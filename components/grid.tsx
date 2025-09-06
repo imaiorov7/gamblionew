@@ -1,41 +1,64 @@
-import Chat from "@/components/chat";
-import CTASection from "@/components/cta-section";
-import { FAQSection } from "@/components/faq-section";
-import Hero from "@/components/hero";
-import TrustedBy from "@/components/trusted-by";
-import { Grid } from "@/components/grid";
-import { HeroVideoDialog } from "@/components/video-dialog";
+import { ComponentPropsWithoutRef, ReactNode } from "react";
+import { cn } from "@/lib/utils";
+import Chat from "./chat";
 
-export default function Home() {
+interface Feature {
+  name: string;
+  description: string;
+  href: string;
+  className?: string;
+  cta: string;
+  background?: ReactNode;
+}
+
+interface GridProps extends ComponentPropsWithoutRef<"div"> {
+  className?: string;
+}
+
+export function Grid({ className, ...props }: GridProps) {
   return (
     <>
-      <Hero></Hero>
-      <div className="relative md:mx-7 mx-3 border-x">
-        <HeroVideoDialog
-          className="block dark:hidden"
-          animationStyle="from-center"
-          videoSrc="https://www.youtube.com/embed/qh3NGpYRG3I?si=4rb-zSdDkVK9qxxb"
-          thumbnailSrc="https://startup-template-sage.vercel.app/hero-light.png"
-          thumbnailAlt="Hero Video"
-        />
-        <HeroVideoDialog
-          className="hidden dark:block"
-          animationStyle="from-center"
-          videoSrc="https://www.youtube.com/embed/qh3NGpYRG3I?si=4rb-zSdDkVK9qxxb"
-          thumbnailSrc="https://startup-template-sage.vercel.app/hero-dark.png"
-          thumbnailAlt="Hero Video"
-        />
+      <div className="flex flex-col items-center md:mx-7 mx-3 border-x py-12">
+        <h1 className="font-medium text-3xl text-center">
+          Empower Your Workflow with AI
+        </h1>
+        <p className="text-muted-foreground md:w-1/2 text-sm text-center">
+          Ask your AI Agent for real-time collaboration, seamless integrations,
+          and actionable insights to streamline your operations.
+        </p>
       </div>
-      <TrustedBy></TrustedBy>
-    
-      <Grid></Grid>
-      <FAQSection></FAQSection>
-      <CTASection></CTASection>
+      <div
+        className={cn("grid md:grid-cols-2 md:mx-7 mx-3 border-x", className)}
+        {...props}
+      >
+        {features.map((feature, idx) => (
+          <div
+            key={idx}
+            className={cn(
+              "group relative col-span-1 h-[400px] flex flex-col justify-between overflow-hidden bg-background transform-gpu dark:bg-background",
+              feature.className
+            )}
+          >
+            {feature.background && <div>{feature.background}</div>}
+            <div className="p-4">
+              <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
+                <h3 className="text-xl font-semibold text-neutral-700 dark:text-neutral-300">
+                  {feature.name}
+                </h3>
+                <p className="max-w-lg text-neutral-400">
+                  {feature.description}
+                </p>
+              </div>
+            </div>
+            <div className="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-black/[.03] group-hover:dark:bg-neutral-800/10" />
+          </div>
+        ))}
+      </div>
     </>
   );
 }
 
-const features = [
+const features: Feature[] = [
   {
     name: "24/7 Intelligent Assistant",
     description: "We automatically save your files as you type.",
@@ -45,17 +68,14 @@ const features = [
     background: <Chat></Chat>,
   },
   {
-    name: "Next-Level Game Recommendations",
+    name: "Advanced Analytics",
     description: "Get notified when something happens.",
     href: "#",
     className: " border-b ",
     cta: "Learn more",
     background: (
       <div className="relative flex h-[300px] w-full items-center justify-center  overflow-hidden">
-        {/* Vertical gradient line */}
         <div className="absolute top-[60%] left-1/2 -translate-x-1/2  h-32 bg-gradient-to-b from-[var(--color)] to-[var(--color-transparent)]"></div>
-
-        {/* Chart SVG */}
         <svg
           width="600"
           height="200"
@@ -70,14 +90,12 @@ const features = [
             </linearGradient>
           </defs>
 
-          {/* Filled gradient area */}
           <path
             d="M 0 157.33 C 20,153.07 60,138.13 100,136 C 120,138.13 160,153.07 200,146.67 C 220,138.13 260,110.4 300,104 C 320,106.13 360,118.93 400,114.67 C 420,108.27 460,97.6 500,82.67 L 600 40 L 600,200 L 0,200 Z"
             fill="url(#lineGradient)"
             opacity="1"
           />
 
-          {/* Line stroke */}
           <path
             d="M 0 157.33 C 20,153.07 60,138.13 100,136 C 120,138.13 160,153.07 200,146.67 C 220,138.13 260,110.4 300,104 C 320,106.13 360,118.93 400,114.67 C 420,108.27 460,97.6 500,82.67 L 600 40"
             stroke="var(--primary)"
@@ -86,7 +104,6 @@ const features = [
             strokeLinecap="round"
           />
 
-          {/* Circles (pulsing effect) */}
           <circle cx="300" cy="104" r="4" fill="var(--primary)" />
           <circle
             cx="300"
@@ -120,11 +137,11 @@ const features = [
     ),
   },
   {
-    name: "Advanced Analytics",
+    name: "Next-Level Game Recommendations",
     description: "Supports 100+ integrations and counting.",
     href: "#",
-    className: " border-r md:col-span-2",
+    className: "border-r md:col-span-2",
     cta: "Learn more",
-    
   },
 ];
+
