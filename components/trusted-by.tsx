@@ -14,7 +14,7 @@ export default function TrustedBy() {
             <div
               key={index}
               className={cn(
-                "w-full  border-t-0 h-36 border flex justify-center items-center",
+                "w-full  border-t-0 h-36 border-[0.5px] border-dashed flex justify-center items-center",
                 index > 3 && "border-b-0",
                 index < 4 && "border-t-0"
               )}

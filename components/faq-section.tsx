@@ -13,8 +13,7 @@ export function FAQSection() {
           Frequently Asked Questions
         </h1>
         <p className="text-muted-foreground md:w-1/2 text-sm text-center">
-          Answers to common questions about SkyAgent and its features. If you
-          have any other questions, please don't hesitate to contact us.
+          Find answers to the most common questions about Gamblio and its features. If you don’t see your question here, our team will be happy to assist—just get in touch with us anytime.
         </p>
       </div>
       <section className="md:mx-7 mx-3 border-x flex justify-center py-12">

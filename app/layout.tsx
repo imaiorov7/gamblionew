@@ -25,7 +25,7 @@ export default function RootLayout({
         className={`${poppins.className} dark grid items-center justify-center   antialiased`}
       >
         <NavBar />
-        <div className="container divide-y divide-dashed max-w-7xl border-x border-dashed relative">
+        <div className="container overflow-hidden divide-y divide-dashed max-w-7xl border-x border-dashed relative">
           {children}
 
           <Footer></Footer>

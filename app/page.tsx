@@ -1,9 +1,9 @@
-import Chat from "@/components/chat";
+import Chat from "@/components/services/chat";
 import CTASection from "@/components/cta-section";
 import { FAQSection } from "@/components/faq-section";
 import Hero from "@/components/hero";
 import TrustedBy from "@/components/trusted-by";
-import { Grid } from "@/components/grid";
+import { ServicesSection } from "@/components/services/services-section";
 import { HeroVideoDialog } from "@/components/video-dialog";
 
 export default function Home() {
@@ -28,7 +28,11 @@ export default function Home() {
       </div>
       <TrustedBy></TrustedBy>
     
-      <Grid></Grid>
+      <ServicesSection></ServicesSection>
+      <div className="w-full p-5 md:p-24 bg-muted">
+        <h1 className="text-muted-foreground">Who we are</h1>
+        <h1 className="md:text-2xl font-medium">At Gamblio, we believe technology should feel personal. That’s why our solutions go beyond efficiency—they are designed to spark engagement, simplify complex processes, and create moments of genuine connection. With every tool we develop, our mission is to empower businesses to not only reach their audiences but to truly resonate with them.</h1>
+      </div>
       <FAQSection></FAQSection>
       <CTASection></CTASection>
     </>

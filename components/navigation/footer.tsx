@@ -5,6 +5,7 @@ import {
   IconBrandInstagram,
   IconBrandLinkedin,
   IconBrandTwitter,
+  IconBrandX,
 } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -50,7 +51,7 @@ export function Footer() {
             <Logo />
           </div>
 
-          <ul className="transition-colors flex sm:flex-row flex-col hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 list-none gap-4">
+          <ul className="transition-colors flex justify-center flex-row  flex-wrap hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 list-none gap-4">
             {pages.map((page, idx) => (
               <li key={"pages" + idx} className="list-none">
                 <Link
@@ -71,17 +72,11 @@ export function Footer() {
           </p>
           <div className="flex gap-4">
             <Link href="#">
-              <IconBrandTwitter className="h-6 w-6 text-neutral-500 dark:text-neutral-300" />
+              <IconBrandX className="h-6 w-6 text-neutral-500 dark:text-neutral-300" />
             </Link>
             <Link href="#">
               <IconBrandLinkedin className="h-6 w-6 text-neutral-500 dark:text-neutral-300" />
-            </Link>
-            <Link href="#">
-              <IconBrandGithub className="h-6 w-6 text-neutral-500 dark:text-neutral-300" />
-            </Link>
-            <Link href="#">
-              <IconBrandFacebook className="h-6 w-6 text-neutral-500 dark:text-neutral-300" />
-            </Link>
+            </Link>         
             <Link href="#">
               <IconBrandInstagram className="h-6 w-6 text-neutral-500 dark:text-neutral-300" />
             </Link>

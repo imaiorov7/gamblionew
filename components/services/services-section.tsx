@@ -1,6 +1,8 @@
 import { ComponentPropsWithoutRef, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import Chat from "./chat";
+import LineChart from "./analytics";
+import { Recommendation } from "./recommendation";
 
 interface Feature {
   name: string;
@@ -15,16 +17,15 @@ interface GridProps extends ComponentPropsWithoutRef<"div"> {
   className?: string;
 }
 
-export function Grid({ className, ...props }: GridProps) {
+export function ServicesSection({ className, ...props }: GridProps) {
   return (
     <>
-      <div className="flex flex-col items-center md:mx-7 mx-3 border-x py-12">
+      <div id="services" className="flex flex-col items-center md:mx-7 mx-3 border-x py-12">
         <h1 className="font-medium text-3xl text-center">
-          Empower Your Workflow with AI
+       Services
         </h1>
         <p className="text-muted-foreground md:w-1/2 text-sm text-center">
-          Ask your AI Agent for real-time collaboration, seamless integrations,
-          and actionable insights to streamline your operations.
+         Gamblio AI. Fast, smart, personal—and always learning.
         </p>
       </div>
       <div
@@ -74,66 +75,7 @@ const features: Feature[] = [
     className: " border-b ",
     cta: "Learn more",
     background: (
-      <div className="relative flex h-[300px] w-full items-center justify-center  overflow-hidden">
-        <div className="absolute top-[60%] left-1/2 -translate-x-1/2  h-32 bg-gradient-to-b from-[var(--color)] to-[var(--color-transparent)]"></div>
-        <svg
-          width="600"
-          height="200"
-          viewBox="0 0 600 200"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient id="lineGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="rgba(3, 146, 160,0.3)" />
-              <stop offset="100%" stopColor="rgba(3, 146, 160,0)" />
-            </linearGradient>
-          </defs>
-
-          <path
-            d="M 0 157.33 C 20,153.07 60,138.13 100,136 C 120,138.13 160,153.07 200,146.67 C 220,138.13 260,110.4 300,104 C 320,106.13 360,118.93 400,114.67 C 420,108.27 460,97.6 500,82.67 L 600 40 L 600,200 L 0,200 Z"
-            fill="url(#lineGradient)"
-            opacity="1"
-          />
-
-          <path
-            d="M 0 157.33 C 20,153.07 60,138.13 100,136 C 120,138.13 160,153.07 200,146.67 C 220,138.13 260,110.4 300,104 C 320,106.13 360,118.93 400,114.67 C 420,108.27 460,97.6 500,82.67 L 600 40"
-            stroke="var(--primary)"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-          />
-
-          <circle cx="300" cy="104" r="4" fill="var(--primary)" />
-          <circle
-            cx="300"
-            cy="104"
-            r="10"
-            stroke="var(--primary)"
-            strokeWidth="2"
-            fill="none"
-            opacity="0.66"
-          />
-          <circle
-            cx="300"
-            cy="104"
-            r="10"
-            stroke="var(--primary)"
-            strokeWidth="2"
-            fill="none"
-            opacity="0.06"
-          />
-          <circle
-            cx="300"
-            cy="104"
-            r="10"
-            stroke="var(--primary)"
-            strokeWidth="2"
-            fill="none"
-            opacity="0.31"
-          />
-        </svg>
-      </div>
+      <LineChart></LineChart>
     ),
   },
   {
@@ -142,6 +84,7 @@ const features: Feature[] = [
     href: "#",
     className: "border-r md:col-span-2",
     cta: "Learn more",
+    background: <Recommendation></Recommendation>
   },
 ];
 
