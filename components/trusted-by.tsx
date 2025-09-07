@@ -8,7 +8,7 @@ export default function TrustedBy() {
           Trusted by
         </p>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4  md:mx-7 mx-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 max-md:border-x border-dashed md:mx-7 mx-3">
         {PARTNERS.map((e, index) => {
           return (
             <div

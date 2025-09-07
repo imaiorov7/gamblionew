@@ -8,7 +8,7 @@ import {
 export function FAQSection() {
   return (
     <>
-      <div className="flex flex-col  items-center md:mx-7 mx-3 border-x py-12">
+      <div id="faq" className="flex flex-col  items-center md:mx-7 mx-3 border-x py-12">
         <h1 className="font-medium text-3xl text-center">
           Frequently Asked Questions
         </h1>

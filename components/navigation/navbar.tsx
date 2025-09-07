@@ -6,7 +6,7 @@ import { IconMenu, IconX } from "@tabler/icons-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const pages = [
+export const pages = [
   { name: "Home", id: "home" },
   { name: "Services", id: "services" },
   { name: "FAQ", id: "faq" },

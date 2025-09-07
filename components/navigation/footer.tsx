@@ -1,12 +1,4 @@
-import { cn } from "@/lib/utils";
-import {
-  IconBrandFacebook,
-  IconBrandGithub,
-  IconBrandInstagram,
-  IconBrandLinkedin,
-  IconBrandTwitter,
-  IconBrandX,
-} from "@tabler/icons-react";
+'use client'
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -14,7 +6,7 @@ import React from "react";
 export function Footer() {
   const pages = [
     {
-      title: "Products",
+      title: "All Products",
       href: "#",
     },
     {
@@ -33,94 +25,146 @@ export function Footer() {
       title: "Blog",
       href: "#",
     },
+  ];
+
+  const socials = [
     {
-      title: "Privacy",
+      title: "Facebook",
       href: "#",
     },
     {
-      title: "Terms",
+      title: "Instagram",
+      href: "#",
+    },
+    {
+      title: "Twitter",
+      href: "#",
+    },
+    {
+      title: "LinkedIn",
+      href: "#",
+    },
+  ];
+  const legals = [
+    {
+      title: "Privacy Policy",
+      href: "#",
+    },
+    {
+      title: "Terms of Service",
+      href: "#",
+    },
+    {
+      title: "Cookie Policy",
       href: "#",
     },
   ];
 
+  const signups = [
+    {
+      title: "Sign Up",
+      href: "#",
+    },
+    {
+      title: "Login",
+      href: "#",
+    },
+    {
+      title: "Forgot Password",
+      href: "#",
+    },
+  ];
   return (
-    <div className="border-t md:mx-7 mx-3 border-neutral-100 dark:border-white/[0.1] px-8 py-20 bg-white dark:bg-neutral-950 border-x border-dashed relative overflow-hidden">
-      <div className="max-w-7xl mx-auto text-sm text-neutral-500  justify-between items-start  md:px-8">
-        <div className="flex flex-col items-center justify-center w-full relative">
+    <div className="border-t border-neutral-100 dark:border-white/[0.1] px-8 py-20 bg-white dark:bg-neutral-950 w-full relative overflow-hidden">
+      <div className="max-w-7xl mx-auto text-sm text-neutral-500 flex sm:flex-row flex-col justify-between items-start  md:px-8">
+        <div>
           <div className="mr-0 md:mr-4  md:flex mb-4">
             <Logo />
           </div>
 
-          <ul className="transition-colors flex justify-center flex-row  flex-wrap hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 list-none gap-4">
-            {pages.map((page, idx) => (
-              <li key={"pages" + idx} className="list-none">
-                <Link
-                  className="transition-colors hover:text-text-neutral-800 "
-                  href="/products"
-                >
-                  {page.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          <GridLineHorizontal className="max-w-7xl mx-auto mt-8" />
+          <div className="mt-2 ml-2">
+            &copy; copyright Gamblio {new Date().getFullYear()}. All rights reserved.
+          </div>
         </div>
-        <div className="flex sm:flex-row flex-col justify-between mt-8 items-center w-full">
-          <p className="text-neutral-500 dark:text-neutral-400 mb-8 sm:mb-0">
-            &copy; Gamblio
-          </p>
-          <div className="flex gap-4">
-            <Link href="#">
-              <IconBrandX className="h-6 w-6 text-neutral-500 dark:text-neutral-300" />
-            </Link>
-            <Link href="#">
-              <IconBrandLinkedin className="h-6 w-6 text-neutral-500 dark:text-neutral-300" />
-            </Link>         
-            <Link href="#">
-              <IconBrandInstagram className="h-6 w-6 text-neutral-500 dark:text-neutral-300" />
-            </Link>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 items-start mt-10 sm:mt-0 md:mt-0">
+          <div className="flex justify-center space-y-4 flex-col w-full">
+            <p className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 font-bold">
+              Pages
+            </p>
+            <ul className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 list-none space-y-4">
+              {pages.map((page, idx) => (
+                <li key={"pages" + idx} className="list-none">
+                  <Link
+                    className="transition-colors hover:text-text-neutral-800 "
+                    href="/products"
+                  >
+                    {page.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="flex justify-center space-y-4 flex-col">
+            <p className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 font-bold">
+              Socials
+            </p>
+            <ul className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 list-none space-y-4">
+              {socials.map((social, idx) => (
+                <li key={"social" + idx} className="list-none">
+                  <Link
+                    className="transition-colors hover:text-text-neutral-800 "
+                    href="/products"
+                  >
+                    {social.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="flex justify-center space-y-4 flex-col">
+            <p className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 font-bold">
+              Legal
+            </p>
+            <ul className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 list-none space-y-4">
+              {legals.map((legal, idx) => (
+                <li key={"legal" + idx} className="list-none">
+                  <Link
+                    className="transition-colors hover:text-text-neutral-800 "
+                    href="/products"
+                  >
+                    {legal.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex justify-center space-y-4 flex-col">
+            <p className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 font-bold">
+              Register
+            </p>
+            <ul className="transition-colors hover:text-text-neutral-800 text-neutral-600 dark:text-neutral-300 list-none space-y-4">
+              {signups.map((auth, idx) => (
+                <li key={"auth" + idx} className="list-none">
+                  <Link
+                    className="transition-colors hover:text-text-neutral-800 "
+                    href="/products"
+                  >
+                    {auth.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
+      {/* <p className="text-center mt-20 text-5xl md:text-9xl lg:text-[12rem] xl:text-[13rem] font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 dark:from-neutral-950 to-neutral-200 dark:to-neutral-800 inset-x-0">
+       Gamblio
+      </p> */}
     </div>
   );
 }
-
-const GridLineHorizontal = ({
-  className,
-  offset,
-}: {
-  className?: string;
-  offset?: string;
-}) => {
-  return (
-    <div
-      style={
-        {
-          "--background": "#ffffff",
-          "--color": "rgba(0, 0, 0, 0.2)",
-          "--height": "1px",
-          "--width": "5px",
-          "--fade-stop": "90%",
-          "--offset": offset || "200px", //-100px if you want to keep the line inside
-          "--color-dark": "rgba(255, 255, 255, 0.2)",
-          maskComposite: "exclude",
-        } as React.CSSProperties
-      }
-      className={cn(
-        "w-[calc(100%+var(--offset))] h-[var(--height)]",
-        "bg-[linear-gradient(to_right,var(--color),var(--color)_50%,transparent_0,transparent)]",
-        "[background-size:var(--width)_var(--height)]",
-        "[mask:linear-gradient(to_left,var(--background)_var(--fade-stop),transparent),_linear-gradient(to_right,var(--background)_var(--fade-stop),transparent),_linear-gradient(black,black)]",
-        "[mask-composite:exclude]",
-        "z-30",
-        "dark:bg-[linear-gradient(to_right,var(--color-dark),var(--color-dark)_50%,transparent_0,transparent)]",
-        className
-      )}
-    ></div>
-  );
-};
 
 const Logo = () => {
   return (
