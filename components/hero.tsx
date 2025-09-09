@@ -34,7 +34,7 @@ export default function Hero() {
           className="flex gap-3"
         >
           <Link href={"https://demo.gamblio.ai"}>
-            <ShimmerButton className="shadow-2xl hidden md:flex">
+            <ShimmerButton className="shadow-2xl flex">
               <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 ">
                 Try demo
               </span>
