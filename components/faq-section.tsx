@@ -8,12 +8,17 @@ import {
 export function FAQSection() {
   return (
     <>
-      <div id="faq" className="flex flex-col  items-center md:mx-7 mx-3 border-x py-12">
+      <div
+        id="faq"
+        className="flex flex-col  items-center md:mx-7 mx-3 border-x py-12"
+      >
         <h1 className="font-medium text-3xl text-center">
           Frequently Asked Questions
         </h1>
         <p className="text-muted-foreground md:w-1/2 text-sm text-center">
-          Find answers to the most common questions about Gamblio and its features. If you don’t see your question here, our team will be happy to assist—just get in touch with us anytime.
+          Find answers to the most common questions about Gamblio and its
+          features. If you don’t see your question here, our team will be happy
+          to assist—just get in touch with us anytime.
         </p>
       </div>
       <section className="md:mx-7 mx-3 border-x flex justify-center py-12">
@@ -44,36 +49,6 @@ export function FAQSection() {
               <p>
                 All orders are carefully packaged and fully insured. Track your
                 shipment in real-time through our dedicated tracking portal.
-              </p>
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-3">
-            <AccordionTrigger>Return Policy</AccordionTrigger>
-            <AccordionContent className="flex flex-col gap-4 text-balance">
-              <p>
-                We stand behind our products with a comprehensive 30-day return
-                policy. If you&apos;re not completely satisfied, simply return
-                the item in its original condition.
-              </p>
-              <p>
-                Our hassle-free return process includes free return shipping and
-                full refunds processed within 48 hours of receiving the returned
-                item.
-              </p>
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-3">
-            <AccordionTrigger>Return Policy</AccordionTrigger>
-            <AccordionContent className="flex flex-col gap-4 text-balance">
-              <p>
-                We stand behind our products with a comprehensive 30-day return
-                policy. If you&apos;re not completely satisfied, simply return
-                the item in its original condition.
-              </p>
-              <p>
-                Our hassle-free return process includes free return shipping and
-                full refunds processed within 48 hours of receiving the returned
-                item.
               </p>
             </AccordionContent>
           </AccordionItem>

@@ -1,6 +1,8 @@
-"use client"
+"use client";
+import Link from "next/link";
 import { ShimmerButton } from "./ui/shimer-button";
-import { motion } from "motion/react"; 
+import { motion } from "motion/react";
+import { Button } from "./ui/button";
 
 export default function Hero() {
   return (
@@ -29,13 +31,20 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut", delay: 0.4 }}
-          className="flex"
+          className="flex gap-3"
         >
-          <ShimmerButton className="shadow-2xl ">
-            <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 ">
-              Try demo
-            </span>
-          </ShimmerButton>
+          <Link href={"https://demo.gamblio.ai"}>
+            <ShimmerButton className="shadow-2xl hidden md:flex">
+              <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 ">
+                Try demo
+              </span>
+            </ShimmerButton>
+          </Link>
+          <Link href={"https://app.gamblio.ai"}>
+            <Button variant={"outline"} className="rounded-full cursor-pointer">
+              Login
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>

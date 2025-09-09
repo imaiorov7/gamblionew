@@ -4,7 +4,7 @@ import React, { forwardRef, useRef } from "react";
 
 import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
-import { User } from "lucide-react";
+import { Dice1, Dice2, Dice3, Dice4, Dice5, User } from "lucide-react";
 
 const Circle = forwardRef<
   HTMLDivElement,
@@ -15,7 +15,7 @@ const Circle = forwardRef<
       ref={ref}
       className={cn(
         "z-10 flex size-12 items-center justify-center rounded-full border-2 bg-muted p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]",
-        className,
+        className
       )}
     >
       {children}
@@ -25,11 +25,7 @@ const Circle = forwardRef<
 
 Circle.displayName = "Circle";
 
-export function Recommendation({
-  className,
-}: {
-  className?: string;
-}) {
+export function Recommendation({ className }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const div1Ref = useRef<HTMLDivElement>(null);
   const div2Ref = useRef<HTMLDivElement>(null);
@@ -43,14 +39,14 @@ export function Recommendation({
     <div
       className={cn(
         "relative flex w-full  items-center justify-center overflow-hidden translate-y-12 px-10",
-        className,
+        className
       )}
       ref={containerRef}
     >
       <div className="flex size-full max-w-lg flex-row items-stretch justify-between gap-10">
         <div className="flex flex-col justify-center">
           <Circle ref={div7Ref}>
-        <User></User>
+            <User></User>
           </Circle>
         </div>
         <div className="flex flex-col justify-center">
@@ -60,14 +56,19 @@ export function Recommendation({
         </div>
         <div className="flex flex-col justify-center gap-2">
           <Circle ref={div1Ref}>
+            <Dice1></Dice1>
           </Circle>
           <Circle ref={div2Ref}>
+            <Dice2></Dice2>
           </Circle>
           <Circle ref={div3Ref}>
+            <Dice3></Dice3>
           </Circle>
           <Circle ref={div4Ref}>
+            <Dice4></Dice4>
           </Circle>
           <Circle ref={div5Ref}>
+            <Dice5></Dice5>
           </Circle>
         </div>
       </div>
@@ -112,4 +113,3 @@ export function Recommendation({
     </div>
   );
 }
-

@@ -1,7 +1,6 @@
 export default function Chat() {
   return (
     <div className="flex flex-col  items-center  h-fit p-4 gap-5">
-      {/* Korisnikova poruka */}
       <div className="flex items-end justify-end gap-3 w-full max-w-md">
         <div className="bg-primary text-white p-4 rounded-2xl shadow">
           <p className="text-sm">
@@ -9,11 +8,9 @@ export default function Chat() {
             everyone. Any suggestions for finding an optimal time slot?
           </p>
         </div>
-        <img
-          src="https://randomuser.me/api/portraits/women/79.jpg"
-          alt="User Avatar"
-          className="size-8 rounded-full"
-        />
+        <div className="size-10 bg-primary aspect-square rounded-full flex items-center justify-center">
+          <p>U</p>
+        </div>
       </div>
 
       {/* Odgovor bota */}

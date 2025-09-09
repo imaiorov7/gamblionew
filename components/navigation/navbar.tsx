@@ -5,12 +5,12 @@ import { ShimmerButton } from "../ui/shimer-button";
 import { IconMenu, IconX } from "@tabler/icons-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 export const pages = [
   { name: "Home", id: "home" },
   { name: "Services", id: "services" },
   { name: "FAQ", id: "faq" },
-
 ];
 
 export default function NavBar() {
@@ -20,7 +20,7 @@ export default function NavBar() {
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
-      setMenuOpen(false); 
+      setMenuOpen(false);
     }
   };
 
@@ -50,12 +50,13 @@ export default function NavBar() {
           </div>
 
           <div className="flex items-center gap-2">
-            <ShimmerButton className="shadow-2xl hidden md:flex">
-              <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 ">
-                Try demo
-              </span>
-            </ShimmerButton>
-
+            <Link href={"https://demo.gamblio.ai"}>
+              <ShimmerButton className="shadow-2xl hidden md:flex">
+                <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 ">
+                  Try demo
+                </span>
+              </ShimmerButton>
+            </Link>
             <button
               className="md:hidden p-2 rounded-lg hover:bg-white/10 transition"
               onClick={() => setMenuOpen(!menuOpen)}
