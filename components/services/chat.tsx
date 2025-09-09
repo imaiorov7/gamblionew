@@ -21,7 +21,7 @@ export default function Chat() {
           className="size-10 rounded-full border p-1"
         />
         <div className="bg-accent border p-4 rounded-xl shadow">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground max-md:line-clamp-5">
             Based on your calendar patterns and preferences, I recommend
             scheduling the team meeting for Tuesday at 2pm. This time slot has
             historically had the highest attendance rate, and it avoids
