@@ -6,7 +6,7 @@ import { Footer } from "@/components/navigation/footer";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  subsets:['latin']
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -24,12 +24,12 @@ export default function RootLayout({
       <body
         className={`${poppins.className} dark grid items-center justify-center   antialiased`}
       >
-        <NavBar />
-        <div className="container overflow-hidden divide-y divide-dashed max-w-7xl border-x border-dashed relative">
-          {children}
+        {/* <NavBar /> */}
+        {/* <div className="container overflow-hidden divide-y divide-dashed max-w-7xl border-x border-dashed relative"> */}
+        {children}
 
-          <Footer></Footer>
-        </div>
+        {/* <Footer></Footer> */}
+        {/* </div> */}
       </body>
     </html>
   );
