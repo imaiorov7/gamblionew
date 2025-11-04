@@ -1,0 +1,25 @@
+name: Gamblio Site deployment
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy to VPS -  development branch
+      uses: appleboy/ssh-action@v1
+      env:
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /opt/gamblio-site
+          git pull origin dev
+          docker compose -f docker-compose.yml up -d --build --remove-orphans
