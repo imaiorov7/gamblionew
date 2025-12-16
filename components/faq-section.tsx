@@ -1,74 +1,87 @@
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { buttonVariants } from "./ui/button";
+import { Description, H1, Title } from "./ui/typography";
+import DashedBorder from "./shared/dashed-border";
 
 export function FAQSection() {
   return (
     <>
-      <div
-        id="faq"
-        className="flex flex-col  items-center md:mx-7 mx-3 border-x py-12"
-      >
-        <h1 className="font-medium text-3xl text-center">
+      <DashedBorder sides="all" className="w-full py-12">
+        <Title className="font-medium text-center ">
           Frequently Asked Questions
-        </h1>
-        <p className="text-muted-foreground md:w-1/2 text-sm text-center">
+        </Title>
+        <Description>
           Find answers to the most common questions about Gamblio and its
           features. If you don’t see your question here, our team will be happy
           to assist—just get in touch with us anytime.
-        </p>
-      </div>
-      <section className="md:mx-7 mx-3 border-x flex justify-center py-12">
-        <Accordion type="single" collapsible className="md:w-xl w-xs space-y-3">
+        </Description>
+      </DashedBorder>
+      <DashedBorder sides="all">
+        <Accordion
+          type="single"
+          collapsible
+          className="w-full p-8 mx-auto space-y-3 max-w-7xl"
+        >
           <AccordionItem value="item-1">
-            <AccordionTrigger>Product Information</AccordionTrigger>
+            <AccordionTrigger>
+              What business problems does Gamblio solve?
+            </AccordionTrigger>
             <AccordionContent className="flex flex-col gap-4 text-balance">
               <p>
-                Our flagship product combines cutting-edge technology with sleek
-                design. Built with premium materials, it offers unparalleled
-                performance and reliability.
-              </p>
-              <p>
-                Key features include advanced processing capabilities, and an
-                intuitive user interface designed for both beginners and
-                experts.
+                Gamblio turns fragmented gambling data into real-time,
+                operational intelligence: it helps you raise player LTV,
+                predicts player behaviour, cuts cost-to-serve, and gives you the
+                tools to make data-driven operations, compress costs and support
+                business decisions every day.
               </p>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
-            <AccordionTrigger>Shipping Details</AccordionTrigger>
+            <AccordionTrigger>
+              How quickly can we see impact after integration?
+            </AccordionTrigger>
             <AccordionContent className="flex flex-col gap-4 text-balance">
               <p>
-                We offer worldwide shipping through trusted courier partners.
-                Standard delivery takes 3-5 business days, while express
-                shipping ensures delivery within 1-2 business days.
-              </p>
-              <p>
-                All orders are carefully packaged and fully insured. Track your
-                shipment in real-time through our dedicated tracking portal.
+                You’ll see operational value within days with business analytics
+                and recommendations; measurable KPIs (reduced ticket volume,
+                improved CTR, early churn interventions, early VIP players
+                detection) typically emerge within a few weeks depending on
+                available data. A short use proves fast impact.
               </p>
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3">
-            <AccordionTrigger>Return Policy</AccordionTrigger>
+            <AccordionTrigger>
+              What integration options do you support?
+            </AccordionTrigger>
             <AccordionContent className="flex flex-col gap-4 text-balance">
               <p>
-                We stand behind our products with a comprehensive 30-day return
-                policy. If you&apos;re not completely satisfied, simply return
-                the item in its original condition.
-              </p>
-              <p>
-                Our hassle-free return process includes free return shipping and
-                full refunds processed within 48 hours of receiving the returned
-                item.
+                We use industry-standard{" "}
+                <span className="font-bold">
+                  Pub-Sub streaming services (Kafka/RabbitMQ)
+                </span>{" "}
+                for real-time ingestion. Optionally we also support secure REST
+                APIs integration. Import via read-only DB clone is used only for
+                initial data population and testing. Widgets (chat/games
+                recommendations) deploy via a single JS snippet.
               </p>
             </AccordionContent>
           </AccordionItem>
+          <Link
+            href="/faq"
+            className={`${buttonVariants({ variant: "ghost" })} align-self-end`}
+          >
+            Read more <ArrowRight />
+          </Link>
         </Accordion>
-      </section>
+      </DashedBorder>
     </>
   );
 }

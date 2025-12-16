@@ -1,10 +1,10 @@
 "use client";
 
-import React, { forwardRef, useRef } from "react";
-
-import { cn } from "@/lib/utils";
-import { AnimatedBeam } from "@/components/ui/animated-beam";
 import { Dice1, Dice2, Dice3, Dice4, Dice5, User } from "lucide-react";
+import type React from "react";
+import { forwardRef, useRef } from "react";
+import { AnimatedBeam } from "@/components/ui/animated-beam";
+import { cn } from "@/lib/utils";
 
 const Circle = forwardRef<
   HTMLDivElement,
@@ -14,8 +14,8 @@ const Circle = forwardRef<
     <div
       ref={ref}
       className={cn(
-        "z-10 flex size-12 items-center justify-center rounded-full border-2 bg-muted p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]",
-        className
+        "z-10 flex size-8 md:size-12 items-center justify-center rounded-full border-2 bg-muted p-1.5 md:p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]",
+        className,
       )}
     >
       {children}
@@ -38,37 +38,41 @@ export function Recommendation({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative flex w-full  items-center justify-center overflow-hidden translate-y-12 px-10",
-        className
+        "relative flex w-full items-center justify-center overflow-hidden px-4 md:px-10",
+        className,
       )}
       ref={containerRef}
     >
-      <div className="flex size-full max-w-lg flex-row items-stretch justify-between gap-10">
+      <div className="flex size-full max-w-lg flex-row items-stretch justify-between gap-2 md:gap-4 lg:gap-10">
         <div className="flex flex-col justify-center">
-          <Circle ref={div7Ref}>
-            <User></User>
+          <Circle ref={div7Ref} className="size-8 md:size-12">
+            <User className="size-4 md:size-6" />
           </Circle>
         </div>
         <div className="flex flex-col justify-center">
-          <Circle ref={div6Ref} className="size-16">
-            <img src={"/images/logotip-dark.svg"}></img>
+          <Circle ref={div6Ref} className="size-10 md:size-16">
+            <img
+              src={"/images/logotip-dark.svg"}
+              alt="Gamblio Logo"
+              className="w-full h-full object-contain p-1"
+            />
           </Circle>
         </div>
-        <div className="flex flex-col justify-center gap-2">
+        <div className="flex flex-col justify-center gap-1 md:gap-2">
           <Circle ref={div1Ref}>
-            <Dice1></Dice1>
+            <Dice1 className="size-3 md:size-6" />
           </Circle>
           <Circle ref={div2Ref}>
-            <Dice2></Dice2>
+            <Dice2 className="size-3 md:size-6" />
           </Circle>
           <Circle ref={div3Ref}>
-            <Dice3></Dice3>
+            <Dice3 className="size-3 md:size-6" />
           </Circle>
           <Circle ref={div4Ref}>
-            <Dice4></Dice4>
+            <Dice4 className="size-3 md:size-6" />
           </Circle>
           <Circle ref={div5Ref}>
-            <Dice5></Dice5>
+            <Dice5 className="size-3 md:size-6" />
           </Circle>
         </div>
       </div>

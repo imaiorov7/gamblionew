@@ -1,31 +1,29 @@
 export default function Chat() {
   return (
-    <div className="flex flex-col  items-center  h-fit p-4 gap-5">
-      <div className="flex items-end justify-end gap-3 w-full max-w-md">
-        <div className="bg-primary text-white p-4 rounded-2xl shadow">
-          <p className="text-sm">
-            Hey, I need help scheduling a team meeting that works well for
-            everyone. Any suggestions for finding an optimal time slot?
-          </p>
+    <div className="flex flex-col items-center gap-5 p-4 h-fit">
+      <div className="flex items-end justify-end w-full max-w-md gap-3">
+        <div className="p-4 text-white shadow bg-primary rounded-2xl">
+          <p className="text-sm">Hello how do I register on your platform?</p>
         </div>
-        <div className="size-10 bg-primary aspect-square rounded-full flex items-center justify-center">
+        <div className="flex items-center justify-center rounded-full size-10 bg-primary aspect-square">
           <p>U</p>
         </div>
       </div>
 
       {/* Odgovor bota */}
-      <div className="flex items-start gap-2 w-full max-w-md">
+      <div className="flex items-start w-full max-w-md gap-2">
         <img
           src="/images/logotip-dark.svg"
           alt="Bot Avatar"
-          className="size-10 rounded-full border p-1"
+          className="p-1 border rounded-full size-10"
         />
-        <div className="bg-accent border p-4 rounded-xl shadow">
+        <div className="p-4 border shadow bg-accent rounded-xl">
           <p className="text-sm text-muted-foreground max-md:line-clamp-5">
-            Based on your calendar patterns and preferences, I recommend
-            scheduling the team meeting for Tuesday at 2pm. This time slot has
-            historically had the highest attendance rate, and it avoids
-            conflicts with other recurring meetings.
+            Hello! Thank you for contacting our customer support. To register,
+            click on REGISTRATION in the upper right corner of the home page,
+            enter the requested information, and accept the Terms of Use. Then
+            activate your account by clicking on the link you will receive in
+            your email. If you need further assistance, please let me know!
           </p>
         </div>
       </div>

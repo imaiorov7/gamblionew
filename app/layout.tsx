@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/navigation/navbar";
 import { Footer } from "@/components/navigation/footer";
+import NavBar from "@/components/navigation/navbar";
+import DashedBorder from "@/components/shared/dashed-border";
+import { Toaster } from "@/components/ui/sonner";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -22,14 +24,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.className} dark grid items-center justify-center   antialiased`}
+        className={`${poppins.className} dark antialiased w-full overflow-x-hidden`}
       >
-        {/* <NavBar /> */}
-        {/* <div className="container overflow-hidden divide-y divide-dashed max-w-7xl border-x border-dashed relative"> */}
-        {children}
-
-        {/* <Footer></Footer> */}
-        {/* </div> */}
+        <NavBar />
+        <DashedBorder
+          sides="x"
+          className="w-full divide-y divide-dashed pt-0 md:mx-0"
+        >
+          {children}
+          <Footer />
+        </DashedBorder>
+        <Toaster />
       </body>
     </html>
   );

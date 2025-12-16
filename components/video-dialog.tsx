@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Play, XIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 type AnimationStyle =
   | "from-bottom"
@@ -80,7 +81,7 @@ export function HeroVideoDialog({
 
   return (
     <div className={cn("relative flex flex-col", className)}>
-      <button
+      <Button
         type="button"
         aria-label="Play video"
         className="group relative h-full flex-1 cursor-pointer border-0 bg-transparent p-0"
@@ -108,7 +109,7 @@ export function HeroVideoDialog({
             </div>
           </div>
         </div>
-      </button>
+      </Button>
       <AnimatePresence>
         {isVideoOpen && (
           <motion.div

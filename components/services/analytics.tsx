@@ -1,4 +1,4 @@
-export default  function Analytics() {
+export default function Analytics() {
   return (
     <div className="relative flex h-[300px] w-full items-center justify-center overflow-hidden">
       {/* background gradient */}
@@ -6,12 +6,12 @@ export default  function Analytics() {
 
       {/* SVG */}
       <svg
-        width="600"
-        height="200"
         viewBox="0 0 600 200"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        aria-labelledby="analyticsSvgTitle"
       >
+        <title id="analyticsSvgTitle">Analytics Chart Line Visualization</title>
         <defs>
           <linearGradient id="lineGradient" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="rgba(3,146,160,0.3)" />
@@ -73,5 +73,4 @@ export default  function Analytics() {
       </svg>
     </div>
   );
-};
-
+}

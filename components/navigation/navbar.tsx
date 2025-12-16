@@ -1,32 +1,44 @@
 "use client";
 
-import Image from "next/image";
-import { ShimmerButton } from "../ui/shimer-button";
 import { IconMenu, IconX } from "@tabler/icons-react";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { ShimmerButton } from "../ui/shimer-button";
 
 export const pages = [
   { name: "Home", id: "home" },
   { name: "Services", id: "services" },
+  { name: "Who we are", id: "who-we-are" },
   { name: "FAQ", id: "faq" },
 ];
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
-  const handleScroll = (id: string) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-      setMenuOpen(false);
+  const handleNavigation = (id: string) => {
+    const isHomePage = pathname === "/";
+
+    if (isHomePage) {
+      // On home page - scroll to section
+      const section = document.getElementById(id);
+      if (section) {
+        window.history.pushState(null, "", `#${id}`);
+        section.scrollIntoView({ behavior: "smooth" });
+        setMenuOpen(false);
+      }
+    } else {
+      // On another page - navigate to home with hash
+      window.location.href = `/#${id}`;
     }
   };
 
   return (
     <>
-      <div className="flex justify-center flex-col gap-3 items-center fixed top-0 w-full mt-5 z-50">
+      <div className="fixed top-0 z-50 flex flex-col items-center justify-center w-full gap-3 mt-5">
         <nav className="border rounded-xl flex items-center justify-between w-1/2 max-sm:w-[90vw] p-3 py-2 backdrop-blur-2xl backdrop-brightness-110">
           {/* Logo */}
           <Image
@@ -37,12 +49,12 @@ export default function NavBar() {
             className="w-8"
           />
 
-          <div className="hidden md:flex items-center gap-6">
+          <div className="items-center hidden gap-6 md:flex">
             {pages.map((page) => (
               <button
                 key={page.name}
-                onClick={() => handleScroll(page.id)}
-                className="text-white hover:text-gray-300 transition text-sm cursor-pointer"
+                onClick={() => handleNavigation(page.id)}
+                className="text-sm text-white transition cursor-pointer hover:text-gray-300"
               >
                 {page.name}
               </button>
@@ -50,15 +62,15 @@ export default function NavBar() {
           </div>
 
           <div className="flex items-center gap-2">
-            <Link href={"https://demo.gamblio.ai"}>
-              <ShimmerButton className="shadow-2xl hidden md:flex">
-                <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 ">
-                  Try demo
+            <Link href={"https://app.gamblio.ai"}>
+              <ShimmerButton className="hidden shadow-2xl md:flex">
+                <span className="text-sm font-medium leading-none tracking-tight text-center text-white whitespace-pre-wrap dark:from-white dark:to-slate-900/10 ">
+                  Login
                 </span>
               </ShimmerButton>
             </Link>
             <button
-              className="md:hidden p-2 rounded-lg hover:bg-white/10 transition"
+              className="p-2 transition rounded-lg md:hidden hover:bg-white/10"
               onClick={() => setMenuOpen(!menuOpen)}
             >
               {menuOpen ? <IconX /> : <IconMenu />}
@@ -78,15 +90,15 @@ export default function NavBar() {
               {pages.map((page) => (
                 <button
                   key={page.name}
-                  onClick={() => handleScroll(page.id)}
-                  className="text-white p-2 border-b border-dashed w-full text-center"
+                  onClick={() => handleNavigation(page.id)}
+                  className="w-full p-2 text-center text-white border-b border-dashed"
                 >
                   {page.name}
                 </button>
               ))}
 
-              <ShimmerButton className="shadow-2xl w-full mt-2">
-                <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 ">
+              <ShimmerButton className="w-full mt-2 shadow-2xl">
+                <span className="text-sm font-medium leading-none tracking-tight text-center text-white whitespace-pre-wrap dark:from-white dark:to-slate-900/10 ">
                   Try demo
                 </span>
               </ShimmerButton>

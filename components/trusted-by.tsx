@@ -1,14 +1,16 @@
 import { cn } from "@/lib/utils";
+import DashedBorder from "./shared/dashed-border";
+import { Description } from "./ui/typography";
 
 export default function TrustedBy() {
   return (
     <>
-      <div className="py-12 md:mx-7 mx-3 border-x">
-        <p className="text-center text-muted-foreground text-lg font-medium">
+      <DashedBorder sides="x" className="py-12 mx-3 md:mx-7">
+        <Description className="text-xl font-medium text-center text-muted-foreground">
           Trusted by
-        </p>
-      </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 max-md:border-x border-dashed md:mx-7 mx-3">
+        </Description>
+      </DashedBorder>
+      <DashedBorder sides="all" className="grid grid-cols-2 p-0 md:grid-cols-4">
         {PARTNERS.map((e, index) => {
           return (
             <div
@@ -16,19 +18,19 @@ export default function TrustedBy() {
               className={cn(
                 "w-full  border-t-0 h-36 border-[0.5px] border-dashed flex justify-center items-center",
                 index > 3 && "border-b-0",
-                index < 4 && "border-t-0"
+                index < 4 && "border-t-0",
               )}
             >
               <img
                 src={e}
-                className="grayscale-100 brightness-0 dark:invert-100 md:w-36 w-24"
+                className="w-24 grayscale-100 brightness-0 dark:invert-100 md:w-36"
                 alt=""
               />
             </div>
           );
         })}
-      </div>
-      <div className="md:mx-7 mx-3 border-x h-12"></div>
+      </DashedBorder>
+      <div className="h-12 mx-3 md:mx-7 border-x"></div>
     </>
   );
 }
