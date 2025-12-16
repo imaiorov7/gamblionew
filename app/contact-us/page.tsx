@@ -78,9 +78,9 @@ export default function ContactUsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-4 text-center max-w-3xl px-4"
+          className="flex flex-col items-center max-w-3xl gap-4 px-4 text-center"
         >
-          <H1 className="font-medium text-4xl md:text-5xl lg:text-6xl">
+          <H1 className="text-4xl font-medium md:text-5xl lg:text-6xl">
             Let&apos;s build your{" "}
             <span className="text-primary">advantage</span>.
           </H1>
@@ -100,7 +100,7 @@ export default function ContactUsPage() {
             transition={{ duration: 0.5, ease: "easeInOut", delay: 0.2 }}
             className="space-y-6"
           >
-            <div className="text-center space-y-2">
+            <div className="space-y-2 text-center">
               <Title className="text-2xl md:text-3xl">Contact us</Title>
               <FieldDescription className="text-center">
                 Enter your information to get in touch with our team.
@@ -192,7 +192,7 @@ export default function ContactUsPage() {
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="p-4 text-sm rounded-md bg-destructive/10 text-destructive border border-destructive/20"
+                      className="p-4 text-sm border rounded-md bg-destructive/10 text-destructive border-destructive/20"
                     >
                       Something went wrong. Please try again later.
                     </motion.div>
@@ -218,7 +218,8 @@ export default function ContactUsPage() {
       {/* CTA Section */}
       <CTASection
         title="Ready to see how it all connects to you?"
-        description="Gamblio combines all three tools into one platform, so your analytics, recommendations, and support work together to maximize player value."
+        description="Gamblio combines all four tools into one platform. 
+Gamblio Analytics, Gamblio Predict, Gamblio uChoose, and Gamblio Care work together to maximize your players' LTV."
       />
     </div>
   );
