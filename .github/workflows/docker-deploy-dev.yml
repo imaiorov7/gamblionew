@@ -1,0 +1,25 @@
+name: Gamblio Site deployment
+
+on:
+  push:
+    branches: [ "site-refactor" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy to VPS -  development branch
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.SSH_HOST_DEV }}
+        username: ${{ secrets.SSH_USER_DEV }}
+        key: ${{ secrets.SSH_PRIVATE_KEY_DEV }}
+        port: ${{ secrets.SSH_PORT || 22 }}
+        script: |
+          cd /opt/gamblio-website
+          git pull origin site-refactor
+          docker compose -f docker-compose-dev.yml up -d --build --remove-orphans
