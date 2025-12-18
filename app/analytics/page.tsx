@@ -1,15 +1,54 @@
-import { CoreValue } from "@/components/analytics/core-value";
-import DataIntoDecisions from "@/components/analytics/data-into-decisions";
-import { InsightsGrow } from "@/components/analytics/insights-grow";
-import { MetricsToOutcomes } from "@/components/analytics/metrics-to-outcomes";
-import PerformanceEngine from "@/components/analytics/performance-engine";
-import SeePerformance from "@/components/analytics/see-performance";
-import CTASection from "@/components/cta-section";
 import Hero from "@/components/hero";
-import DashedBorder from "@/components/shared/dashed-border";
+import CTASection from "@/components/cta-section";
+import GlobalReach from "@/components/shared/global-reach";
+import ReportCards from "@/components/shared/report-cards";
 import { HeroVideoDialog } from "@/components/video-dialog";
+import DashedBorder from "@/components/shared/dashed-border";
+import PerformanceEngine from "@/components/shared/feature-intro";
+import FeatureShowcase from "@/components/shared/feature-showcase";
+import DataIntoDecisions from "@/components/shared/key-capabilities";
+import ProcessFlowchart from "@/components/shared/process-flowchart";
+import ObjectiveDeliverables from "@/components/shared/objective-deliverables";
 
 const AnalyticsPage = () => {
+  const reportData = [
+    {
+      title: "Daily Report",
+      description: "Snapshot of player activity and financial performance.",
+      value: "Enables daily operational control and instant decisions.",
+      hasImage: true,
+      imgPosition: "-right-10 -top-14",
+      imgArrowRotation: "none",
+      imgArrowPosition: "-right-16 -top-18",
+    },
+    {
+      title: "Performance Report",
+      description: "Highlights top-performing players, games, and vendors.",
+      value: "Supports targeted promotions and strategic content planning.",
+      hasImage: false,
+      imgPosition: "none",
+    },
+    {
+      title: "Bonus Report",
+      description: "Tracks bonus activation, redemption, and ROI.",
+      value:
+        "Enables A/B testing of promotional campaigns and maximizes promotional efficiency.",
+      hasImage: true,
+      imgPosition: "-left-10 -bottom-14",
+      imgArrowRotation: "rotate-180 ",
+      imgArrowPosition: " -left-16 -bottom-18",
+    },
+    {
+      title: "Financial Report",
+      description:
+        "Analyzes bets, wins, deposits, withdrawals, GGR, NGR and all cross-KPIs in between.",
+      value: "Strengthens reconciliation and profitability tracking.",
+      hasImage: true,
+      imgPosition: "-right-10 -bottom-14",
+      imgArrowRotation: "rotate-90",
+      imgArrowPosition: "-right-16 -bottom-18",
+    },
+  ];
   return (
     <div className="w-full">
       <Hero {...HeroDetails} />
@@ -34,20 +73,115 @@ const AnalyticsPage = () => {
       </DashedBorder>
 
       {/* Section 1: The Performance Engine */}
-      <PerformanceEngine />
+      <PerformanceEngine
+        title={
+          <>
+            The Performance Engine of the{" "}
+            <span className="text-primary">Gamblio Platform</span>
+          </>
+        }
+        description={
+          <>
+            Gamblio Analytics is the business intelligence hub built exclusively
+            for the gambling industry. It gives operators the clarity they need
+            - a powerful dashboard that provides real-time visibility into
+            financial performance and all major KPIs, enabling faster, smarter,
+            and more confident decision-making.
+          </>
+        }
+        processFlowchart={
+          <ProcessFlowchart
+            steps={[
+              { number: 1, label: "KPI monitoring" },
+              { number: 2, label: "Trend detection" },
+              { number: 3, label: "Operational optimization" },
+              { number: 4, label: "Strategic reporting" },
+            ]}
+            labels={[
+              { title: "gamblio ai", position: "top", index: 0 },
+              { title: "analytics", position: "bottom", index: 2 },
+            ]}
+          />
+        }
+        subTitle="It's the central control room for:"
+        signature={
+          <>
+            "From insight to action, every metric drives measurable growth."
+            <br />
+            <span className="font-medium text-primary">-Gamblio</span>
+          </>
+        }
+      />
 
       {/* Section 2: Turn Data Into Decisions */}
-      <DataIntoDecisions />
+      <DataIntoDecisions
+        title={
+          <>
+            Turn Data Into <span className="text-primary">Decisions</span>
+          </>
+        }
+        description={
+          <>
+            Gamblio Analytics connects every deposit, bet, win, or bonus into
+            one intuitive, real-time interface. Operators can track performance
+            across players, games, and vendors with the precision needed to
+            optimize every move.
+          </>
+        }
+        subTitle=" Key capabilities:"
+        list={[
+          "Real-time tracking of core gambling events and KPIs",
+          "Predefined & customizable reports for every team",
+          "Advanced filtering and segmentation tools",
+          "Exportable reports for further analysis",
+          "Automated scheduled reports for leadership - insights that come to you",
+        ]}
+        buttonTitle="Explore Report Types"
+      />
 
       {/* Section 3: See Performance as It Happens */}
-      <SeePerformance />
+      <ReportCards
+        title={
+          <>
+            See <span className="text-primary">Performance</span> as It Happens
+          </>
+        }
+        description="Four report types, one goal: faster, smarter, and clearer operations"
+        data={reportData}
+      />
 
       {/* Section 4: From Metrics to Measurable Outcomes */}
-      <MetricsToOutcomes />
+      <ObjectiveDeliverables
+        title={
+          <>
+            From <span className="text-primary">Metrics</span> to Measurable{" "}
+            <span className="text-primary">Outcomes</span>
+          </>
+        }
+        description="Every feature in Gamblio Analytics is designed to directly influence
+                performance — reducing blind spots, increasing Lifetime Value of
+                players, and driving profitability."
+        leftColumn={[
+          "Faster decisions",
+          "Smarter bonus spend",
+          "Leaner operations",
+          "Risk prevention",
+          "Improved vendor strategy",
+        ]}
+        leftLabels={{ title: "analytics", index: 0.5 }}
+        rightLabels={{ title: "gamblio ai", index: 3.5 }}
+        rightColumn={[
+          "Real-time KPI visibility",
+          "Track ROI & optimize campaigns",
+          "Replace manual checks with live monitoring",
+          "Early alerts for abnormal events or performance drops",
+          "Benchmark and optimize game/provider performance",
+        ]}
+      />
       {/* Section 5: Services Section */}
-      <InsightsGrow />
+      <GlobalReach />
       {/* Section 6: Core Value Proposition */}
-      <CoreValue />
+      <FeatureShowcase />
       {/* Section 7: Call to Action */}
       <CTASection
         title="Ready to See Gamblio Analytics in Action?"

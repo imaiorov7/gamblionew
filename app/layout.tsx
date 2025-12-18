@@ -29,7 +29,7 @@ export default function RootLayout({
         <NavBar />
         <DashedBorder
           sides="x"
-          className="w-full divide-y divide-dashed pt-0 md:mx-0"
+          className="w-full pt-0 divide-y divide-dashed md:mx-0"
         >
           {children}
           <Footer />

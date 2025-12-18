@@ -164,7 +164,7 @@ const features: Feature[] = [
       "Detect bonus abuse and risky patterns",
       "Predict churn and automate retention",
     ],
-    href: "#",
+    href: "/predict",
     className: " border-b ",
     cta: "Meet Gamblio Predict",
     img: <Predict />,

@@ -2,7 +2,7 @@ import DashedBorder from "@/components/shared/dashed-border";
 import { Description, Title } from "@/components/ui/typography";
 import { WorldMap } from "../ui/world-map";
 
-export function InsightsGrow() {
+function GlobalReach() {
   return (
     <DashedBorder
       sides="all"
@@ -117,3 +117,4 @@ export function InsightsGrow() {
     </DashedBorder>
   );
 }
+export default GlobalReach;

@@ -2,7 +2,7 @@ import DashedBorder from "@/components/shared/dashed-border";
 import { Description, Title } from "@/components/ui/typography";
 import Image from "next/image";
 
-export function CoreValue() {
+function FeatureShowcase() {
   return (
     <DashedBorder
       sides="all"
@@ -70,3 +70,5 @@ export function CoreValue() {
     </DashedBorder>
   );
 }
+
+export default FeatureShowcase;

@@ -53,7 +53,7 @@ export function Footer() {
   ];
 
   return (
-    <div className="border-t border-neutral-100 dark:border-white/[0.1] px-8 py-20 bg-white dark:bg-neutral-950 w-full relative overflow-hidden">
+    <div className="relative w-full px-8 py-20 overflow-hidden bg-white dark:bg-neutral-950">
       <div className="flex flex-col items-start justify-between mx-auto text-sm max-w-7xl text-neutral-500 sm:flex-row md:px-8">
         <div>
           <div className="mb-4 mr-0 md:mr-4 md:flex">

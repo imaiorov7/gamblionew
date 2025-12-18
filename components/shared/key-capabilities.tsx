@@ -1,23 +1,31 @@
 import React from "react";
-import DashedBorder from "../shared/dashed-border";
+import DashedBorder from "./dashed-border";
 import { Description, Title } from "../ui/typography";
 import { Button } from "../ui/button";
+interface KeyCapabilitiesProps {
+  title?: string | React.ReactNode;
+  description?: string | React.ReactNode;
+  subTitle?: string | React.ReactNode;
+  list?: string[];
+  buttonTitle?: string;
+}
 
-const DataIntoDecisions = () => {
+const KeyCapabilities = ({
+  title,
+  description,
+  subTitle,
+  list,
+  buttonTitle,
+}: KeyCapabilitiesProps) => {
   return (
     <DashedBorder
       sides="all"
       className="flex flex-col items-center gap-8 py-12"
     >
-      <Title className="text-3xl font-medium text-center">
-        Turn Data Into <span className="text-primary">Decisions</span>
-      </Title>
+      <Title className="text-3xl font-medium text-center">{title}</Title>
 
       <Description className="max-w-3xl text-center md:w-2/3">
-        Gamblio Analytics connects every deposit, bet, win, or bonus into one
-        intuitive, real-time interface. Operators can track performance across
-        players, games, and vendors with the precision needed to optimize every
-        move.
+        {description}
       </Description>
 
       <div className="w-full h-fit md:max-w-[80%] px-4">
@@ -30,15 +38,9 @@ const DataIntoDecisions = () => {
               sides="all"
               className="flex-wrap justify-end w-full px-0 mx-0 text-left md:mx-0 text-muted-foreground"
             >
-              Key capabilities:
+              {subTitle}
             </DashedBorder>
-            {[
-              "Real-time tracking of core gambling events and KPIs",
-              "Predefined & customizable reports for every team",
-              "Advanced filtering and segmentation tools",
-              "Exportable reports for further analysis",
-              "Automated scheduled reports for leadership - insights that come to you",
-            ].map((capability, index) => (
+            {list?.map((capability, index) => (
               <DashedBorder
                 key={capability}
                 sides="all"
@@ -60,11 +62,13 @@ const DataIntoDecisions = () => {
         </div>
       </div>
 
-      <Button className="mt-4 text-white cursor-pointer">
-        Explore Report Types
-      </Button>
+      {buttonTitle && (
+        <Button className="mt-4 text-white cursor-pointer">
+          Explore Report Types
+        </Button>
+      )}
     </DashedBorder>
   );
 };
 
-export default DataIntoDecisions;
+export default KeyCapabilities;

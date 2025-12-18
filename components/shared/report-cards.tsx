@@ -1,75 +1,41 @@
 import React from "react";
-import DashedBorder from "../shared/dashed-border";
+import DashedBorder from "./dashed-border";
 import { Description, H1, Title } from "../ui/typography";
 import { Button } from "../ui/button";
 import Image from "next/image";
 
-interface ReportCard {
+type ReportCard = {
   title: string;
   description: string;
-  value: string;
+  value: string | React.ReactNode;
   hasImage: boolean;
   imgPosition: string;
   imgArrowRotation?: string;
   imgArrowPosition?: string;
+};
+
+interface ReportCardsProps {
+  title?: string | React.ReactNode;
+  description?: string | React.ReactNode;
+  data?: ReportCard[];
 }
 
-const SeePerformance = () => {
-  const data: ReportCard[] = [
-    {
-      title: "Daily Report",
-      description: "Snapshot of player activity and financial performance.",
-      value: "Enables daily operational control and instant decisions.",
-      hasImage: true,
-      imgPosition: "-right-10 -top-14",
-      imgArrowRotation: "none",
-      imgArrowPosition: "-right-16 -top-18",
-    },
-    {
-      title: "Performance Report",
-      description: "Highlights top-performing players, games, and vendors.",
-      value: "Supports targeted promotions and strategic content planning.",
-      hasImage: false,
-      imgPosition: "none",
-    },
-    {
-      title: "Bonus Report",
-      description: "Tracks bonus activation, redemption, and ROI.",
-      value:
-        "Enables A/B testing of promotional campaigns and maximizes promotional efficiency.",
-      hasImage: true,
-      imgPosition: "-left-10 -bottom-14",
-      imgArrowRotation: "rotate-180 ",
-      imgArrowPosition: " -left-16 -bottom-18",
-    },
-    {
-      title: "Financial Report",
-      description:
-        "Analyzes bets, wins, deposits, withdrawals, GGR, NGR and all cross-KPIs in between.",
-      value: "Strengthens reconciliation and profitability tracking.",
-      hasImage: true,
-      imgPosition: "-right-10 -bottom-14",
-      imgArrowRotation: "rotate-90",
-      imgArrowPosition: "-right-16 -bottom-18",
-    },
-  ];
+const ReportCards = ({ title, description, data }: ReportCardsProps) => {
   return (
     <DashedBorder
       sides="all"
       className="relative flex flex-col items-center gap-8 py-12"
     >
-      <Title className="text-3xl font-medium text-center">
-        See <span className="text-primary">Performance</span> as It Happens
-      </Title>
+      <Title className="text-3xl font-medium text-center">{title}</Title>
 
       <Description className="max-w-3xl text-center md:w-2/3">
-        Four report types, one goal: faster, smarter, and clearer operations
+        {description}
       </Description>
 
       <div className="relative w-full px-4 mt-8">
         {/* Grid of report cards */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {data.map(
+          {data?.map(
             ({
               title,
               description,
@@ -130,4 +96,4 @@ const SeePerformance = () => {
   );
 };
 
-export default SeePerformance;
+export default ReportCards;
