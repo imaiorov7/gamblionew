@@ -1,15 +1,19 @@
+import React from "react";
+import type, { ComponentPropsWithoutRef, ReactNode } from "react";
+
 import Link from "next/link";
-import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import DashedBorder from "../shared/dashed-border";
-import { buttonVariants } from "../ui/button";
-import { Description, Title } from "../ui/typography";
-import LineChart from "./analytics";
+
 import Chat from "./chat";
 import Predict from "./predict";
+import LineChart from "./analytics";
+import { buttonVariants } from "../ui/button";
 import { Recommendation } from "./recommendation";
+import DashedBorder from "../shared/dashed-border";
+import { Description, Title } from "../ui/typography";
 
 interface Feature {
+  title?: string | ReactNode;
   name: string | ReactNode;
   id: number;
   description: string | ReactNode;
@@ -24,11 +28,11 @@ interface GridProps extends ComponentPropsWithoutRef<"div"> {
   className?: string;
 }
 
-export function ServicesSection({ className, ...props }: GridProps) {
+export function ServicesSection({ className }: GridProps) {
   return (
     <div id="services" className="scroll-mt-32">
       <DashedBorder sides="all" className="flex flex-col items-center py-12 ">
-        <Title className="font-medium text-center ">Services</Title>
+        <Title className="mb-4 font-medium text-center">Services</Title>
         <Description className="text-center text-muted-foreground md:w-1/2">
           Four tools. One platform. Convenient and impactful.
         </Description>
@@ -39,67 +43,74 @@ export function ServicesSection({ className, ...props }: GridProps) {
           "flex flex-col items-center pt-12 pb-0 px-0 gap-12",
           className,
         )}
-        {...props}
       >
-        {features.map((feature) => (
-          <DashedBorder
-            sides="all"
-            key={feature.id}
-            className="flex flex-col-reverse items-stretch w-full h-full p-0 md:flex-row md:even:flex-row-reverse md:mx-0 border-x-0 min-h-[450px]"
-          >
+        {features.map((feature, index) => (
+          <React.Fragment key={feature.id}>
+            <Title className="text-3xl uppercase">{feature.title}</Title>
             <DashedBorder
-              sides="none"
-              className="flex flex-col items-center justify-center w-full md:w-1/2 mx-0 md:!mx-0 px-0 md:p-4 gap-4"
+              sides="all"
+              key={feature.id}
+              className={cn(
+                "flex flex-col-reverse items-stretch w-full h-full p-0 md:flex-row md:mx-0 border-x-0 min-h-[450px]",
+                index % 2 !== 0 && "md:flex-row-reverse",
+              )}
             >
-              <Title className="w-full pl-4 text-left md:pl-4">
-                {feature.name}
-              </Title>
-              <Description className="px-4">{feature.description}</Description>
               <DashedBorder
-                sides="all"
-                className="w-full  bg-[#0e0e10] text-left p-0"
+                sides="none"
+                className="flex flex-col items-center justify-center w-full md:w-1/2 mx-0 md:!mx-0 px-0 md:p-4 gap-4"
               >
-                <p className="w-full p-4 text-white">Key benefits:</p>
-                <div
-                  className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6`}
+                <Title className="w-full pl-4 text-left lg:text-3xl md:pl-4">
+                  {feature.name}
+                </Title>
+                <Description className="px-4">
+                  {feature.description}
+                </Description>
+                <DashedBorder
+                  sides="all"
+                  className="w-full  bg-[#0e0e10] text-left p-0"
                 >
-                  {feature.benefits.map((benefit, index) => {
-                    const isLastTwoInFive =
-                      feature.benefits.length === 5 && index >= 3;
-                    return (
-                      <DashedBorder
-                        sides="all"
-                        key={benefit}
-                        className={cn(
-                          "w-full text-left mx-0 md:mx-0",
-                          isLastTwoInFive ? "lg:col-span-3" : "lg:col-span-2",
-                        )}
-                      >
-                        <p className="w-full text-white ">{benefit}</p>
-                      </DashedBorder>
-                    );
-                  })}
-                </div>
+                  <p className="w-full p-4 text-white">Key benefits:</p>
+                  <div
+                    className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6`}
+                  >
+                    {feature.benefits.map((benefit, index) => {
+                      const isLastTwoInFive =
+                        feature.benefits.length === 5 && index >= 3;
+                      return (
+                        <DashedBorder
+                          sides="all"
+                          key={benefit}
+                          className={cn(
+                            "w-full text-left mx-0 md:mx-0",
+                            isLastTwoInFive ? "lg:col-span-3" : "lg:col-span-2",
+                          )}
+                        >
+                          <p className="w-full text-white ">{benefit}</p>
+                        </DashedBorder>
+                      );
+                    })}
+                  </div>
+                </DashedBorder>
+                <Link
+                  href={feature.href}
+                  className={`${buttonVariants({
+                    variant: "default",
+                  })} w-fit text-white cursor-pointer`}
+                >
+                  {feature.cta}
+                </Link>
               </DashedBorder>
-              <Link
-                href={feature.href}
-                className={`${buttonVariants({
-                  variant: "default",
-                })} w-fit text-white cursor-pointer`}
-              >
-                {feature.cta}
-              </Link>
+              {feature.img && (
+                <DashedBorder
+                  sides={`even:left odd:right` as "left" | "right"}
+                  // sidesMd={`even:left odd:right` as "left" | "right"}
+                  className="w-full md:w-1/2 md:!mx-0 overflow-hidden  flex items-center justify-center"
+                >
+                  {feature.img}
+                </DashedBorder>
+              )}
             </DashedBorder>
-            {feature.img && (
-              <DashedBorder
-                sides={`even:left odd:right` as "left" | "right"}
-                // sidesMd={`even:left odd:right` as "left" | "right"}
-                className="w-full md:w-1/2 md:!mx-0 overflow-hidden  flex items-center justify-center"
-              >
-                {feature.img}
-              </DashedBorder>
-            )}
-          </DashedBorder>
+          </React.Fragment>
         ))}
       </DashedBorder>
     </div>
@@ -109,10 +120,19 @@ export function ServicesSection({ className, ...props }: GridProps) {
 const features: Feature[] = [
   {
     id: 1,
+    title: (
+      <>
+        G<span className="font-semibold text-primary">a</span>mbl
+        <span className="font-semibold text-primary ">i</span>o{" "}
+        <span className="text-primary">Analytics</span>
+      </>
+    ),
     name: (
       <>
-        Know faster. Act smarter.{" "}
-        <span className="text-primary">Win more.</span>
+        <span className="text-primary">Know</span> faster.{" "}
+        <span className="text-primary">Act</span> smarter.{" "}
+        <span className="text-primary">Win </span>
+        more.
       </>
     ),
     description: (
@@ -134,11 +154,18 @@ const features: Feature[] = [
     ],
     href: "/analytics",
     className: " border-b border-r",
-    cta: "See analytics",
+    cta: "See Analytics",
     img: <LineChart />,
   },
   {
     id: 2,
+    title: (
+      <>
+        G<span className="font-semibold text-primary">a</span>mbl
+        <span className="font-semibold text-primary ">i</span>o{" "}
+        <span className="text-primary">Predict</span>
+      </>
+    ),
     name: (
       <>
         <span className="text-primary">Predict</span> behavior.{" "}
@@ -171,10 +198,20 @@ const features: Feature[] = [
   },
   {
     id: 3,
+    title: (
+      <>
+        G<span className="font-semibold text-primary">a</span>mbl
+        <span className="font-semibold text-primary ">i</span>o{" "}
+        <span className="text-primary">
+          <span className="lowercase">u</span>Choose
+        </span>
+      </>
+    ),
     name: (
       <>
-        Right game. Right time.{" "}
-        <span className="text-primary">Maximum retention.</span>
+        <span className="text-primary">Right</span> game.{" "}
+        <span className="text-primary">Right</span> time.{" "}
+        <span className="text-primary">Maximum </span>retention.
       </>
     ),
     description: (
@@ -185,7 +222,7 @@ const features: Feature[] = [
         <br />
         <br />
         <span className="underline">
-          Bring tailored gaming recommendations to each user.
+          Turn player data into personalized game discovery.
         </span>
       </>
     ),
@@ -201,9 +238,16 @@ const features: Feature[] = [
   },
   {
     id: 4,
+    title: (
+      <>
+        G<span className="font-semibold text-primary">a</span>mbl
+        <span className="font-semibold text-primary ">i</span>o{" "}
+        <span className="text-primary">Care</span>
+      </>
+    ),
     name: (
       <>
-        Support that never sleeps, AI that{" "}
+        Support that <span className="text-primary">never sleeps</span>, AI that{" "}
         <span className="text-primary">never stops learning.</span>
       </>
     ),
@@ -220,7 +264,7 @@ const features: Feature[] = [
         <br />
         <br />
         <span className="underline">
-          Automatize customer care with smart, contextual replies.
+          Provide AI-powered customer support with full player context.
         </span>
       </>
     ),

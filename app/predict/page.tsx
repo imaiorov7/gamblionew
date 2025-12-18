@@ -97,27 +97,24 @@ const Predict = () => {
         />
       </DashedBorder>
 
-      {/* TODO: Rename components to be globally appropriate */}
-
       <FeatureIntro
         title={
           <>
-            The Behavioral Intelligence Engine of{" "}
-            <span className="text-primary">Gamblio</span>
+            The{" "}
+            <span className="text-primary">
+              Behavioral Intelligence Engine{" "}
+            </span>
+            of Gamblio
           </>
         }
-        description={
-          <>
+        description="
             Gamblio Predict is the player behavior prediction and segmentation
             hub of the Gamblio platform. Using advanced machine learning and
             behavioral modeling, it classifies players into actionable segments,
-            enabling operators to prevent in time rather than react late.
-            <br />
-            Purpose-built for the online gambling industry, it blends AI
+            enabling operators to prevent in time rather than react late."
+        description2="Purpose-built for the online gambling industry, it blends AI
             precision with operational control, giving CRM, retention, and
-            compliance teams the foresight they’ve never had before.
-          </>
-        }
+            compliance teams the foresight they’ve never had before."
         processFlowchart={
           <ProcessFlowchart
             steps={[
@@ -129,7 +126,7 @@ const Predict = () => {
             ]}
             labels={[
               { title: "gamblio ai", position: "top", index: 0 },
-              { title: "predict", position: "bottom", index: 1.7 },
+              { title: "predict", position: "bottom", index: 1.68 },
             ]}
           />
         }
@@ -220,8 +217,8 @@ const Predict = () => {
       <ObjectiveDeliverables
         title={
           <>
-            Proactive <span className="text-primary">Intelligence</span>.
-            Measurable <span className="text-primary">Results</span>.
+            <span className="text-primary">Proactive </span>Intelligence.{" "}
+            <span className="text-primary">Measurable </span>Results.
           </>
         }
         description="Business impact:"
@@ -246,8 +243,8 @@ const Predict = () => {
       <ValueProposition />
       {/* Section 7: Call to Action */}
       <CTASection
-        title="Ready to See Gamblio Analytics in Action?"
-        description=" Turn data into revenue with the BI engine designed for gambling operators."
+        title="Ready to Predict What Players Will Do Next?"
+        description="Take control of your operations with the AI engine that thinks ahead of your players."
         buttonText="Contact Us"
         buttonLink="/contact-us"
       />
@@ -269,10 +266,9 @@ const HeroDetails = {
     "text-4xl font-medium tracking-tighter text-center md:text-4xl lg:text-5xl xl:text-6xl text-balance ",
   description: (
     <>
-      Turn complexity into clarity with real-time performance
-      intelligence.Gamblio Analytics transforms gaming data into measurable
-      business outcomes, empowering operators to make confident, data-driven
-      decisions.
+      Gamblio Predict uses AI-driven segmentation and behavioral forecasting to
+      help operators anticipate player actions, identifying VIPs early,
+      preventing churn, stopping bonus abuse, and ensuring responsible play.
     </>
   ),
   className: " text-left ",

@@ -5,6 +5,7 @@ import { Description, Title } from "../ui/typography";
 interface FeatureIntroProps {
   title?: string | React.ReactNode;
   description?: string | React.ReactNode;
+  description2?: string | React.ReactNode;
   processFlowchart?: React.ReactNode;
   subTitle?: string | React.ReactNode;
   signature?: string | React.ReactNode;
@@ -12,6 +13,7 @@ interface FeatureIntroProps {
 const FeatureIntro = ({
   title,
   description,
+  description2,
   processFlowchart,
   subTitle,
   signature,
@@ -20,7 +22,7 @@ const FeatureIntro = ({
     <DashedBorder
       id="learn-how-it-works"
       sides="all"
-      className="flex flex-col items-center gap-8 py-12 scroll-mt-32"
+      className="flex flex-col items-center gap-4 py-12 scroll-mt-32"
     >
       <Title className="text-3xl font-medium text-center">{title}</Title>
 
@@ -31,6 +33,9 @@ const FeatureIntro = ({
       <p className="p-2 mt-4 text-center rounded-lg bg-muted ">{subTitle}</p>
 
       {processFlowchart}
+      <Description className="max-w-3xl text-center md:w-2/3">
+        {description2}
+      </Description>
 
       <div className="flex flex-col items-center gap-2 mt-8">
         <p className="italic text-center text-muted-foreground">{signature}</p>

@@ -6,7 +6,7 @@ function FeatureShowcase() {
   return (
     <DashedBorder
       sides="all"
-      className="flex flex-col items-center w-full gap-8 pt-12 pb-18"
+      className="flex flex-col items-center w-full gap-4 pt-12 pb-18"
     >
       <Title className="text-3xl font-medium text-center">
         <span className="text-primary">Core Value</span> Proposition

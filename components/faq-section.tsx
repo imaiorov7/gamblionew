@@ -13,7 +13,11 @@ import DashedBorder from "./shared/dashed-border";
 export function FAQSection() {
   return (
     <>
-      <DashedBorder sides="all" className="w-full py-12">
+      <DashedBorder
+        id="faq"
+        sides="all"
+        className="w-full gap-4 py-12 scroll-mt-12"
+      >
         <Title className="font-medium text-center ">
           Frequently Asked Questions
         </Title>

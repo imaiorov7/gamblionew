@@ -55,10 +55,16 @@ export default function Home() {
       />
       <TrustedBy />
       <ServicesSection />
-      <DashedBorder sides="all" className="mt-10 scroll-mt-32" id="who-we-are">
+      <DashedBorder
+        sides="all"
+        className="gap-4 mt-10 scroll-mt-32"
+        id="who-we-are"
+      >
         <Title>Who we are</Title>
-        <Description>Gambling Meets Expertise.</Description>
-        <Description className="p-10 my-6 text-xl bg-custom-dark">
+        <Description>
+          Gambling Meets <span className="text-primary">Expertise.</span>
+        </Description>
+        <Description className="p-10 mb-6 text-lg bg-custom-dark">
           Gamblio was built by industry professionals who understand both sides
           of the table, operational realities and advanced AI capabilities. Our
           team brings together experts in gaming operations, data science,
@@ -83,8 +89,8 @@ export default function Home() {
         description="Experience how Gamblio turns your gambling site data into actionable
             insights. Book a personalized session and see how easy it is to
             integrate, analyze, and optimize your platform."
-        buttonText="Book a call"
-        buttonLink="#"
+        buttonText="Contact Us"
+        buttonLink="/contact-us"
       />
     </div>
   );
@@ -108,8 +114,7 @@ const HeroDetails = {
       Everything you need to skyrocket your operation in one place.
     </>
   ),
-  descriptionClassName:
-    "text-center md:w-1/2 max-md:text-sm text-muted-foreground",
+  descriptionClassName: "text-center md:w-1/2 text-lg text-muted-foreground",
   buttons: [
     {
       label: "Contact Us",

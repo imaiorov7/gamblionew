@@ -20,7 +20,7 @@ const KeyCapabilities = ({
   return (
     <DashedBorder
       sides="all"
-      className="flex flex-col items-center gap-8 py-12"
+      className="flex flex-col items-center gap-4 py-12"
     >
       <Title className="text-3xl font-medium text-center">{title}</Title>
 
@@ -53,9 +53,9 @@ const KeyCapabilities = ({
                 >
                   {index + 1}.
                 </DashedBorder>
-                <p className="flex-1 px-4 py-3 md:px-0 text-muted-foreground h-fit">
+                <Description className="flex-1 px-4 py-3 md:px-0 text-muted-foreground h-fit">
                   {capability}
-                </p>
+                </Description>
               </DashedBorder>
             ))}
           </DashedBorder>

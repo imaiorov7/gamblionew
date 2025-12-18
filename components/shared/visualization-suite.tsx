@@ -29,7 +29,7 @@ const VisualizationSuite = ({
   return (
     <DashedBorder
       sides="all"
-      className="flex flex-col items-center gap-8 py-12"
+      className="flex flex-col items-center gap-4 py-12"
     >
       <Title className="text-3xl font-medium text-center">{title}</Title>
 

@@ -10,6 +10,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Description, Title } from "@/components/ui/typography";
+import Image from "next/image";
 import Link from "next/link";
 
 interface TeamMember {
@@ -28,7 +29,7 @@ const teamMembers: TeamMember[] = [
     title: "CEO",
     href: " https://www.linkedin.com/in/filip-patkovic/",
     description: "Here for the long game.",
-    image: "https://picsum.photos/200",
+    image: "/images/no-img.jpg",
   },
   {
     id: 2,
@@ -36,7 +37,7 @@ const teamMembers: TeamMember[] = [
     title: " CTO",
     href: " https://www.linkedin.com/in/ivan-soc/",
     description: "Transforms vision into reality.",
-    image: "https://picsum.photos/200",
+    image: "/images/no-img.jpg",
   },
   {
     id: 3,
@@ -44,7 +45,7 @@ const teamMembers: TeamMember[] = [
     title: "CPO",
     href: "https://www.linkedin.com/in/aleksa-%C4%8Dovi%C4%87/",
     description: "Solving problems before they appear.",
-    image: "https://picsum.photos/200",
+    image: "/images/no-img.jpg",
   },
   {
     id: 4,
@@ -52,7 +53,7 @@ const teamMembers: TeamMember[] = [
     title: "Project Manager",
     href: "https://www.linkedin.com/in/nebojsa001/",
     description: "Bringing chaos to order.",
-    image: "https://picsum.photos/200",
+    image: "/images/no-img.jpg",
   },
 ];
 
@@ -102,9 +103,11 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
         sides="all"
         className="justify-between w-full h-full p-0 mx-0 rounded-lg md:mx-0"
       >
-        <img
+        <Image
           src={member.image}
           alt={member.name}
+          width={500}
+          height={300}
           className="w-full h-[70%] rounded-sm object-cover mb-2"
         />
         <Title className="text-xl md:text-2xl lg:text-2xl">{member.name}</Title>

@@ -4,11 +4,11 @@ import GlobalReach from "@/components/shared/global-reach";
 import ReportCards from "@/components/shared/report-cards";
 import { HeroVideoDialog } from "@/components/video-dialog";
 import DashedBorder from "@/components/shared/dashed-border";
-import PerformanceEngine from "@/components/shared/feature-intro";
 import FeatureShowcase from "@/components/shared/feature-showcase";
 import DataIntoDecisions from "@/components/shared/key-capabilities";
 import ProcessFlowchart from "@/components/shared/process-flowchart";
 import ObjectiveDeliverables from "@/components/shared/objective-deliverables";
+import FeatureIntro from "@/components/shared/feature-intro";
 
 const AnalyticsPage = () => {
   const reportData = [
@@ -71,13 +71,12 @@ const AnalyticsPage = () => {
           thumbnailAlt="Hero Video"
         />
       </DashedBorder>
-
       {/* Section 1: The Performance Engine */}
-      <PerformanceEngine
+      <FeatureIntro
         title={
           <>
-            The Performance Engine of the{" "}
-            <span className="text-primary">Gamblio Platform</span>
+            The<span className="text-primary"> Performance Engine </span>of the
+            Gamblio Platform
           </>
         }
         description={
@@ -112,12 +111,12 @@ const AnalyticsPage = () => {
           </>
         }
       />
-
       {/* Section 2: Turn Data Into Decisions */}
       <DataIntoDecisions
         title={
           <>
-            Turn Data Into <span className="text-primary">Decisions</span>
+            Turn<span className="text-primary"> Data </span>Into{" "}
+            <span className="text-primary">Decisions</span>
           </>
         }
         description={
@@ -138,7 +137,6 @@ const AnalyticsPage = () => {
         ]}
         buttonTitle="Explore Report Types"
       />
-
       {/* Section 3: See Performance as It Happens */}
       <ReportCards
         title={
@@ -149,7 +147,6 @@ const AnalyticsPage = () => {
         description="Four report types, one goal: faster, smarter, and clearer operations"
         data={reportData}
       />
-
       {/* Section 4: From Metrics to Measurable Outcomes */}
       <ObjectiveDeliverables
         title={
@@ -197,19 +194,18 @@ export default AnalyticsPage;
 const HeroDetails = {
   title: (
     <>
-      Faster <span className="text-primary">insights.</span> Smarter{" "}
-      <span className="text-primary">actions.</span> Stronger{" "}
-      <span className="text-primary">results.</span>
+      <span className="text-primary">Faster </span>insights.
+      <span className="text-primary"> Smarter </span>actions.
+      <span className="text-primary"> Stronger </span>results.
     </>
   ),
   tittleClassName:
     "text-4xl font-medium tracking-tighter text-center md:text-4xl lg:text-5xl xl:text-6xl text-balance ",
   description: (
     <>
-      Turn complexity into clarity with real-time performance
-      intelligence.Gamblio Analytics transforms gaming data into measurable
-      business outcomes, empowering operators to make confident, data-driven
-      decisions.
+      Turn complexity into clarity with real-time performance intelligence.
+      Gamblio Analytics transforms gaming data into measurable business
+      outcomes, empowering operators to make confident, data-driven decisions.
     </>
   ),
   className: " text-left ",

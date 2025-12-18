@@ -51,7 +51,7 @@ function ObjectiveDeliverables({
   return (
     <DashedBorder
       sides="all"
-      className="flex flex-col items-center gap-8 pt-12 pb-0"
+      className="flex flex-col items-center gap-4 pt-12 pb-0"
     >
       <Title className="font-medium text-center ">{title}</Title>
 
@@ -94,11 +94,8 @@ function ObjectiveDeliverables({
                       <div
                         key={labelIdx}
                         className={cn(
-                          "absolute  w-60 -rotate-90 hidden lg:flex gap-2 z-20 top-[120%] items-start",
+                          "absolute  w-60 -rotate-90 hidden lg:flex gap-2 z-20 top-[120%] -left-[150px] items-start",
                         )}
-                        style={{
-                          left: `${-75 + offset}%`,
-                        }}
                       >
                         <div className="w-0.5 h-8 border-l-2 border-dashed border-border"></div>
                         <p
@@ -136,19 +133,15 @@ function ObjectiveDeliverables({
                   ?.filter((label) => Math.floor(label.index) === index)
                   .map((label, labelIdx) => {
                     const fraction = label.index - Math.floor(label.index);
-                    const offset = fraction * 100;
 
                     return (
                       <div
                         key={labelIdx}
                         className={cn(
-                          "absolute  w-60 rotate-90 hidden lg:flex gap-2 z-20 top-[120%] items-start",
+                          `absolute  w-60 rotate-90 hidden lg:flex gap-2 z-20 top-[120%] items-start -right-[150px]`,
                         )}
-                        style={{
-                          right: `${-75 + offset}%`,
-                        }}
                       >
-                        <div className="w-0.5 h-8 border-l-2 border-dashed border-border"></div>
+                        <div className="w-0.5 h-8 border-l-2 border-dashed border-border "></div>
                         <p
                           className={cn(
                             "text-[8px] w-full text-center text-muted-foreground whitespace-nowrap border-dashed border-b-2 border-b-border pb-1",

@@ -16,10 +16,11 @@ const WorkflowVisualization = () => {
   return (
     <DashedBorder
       sides="all"
-      className="flex flex-col items-center gap-8 pt-12 pb-0 "
+      className="flex flex-col items-center gap-4 pt-12 pb-0 "
     >
       <Title className="font-medium text-center ">
-        Let the Predictions Trigger the Actions
+        Let the<span className="text-primary"> Predictions </span>Trigger the
+        <span className="text-primary"> Actions</span>
       </Title>
       <Description className="max-w-3xl text-center md:w-2/3">
         Gamblio Predict connects insights to automation, ensuring no opportunity

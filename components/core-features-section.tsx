@@ -18,10 +18,7 @@ export function CoreFeaturesSection({
   className?: string;
 }) {
   return (
-    <DashedBorder
-      sides="all"
-      className={cn("gap-4 md:gap-10 py-10", className)}
-    >
+    <DashedBorder sides="all" className={cn("gap-4 py-10", className)}>
       <Title className="w-full text-center">{title}</Title>
 
       <Description className="text-center">{description}</Description>

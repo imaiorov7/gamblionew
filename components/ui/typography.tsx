@@ -27,14 +27,14 @@ export function Title({
   children: ReactNode;
 }) {
   return (
-    <p
+    <span
       className={cn(
-        " text-xl md:text-2xl lg:text-4xl capitalize font-medium",
+        "text-xl md:text-2xl lg:text-4xl capitalize font-medium",
         className,
       )}
     >
       {children}
-    </p>
+    </span>
   );
 }
 export function Description({

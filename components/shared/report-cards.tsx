@@ -24,7 +24,7 @@ const ReportCards = ({ title, description, data }: ReportCardsProps) => {
   return (
     <DashedBorder
       sides="all"
-      className="relative flex flex-col items-center gap-8 py-12"
+      className="relative flex flex-col items-center gap-4 py-12"
     >
       <Title className="text-3xl font-medium text-center">{title}</Title>
 
@@ -72,16 +72,16 @@ const ReportCards = ({ title, description, data }: ReportCardsProps) => {
                     sides="bottom"
                     className="w-full mx-0 mb-4 md:mx-0 "
                   >
-                    <h3 className="w-full text-xl font-semibold text-center">
+                    <Title className="w-full text-xl font-semibold text-center lg:text-2xl">
                       {title}
-                    </h3>
+                    </Title>
                   </DashedBorder>
-                  <p className="mb-2 text-sm text-center text-muted-foreground">
+                  <Description className="mb-2 text-muted-foreground">
                     {description}
-                  </p>
-                  <p className="text-sm text-center text-muted-foreground">
+                  </Description>
+                  <Description className=" text-muted-foreground">
                     <span className="text-primary">Value:</span> {value}
-                  </p>
+                  </Description>
                 </DashedBorder>
               </div>
             ),

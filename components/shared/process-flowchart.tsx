@@ -30,7 +30,10 @@ function ProcessFlowchart({
 
           {/* Grid layout for steps */}
           <div
-            className={`absolute inset-0 grid grid-cols-${steps.length} gap-4`}
+            className="absolute inset-0 grid gap-4"
+            style={{
+              gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))`,
+            }}
           >
             {steps.map((step, index) => {
               const isEven = index % 2 === 0;
@@ -78,10 +81,13 @@ function ProcessFlowchart({
                             "absolute ml-4 w-40 hidden lg:flex gap-2 z-20",
                             label.position === "top"
                               ? "top-[35%] items-start"
-                              : `bottom-[${fraction ? 30 : 35}%] items-end`,
+                              : "items-end",
                           )}
                           style={{
                             left: `${65 + offset}%`,
+                            ...(label.position === "bottom" && {
+                              bottom: `${fraction ? 30 : 35}%`,
+                            }),
                           }}
                         >
                           <div className="w-0.5 h-8 border-l-2 border-dashed border-border"></div>

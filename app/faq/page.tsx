@@ -87,7 +87,10 @@ const faqData = [
 export default function FAQPage() {
   return (
     <div className="w-full pt-24">
-      <DashedBorder sides="x" className="flex flex-col items-center py-12">
+      <DashedBorder
+        sides="x"
+        className="flex flex-col items-center gap-4 py-12"
+      >
         <H1 className="font-medium text-center md:text-3xl lg:text-4xl">
           Frequently Asked Questions
         </H1>
