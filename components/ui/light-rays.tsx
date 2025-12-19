@@ -86,6 +86,7 @@ interface Uniforms {
   mouseInfluence: { value: number };
   noiseAmount: { value: number };
   distortion: { value: number };
+  [key: string]: { value: number | Vec2 | Vec3 };
 }
 
 const LightRays: React.FC<LightRaysProps> = ({
