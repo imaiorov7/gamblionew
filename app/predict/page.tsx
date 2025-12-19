@@ -1,20 +1,16 @@
-import React from "react";
-
-import Hero from "@/components/hero";
 import CTASection from "@/components/cta-section";
-import GlobalReach from "@/components/shared/global-reach";
-import ReportCards from "@/components/shared/report-cards";
-import { HeroVideoDialog } from "@/components/video-dialog";
+import Hero from "@/components/hero";
 import DashedBorder from "@/components/shared/dashed-border";
 import FeatureIntro from "@/components/shared/feature-intro";
-import FeatureShowcase from "@/components/shared/feature-showcase";
+
 import KeyCapabilities from "@/components/shared/key-capabilities";
-import ProcessFlowchart from "@/components/shared/process-flowchart";
 import ObjectiveDeliverables from "@/components/shared/objective-deliverables";
+import ProcessFlowchart from "@/components/shared/process-flowchart";
+import ReportCards from "@/components/shared/report-cards";
+import ValueProposition from "@/components/shared/value-proposition";
 import VisualizationSuite from "@/components/shared/visualization-suite";
 import WorkflowVisualization from "@/components/shared/workflow-visualization";
-import ValueProposition from "@/components/shared/value-proposition";
-import { title } from "process";
+import { HeroVideoDialog } from "@/components/video-dialog";
 
 const Predict = () => {
   const predictData = [
@@ -272,8 +268,7 @@ const HeroDetails = {
     </>
   ),
   className: " text-left ",
-  descriptionClassName:
-    "text-center md:w-1/2 max-md:text-sm text-muted-foreground",
+  descriptionClassName: "text-center md:w-1/2 text-xl text-muted-foreground",
   buttons: [
     {
       label: "Contact Us",

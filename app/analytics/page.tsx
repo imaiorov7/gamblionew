@@ -1,14 +1,14 @@
-import Hero from "@/components/hero";
 import CTASection from "@/components/cta-section";
+import Hero from "@/components/hero";
+import DashedBorder from "@/components/shared/dashed-border";
+import FeatureIntro from "@/components/shared/feature-intro";
+import FeatureShowcase from "@/components/shared/feature-showcase";
 import GlobalReach from "@/components/shared/global-reach";
+import DataIntoDecisions from "@/components/shared/key-capabilities";
+import ObjectiveDeliverables from "@/components/shared/objective-deliverables";
+import ProcessFlowchart from "@/components/shared/process-flowchart";
 import ReportCards from "@/components/shared/report-cards";
 import { HeroVideoDialog } from "@/components/video-dialog";
-import DashedBorder from "@/components/shared/dashed-border";
-import FeatureShowcase from "@/components/shared/feature-showcase";
-import DataIntoDecisions from "@/components/shared/key-capabilities";
-import ProcessFlowchart from "@/components/shared/process-flowchart";
-import ObjectiveDeliverables from "@/components/shared/objective-deliverables";
-import FeatureIntro from "@/components/shared/feature-intro";
 
 const AnalyticsPage = () => {
   const reportData = [
@@ -209,8 +209,7 @@ const HeroDetails = {
     </>
   ),
   className: " text-left ",
-  descriptionClassName:
-    "text-center md:w-1/2 max-md:text-sm text-muted-foreground",
+  descriptionClassName: "text-center md:w-1/2 text-xl text-muted-foreground",
   buttons: [
     {
       label: "Contact Us",

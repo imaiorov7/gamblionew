@@ -1,10 +1,11 @@
 "use client";
-import Link from "next/link";
-import { ShimmerButton } from "./ui/shimer-button";
 import { motion } from "motion/react";
-import { Button, buttonVariants } from "./ui/button";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import DashedBorder from "./shared/dashed-border";
+import { buttonVariants } from "./ui/button";
+import LightRays from "./ui/light-rays";
+
 interface HeroProps {
   title?: string | React.ReactNode;
   tittleClassName?: string;
@@ -35,7 +36,23 @@ export default function Hero({
 }: HeroProps) {
   return (
     <DashedBorder id="home" sides="x" className={className}>
-      <div className="absolute inset-0 -z-10 h-[600px] md:h-[800px] w-full [background:radial-gradient(125%_125%_at_50%_10%,var(--background)_40%,var(--primary)_100%)] "></div>
+      {/* <div className="absolute inset-0 -z-10 h-[600px] md:h-[800px] w-full [background:radial-gradient(125%_125%_at_50%_10%,var(--background)_40%,var(--primary)_100%)]"></div> */}
+      <div className="absolute inset-0 -z-10 h-[600px] md:h-[800px] w-full overflow-hidden pointer-events-none">
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#0392a0"
+          raysSpeed={0.5}
+          lightSpread={2}
+          rayLength={3}
+          pulsating={true}
+          fadeDistance={1.5}
+          saturation={1.0}
+          followMouse={false}
+          mouseInfluence={0}
+          noiseAmount={0}
+          distortion={0}
+        />
+      </div>
       <div className="flex flex-col h-[600px] max-md:h-[500px] pt-20 justify-center items-center gap-3 ">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -45,7 +62,6 @@ export default function Hero({
         >
           {title}
         </motion.h1>
-        <br />
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,9 +76,9 @@ export default function Hero({
           transition={{ duration: 0.5, ease: "easeInOut", delay: 0.4 }}
           className="flex items-center justify-center gap-3"
         >
-          {buttons?.map((button, index) => (
+          {buttons?.map((button) => (
             <Link
-              key={index}
+              key={button.href}
               href={button.href}
               className={cn(
                 buttonVariants({ variant: button.variant || "default" }),

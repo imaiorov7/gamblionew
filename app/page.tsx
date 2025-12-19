@@ -114,7 +114,7 @@ const HeroDetails = {
       Everything you need to skyrocket your operation in one place.
     </>
   ),
-  descriptionClassName: "text-center md:w-1/2 text-lg text-muted-foreground",
+  descriptionClassName: "text-center md:w-1/2 text-xl text-muted-foreground",
   buttons: [
     {
       label: "Contact Us",
