@@ -1,7 +1,8 @@
-import React from "react";
-import DashedBorder from "./dashed-border";
-import { Description, Title } from "../ui/typography";
+import type React from "react";
 import { Button } from "../ui/button";
+import { Description, Title } from "../ui/typography";
+import DashedBorder from "./dashed-border";
+
 interface KeyCapabilitiesProps {
   title?: string | React.ReactNode;
   description?: string | React.ReactNode;
@@ -36,7 +37,7 @@ const KeyCapabilities = ({
           >
             <DashedBorder
               sides="all"
-              className="flex-wrap justify-end w-full px-0 mx-0 text-left md:mx-0 text-muted-foreground"
+              className="flex-wrap justify-end w-full px-0 mx-0 text-left md:mx-0 text-muted-foreground text-xl"
             >
               {subTitle}
             </DashedBorder>

@@ -1,8 +1,8 @@
-import React from "react";
-import DashedBorder from "./dashed-border";
-import { Description, H1, Title } from "../ui/typography";
-import { Button } from "../ui/button";
 import Image from "next/image";
+import type React from "react";
+import { Button } from "../ui/button";
+import { Description, H1, Title } from "../ui/typography";
+import DashedBorder from "./dashed-border";
 
 type ReportCard = {
   title: string;
@@ -76,7 +76,7 @@ const ReportCards = ({ title, description, data }: ReportCardsProps) => {
                       {title}
                     </Title>
                   </DashedBorder>
-                  <Description className="mb-2 text-muted-foreground">
+                  <Description className="mb-2 text-muted-foreground px-4">
                     {description}
                   </Description>
                   <Description className=" text-muted-foreground">

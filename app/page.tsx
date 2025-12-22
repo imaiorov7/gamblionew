@@ -64,7 +64,7 @@ export default function Home() {
         <Description>
           Gambling Meets <span className="text-primary">Expertise.</span>
         </Description>
-        <Description className="p-10 mb-6 text-lg bg-custom-dark">
+        <Description className="p-10 mb-6 text-lg bg-custom-dark text-center">
           Gamblio was built by industry professionals who understand both sides
           of the table, operational realities and advanced AI capabilities. Our
           team brings together experts in gaming operations, data science,
@@ -123,7 +123,7 @@ const HeroDetails = {
       className: "text-white",
     },
     {
-      label: "Services",
+      label: "Learn More",
       href: "#services",
       variant: "outline" as const,
       className: "text-white",

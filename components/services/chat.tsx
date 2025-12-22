@@ -172,13 +172,13 @@ export default function Chat() {
             messages.length > 0 ? "hidden" : ""
           }`}
         >
-          <div className="p-4 text-white shadow bg-primary rounded-2xl">
+        <div className="p-4 text-white shadow bg-primary rounded-2xl">
             <p ref={userTextRef} className="text-sm"></p>
-          </div>
-          <div className="flex items-center justify-center rounded-full size-10 bg-primary aspect-square flex-shrink-0">
-            <p>U</p>
-          </div>
         </div>
+          <div className="flex items-center justify-center rounded-full size-10 bg-primary aspect-square flex-shrink-0">
+          <p>U</p>
+        </div>
+      </div>
 
         {/* Completed messages */}
         {messages.map((message) => (
@@ -190,12 +190,12 @@ export default function Chat() {
           >
             {message.sender === "bot" && (
               <Image
-                src="/images/logotip-dark.svg"
-                alt="Bot Avatar"
+          src="/images/logotip-dark.svg"
+          alt="Bot Avatar"
                 width={40}
                 height={40}
                 className="p-1 border rounded-full size-10 flex-shrink-0"
-              />
+        />
             )}
             <div
               className={`p-4 shadow rounded-2xl ${
@@ -212,8 +212,8 @@ export default function Chat() {
                 }`}
               >
                 {message.text}
-              </p>
-            </div>
+          </p>
+        </div>
             {message.sender === "user" && (
               <div className="flex items-center justify-center rounded-full size-10 bg-primary aspect-square flex-shrink-0">
                 <p>U</p>

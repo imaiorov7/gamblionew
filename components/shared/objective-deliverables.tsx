@@ -1,7 +1,7 @@
 import DashedBorder from "@/components/shared/dashed-border";
 import { Description, Title } from "@/components/ui/typography";
-import BorderedCard from "./bordered-card";
 import { cn } from "@/lib/utils";
+import BorderedCard from "./bordered-card";
 
 interface ObjectiveDeliverablesProps {
   title?: string | React.ReactNode;
@@ -97,15 +97,15 @@ function ObjectiveDeliverables({
                           "absolute  w-60 -rotate-90 hidden lg:flex gap-2 z-20 top-[120%] -left-[150px] items-start",
                         )}
                       >
-                        <div className="w-0.5 h-8 border-l-2 border-dashed border-border"></div>
+                        <div className="w-0.5 h-10 border-l-2 border-dashed border-border"></div>
                         <p
                           className={cn(
-                            "text-[8px] w-full text-center text-muted-foreground whitespace-nowrap border-dashed border-b-2 border-b-border pb-1",
+                            "text-sm w-full text-center text-muted-foreground whitespace-nowrap border-dashed border-b-2 border-b-border pb-1",
                           )}
                         >
                           {label.title}
                         </p>
-                        <div className="w-0.5 h-8 border-l-2 border-dashed border-border"></div>
+                        <div className="w-0.5 h-10 border-l-2 border-dashed border-border"></div>
                       </div>
                     );
                   })}
@@ -141,15 +141,15 @@ function ObjectiveDeliverables({
                           `absolute  w-60 rotate-90 hidden lg:flex gap-2 z-20 top-[120%] items-start -right-[150px]`,
                         )}
                       >
-                        <div className="w-0.5 h-8 border-l-2 border-dashed border-border "></div>
+                        <div className="w-0.5 h-10 border-l-2 border-dashed border-border "></div>
                         <p
                           className={cn(
-                            "text-[8px] w-full text-center text-muted-foreground whitespace-nowrap border-dashed border-b-2 border-b-border pb-1",
+                            "text-sm w-full text-center text-muted-foreground whitespace-nowrap border-dashed border-b-2 border-b-border pb-1",
                           )}
                         >
                           {label.title}
                         </p>
-                        <div className="w-0.5 h-8 border-l-2 border-dashed border-border"></div>
+                        <div className="w-0.5 h-10 border-l-2 border-dashed border-border"></div>
                       </div>
                     );
                   })}

@@ -1,16 +1,14 @@
-import React from "react";
-import type, { ComponentPropsWithoutRef, ReactNode } from "react";
-
 import Link from "next/link";
+import React from "react";
+import type, { type ComponentPropsWithoutRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
-
+import DashedBorder from "../shared/dashed-border";
+import { buttonVariants } from "../ui/button";
+import { Description, Title } from "../ui/typography";
+import LineChart from "./analytics";
 import Chat from "./chat";
 import Predict from "./predict";
-import LineChart from "./analytics";
-import { buttonVariants } from "../ui/button";
 import { Recommendation } from "./recommendation";
-import DashedBorder from "../shared/dashed-border";
-import { Description, Title } from "../ui/typography";
 
 interface Feature {
   title?: string | ReactNode;
@@ -253,14 +251,12 @@ const features: Feature[] = [
     ),
     description: (
       <>
-        Automate, analyze and accelerate customer care. Gamblio Care blends AI
-        and live support, providing 24/7 service, faster resolutions and reduced
-        costs.
-        <br />
-        <br />
-        Unlike traditional agents trained only to answer inquiries, Gamblio
-        really does take care of your players by recommending them exactly what
-        they will love and boosting your revenue and retention in return.
+        Automate, analyze, and elevate customer care. Gamblio Care combines AI
+        and live support to deliver 24/7 assistance with faster resolutions and
+        lower operational costs. By learning from every interaction and using
+        full chat history as context, Gamblio goes beyond answering questions —
+        it understands players, knows what they truly care about, and drives
+        higher retention and revenue in return.
         <br />
         <br />
         <span className="underline">
@@ -269,11 +265,9 @@ const features: Feature[] = [
       </>
     ),
     benefits: [
-      "Ai agent + live agent collaboration",
-      "Ticketing & performance monitoring",
-      "Player satisfaction through faster, smarter care",
-      "More efficient resolution with higher FTR rate",
       "Operational cost reduction",
+      "Ticketing & performance monitoring with available historical data",
+      "Player satisfaction through a higher FTR rate",
     ],
     href: "#",
     className: " border-b ",

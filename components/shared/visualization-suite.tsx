@@ -1,10 +1,9 @@
-import React from "react";
-
 import Link from "next/link";
+import type React from "react";
 
 import { Button } from "../ui/button";
-import DashedBorder from "./dashed-border";
 import { Description, Title } from "../ui/typography";
+import DashedBorder from "./dashed-border";
 
 interface VisualizationCard {
   title: string;

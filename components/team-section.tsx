@@ -1,6 +1,8 @@
 /** biome-ignore-all lint/performance/noImgElement: Using img for design consistency */
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import DashedBorder from "@/components/shared/dashed-border";
 import {
   Carousel,
@@ -10,8 +12,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Description, Title } from "@/components/ui/typography";
-import Image from "next/image";
-import Link from "next/link";
 
 interface TeamMember {
   id: number;
@@ -88,8 +88,12 @@ export function TeamSection() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious
+            className={`${teamMembers.length <= 4 ? "hidden" : "flex"}`}
+          />
+          <CarouselNext
+            className={`${teamMembers.length <= 4 ? "hidden" : "flex"}`}
+          />
         </Carousel>
       </div>
     </DashedBorder>

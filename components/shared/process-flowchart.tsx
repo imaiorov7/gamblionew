@@ -78,30 +78,30 @@ function ProcessFlowchart({
                         <div
                           key={labelIdx}
                           className={cn(
-                            "absolute ml-4 w-40 hidden lg:flex gap-2 z-20",
+                            "absolute ml-4 w-40  hidden lg:flex gap-2 z-20",
                             label.position === "top"
-                              ? "top-[35%] items-start"
+                              ? "top-[32%] items-start"
                               : "items-end",
                           )}
                           style={{
                             left: `${65 + offset}%`,
                             ...(label.position === "bottom" && {
-                              bottom: `${fraction ? 30 : 35}%`,
+                              bottom: `${fraction ? 30 : 33}%`,
                             }),
                           }}
                         >
-                          <div className="w-0.5 h-8 border-l-2 border-dashed border-border"></div>
+                          <div className="w-0.5 h-10 border-l-2 border-dashed border-border" />
                           <p
                             className={cn(
-                              "text-[8px] w-full text-center text-muted-foreground whitespace-nowrap border-dashed",
+                              "text-sm w-full text-center text-muted-foreground whitespace-nowrap border-dashed",
                               label.position === "top"
-                                ? "border-b-2 border-b-border pb-1"
-                                : "border-t-2 border-t-border pt-1",
+                                ? "border-b-2 border-b-border "
+                                : "border-t-2 border-t-border ",
                             )}
                           >
                             {label.title}
                           </p>
-                          <div className="w-0.5 h-8 border-l-2 border-dashed border-border"></div>
+                          <div className="w-0.5 h-10 border-l-2 border-dashed border-border" />
                         </div>
                       );
                     })}
