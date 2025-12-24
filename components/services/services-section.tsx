@@ -140,7 +140,7 @@ const features: Feature[] = [
         profitability, control risk, and scale operations with confidence.
         <br />
         <br />
-        <span className="underline">
+        <span className="border-l-6 pl-2 border-primary text-primary">
           Every insight drives measurable business growth.
         </span>
       </>
@@ -179,7 +179,7 @@ const features: Feature[] = [
         play — before risks or missed opportunities arise.
         <br />
         <br />
-        <span className="underline">
+        <span className="border-l-6 pl-2 border-primary text-primary">
           Act before risks or missed opportunities arise.
         </span>
       </>
@@ -219,7 +219,7 @@ const features: Feature[] = [
         discovery, just like Netflix does with shows. But way cooler.
         <br />
         <br />
-        <span className="underline">
+        <span className="border-l-6 pl-2 border-primary text-primary">
           Turn player data into personalized game discovery.
         </span>
       </>
@@ -229,7 +229,7 @@ const features: Feature[] = [
       "Boosts conversion & engagement",
       "Enables weekly bundles",
     ],
-    href: "#",
+    href: "uChoose",
     className: "border-r md:col-span-2",
     cta: "Discover uChoose",
     img: <Recommendation />,
@@ -259,14 +259,14 @@ const features: Feature[] = [
         higher retention and revenue in return.
         <br />
         <br />
-        <span className="underline">
+        <span className="border-l-6 pl-2 border-primary text-primary">
           Provide AI-powered customer support with full player context.
         </span>
       </>
     ),
     benefits: [
       "Operational cost reduction",
-      "Ticketing & performance monitoring with available historical data",
+      "Ticketing & live agents performance monitoring",
       "Player satisfaction through a higher FTR rate",
     ],
     href: "#",

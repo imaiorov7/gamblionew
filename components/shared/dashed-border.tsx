@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 interface DashedBorderProps {
   children: React.ReactNode;
   id?: string;
+  ref?: React.RefObject<HTMLDivElement> | null;
   className?: string;
   /**
    * Which borders to show.
@@ -36,6 +37,7 @@ interface DashedBorderProps {
 
 const DashedBorder = ({
   children,
+  ref,
   className,
   sides = "x",
   sidesMd,
@@ -134,6 +136,7 @@ const DashedBorder = ({
   return (
     <div
       id={id}
+      ref={ref}
       className={cn(
         "flex flex-col justify-center items-center md:mx-7 mx-3",
         getBorderClasses(),

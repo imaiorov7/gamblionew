@@ -36,16 +36,26 @@ const ReportCards = ({ title, description, data }: ReportCardsProps) => {
         {/* Grid of report cards */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {data?.map(
-            ({
-              title,
-              description,
-              value,
-              imgPosition,
-              imgArrowRotation,
-              imgArrowPosition,
-              hasImage,
-            }) => (
-              <div key={title} className="p-2 border rounded-md ">
+            (
+              {
+                title,
+                description,
+                value,
+                imgPosition,
+                imgArrowRotation,
+                imgArrowPosition,
+                hasImage,
+              },
+              index,
+            ) => (
+              <div
+                key={title}
+                className={`p-2 border rounded-md ${
+                  data?.length === 3 && index === 2
+                    ? "md:col-span-2 md:justify-self-center w-[80%] "
+                    : ""
+                }`}
+              >
                 <DashedBorder
                   sides="all"
                   className="relative px-0 py-6 mx-0 md:mx-0"

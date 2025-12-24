@@ -1,8 +1,28 @@
-import React from "react";
-import DashedBorder from "./dashed-border";
+import type React from "react";
 import { Description, Title } from "../ui/typography";
+import DashedBorder from "./dashed-border";
 
-const ValueProposition = () => {
+interface ValuePropositionProps {
+  title?: string | React.ReactNode;
+  description?: string | React.ReactNode;
+  box1: string;
+  box2: string;
+  box3: string;
+  box4: string;
+  box5: string;
+  box6: string;
+}
+
+const ValueProposition = ({
+  title,
+  description,
+  box1,
+  box2,
+  box3,
+  box4,
+  box5,
+  box6,
+}: ValuePropositionProps) => {
   return (
     <DashedBorder sides="all" className="gap-0 p-0 ">
       {/* Desktop Grid View */}
@@ -10,38 +30,33 @@ const ValueProposition = () => {
         <div className="flex items-center justify-center row-span-3 border-l border-dashed border-border"></div>
         <div className="flex items-center justify-center row-span-3 border-l border-dashed border-border"></div>
         <div className="flex items-start justify-center row-span-3 pt-8 border-l border-dashed border-border">
-          <Title className="text-center">
-            Core Value <span className="text-primary">Proposition</span>
-          </Title>
+          <Title className="text-center">{title}</Title>
           <Description className="absolute z-10 max-w-xl px-4 text-center -translate-x-1/2 left-1/2 top-32">
-            Gamblio Predict turns raw player data into predictive intelligence —
-            empowering operators to identify opportunity, prevent loss, compress
-            churn, and ensure compliance through AI-driven segmentation and
-            behavior modeling.
+            {description}
           </Description>
         </div>
         <div className="flex items-center justify-center row-span-3 border-l border-dashed border-border"></div>
         <div className="flex items-center justify-center row-span-3 border-l border-dashed border-border"></div>
         <div className="flex items-center justify-center row-start-4 border-r border-dashed border-y border-border"></div>
         <div className="flex items-center justify-center row-start-4 border-r border-dashed border-y border-border bg-custom-dark">
-          <p>Predictive Intelligence</p>
+          <p>{box1}</p>
         </div>
         <div className="flex items-center justify-center row-start-4 border-r border-dashed border-y border-border bg-custom-dark">
-          <p>Automated Detection</p>
+          <p>{box2}</p>
         </div>
         <div className="flex items-center justify-center row-start-4 border-r border-dashed border-y border-border bg-custom-dark">
-          <p>Early Warning System</p>
+          <p>{box3}</p>
         </div>
         <div className="flex items-center justify-center row-start-4 border-dashed border-y border-border"></div>
         <div className="flex items-center justify-center row-start-5 border-r border-dashed border-border"></div>
         <div className="flex items-center justify-center row-start-5 border-r border-dashed border-border bg-custom-dark">
-          <p>Anticipation Over Reaction</p>
+          <p>{box4}</p>
         </div>
         <div className="flex items-center justify-center row-start-5 border-r border-dashed border-border bg-custom-dark">
-          <p>Data-Driven Retention</p>
+          <p>{box5}</p>
         </div>
         <div className="flex items-center justify-center row-start-5 border-r border-dashed border-border bg-custom-dark">
-          <p>Player Foresight</p>
+          <p>{box6}</p>
         </div>
         <div className="flex items-center justify-center row-start-5 border-r border-dashed border-border"></div>
         <div className="flex items-center justify-center row-span-2 row-start-6 border-r border-dashed border-y border-border"></div>

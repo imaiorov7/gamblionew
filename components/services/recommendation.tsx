@@ -38,12 +38,12 @@ export function Recommendation({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative flex w-full items-center justify-center overflow-hidden px-4 md:px-10",
+        "relative flex w-full h-full items-center justify-center overflow-hidden px-4",
         className,
       )}
       ref={containerRef}
     >
-      <div className="flex size-full max-w-lg flex-row items-stretch justify-between gap-2 md:gap-4 lg:gap-10">
+      <div className="flex w-full h-full max-w-[95%]  flex-row items-stretch justify-between gap-2 md:gap-4 lg:gap-10">
         <div className="flex flex-col justify-center">
           <Circle ref={div7Ref} className="size-8 md:size-12">
             <User className="size-4 md:size-6" />
@@ -58,7 +58,7 @@ export function Recommendation({ className }: { className?: string }) {
             />
           </Circle>
         </div>
-        <div className="flex flex-col justify-center gap-1 md:gap-2">
+        <div className="flex flex-col justify-around gap-1 md:gap-2 ">
           <Circle ref={div1Ref}>
             <Dice1 className="size-3 md:size-6" />
           </Circle>

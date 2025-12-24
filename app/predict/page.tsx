@@ -8,68 +8,13 @@ import ObjectiveDeliverables from "@/components/shared/objective-deliverables";
 import ProcessFlowchart from "@/components/shared/process-flowchart";
 import ReportCards from "@/components/shared/report-cards";
 import ValueProposition from "@/components/shared/value-proposition";
-import VisualizationSuite from "@/components/shared/visualization-suite";
+import VisualizationSuite, {
+  type Connection,
+} from "@/components/shared/visualization-suite";
 import WorkflowVisualization from "@/components/shared/workflow-visualization";
 import { HeroVideoDialog } from "@/components/video-dialog";
 
 const Predict = () => {
-  const predictData = [
-    {
-      title: "VIP Detection Model",
-      description:
-        "Identifies potential VIPs early using advanced learning model that includes deposit growth, bet velocity, and session trajectories, among many others.",
-      value: (
-        <span className="underline">
-          Maximize LTV by recognizing high-potential players before competitors
-          do.
-        </span>
-      ),
-      hasImage: true,
-      imgPosition: "-right-10 -top-14",
-      imgArrowRotation: "none",
-      imgArrowPosition: "-right-16 -top-18",
-    },
-    {
-      title: "Bonus Hunter Detection",
-      description:
-        "Detects repetitive, coordinated, or exploitative behavior by cross-referencing wallet usage, RTP anomalies, and timing patterns",
-      value: (
-        <span className="underline">
-          Protect promotional ROI and safeguard your margins.
-        </span>
-      ),
-      hasImage: false,
-      imgPosition: "none",
-    },
-    {
-      title: "Churn Risk Model",
-      description:
-        "Predicts player drop-off based on AI-powered system learning from declining engagement, deposit frequency, and win/loss patterns.",
-      value: (
-        <span className="underline">
-          Trigger targeted CRM actions to prevent revenue loss.
-        </span>
-      ),
-      hasImage: true,
-      imgPosition: "-left-10 -bottom-14",
-      imgArrowRotation: "rotate-180 ",
-      imgArrowPosition: " -left-16 -bottom-18",
-    },
-    {
-      title: "Responsible Gaming Monitoring",
-      description:
-        "Flags behavior patterns aligned with potential harm — escalating bet sizes, rapid deposits, long sessions.",
-      value: (
-        <span className="underline">
-          Strengthen compliance posture and support safer play.
-        </span>
-      ),
-      hasImage: true,
-      imgPosition: "-right-10 -bottom-14",
-      imgArrowRotation: "rotate-90",
-      imgArrowPosition: "-right-16 -bottom-18",
-    },
-  ];
   return (
     <div className="w-full">
       <Hero {...HeroDetails} />
@@ -206,6 +151,7 @@ const Predict = () => {
             description: "Full player lists with advanced filters",
           },
         ]}
+        connections={predictConnections}
         buttonText="Explore our services"
         buttonLink="/services"
       />
@@ -236,7 +182,23 @@ const Predict = () => {
         ]}
       />
 
-      <ValueProposition />
+      <ValueProposition
+        title={
+          <>
+            Core Value <span className="text-primary">Proposition</span>
+          </>
+        }
+        description="Gamblio Predict turns raw player data into predictive intelligence —
+            empowering operators to identify opportunity, prevent loss, compress
+            churn, and ensure compliance through AI-driven segmentation and
+            behavior modeling."
+        box1="Predictive Intelligence"
+        box2="Automated Detection"
+        box3="Early Warning System"
+        box4="Anticipation Over Reaction"
+        box5="Data-Driven Retention"
+        box6="Player Foresight"
+      />
       {/* Section 7: Call to Action */}
       <CTASection
         title="Ready to Predict What Players Will Do Next?"
@@ -284,3 +246,88 @@ const HeroDetails = {
     },
   ],
 };
+const predictData = [
+  {
+    title: "VIP Detection Model",
+    description:
+      "Identifies potential VIPs early using advanced learning model that includes deposit growth, bet velocity, and session trajectories, among many others.",
+    value: (
+      <span className="underline">
+        Maximize LTV by recognizing high-potential players before competitors
+        do.
+      </span>
+    ),
+    hasImage: true,
+    imgPosition: "-right-10 -top-14",
+    imgArrowRotation: "none",
+    imgArrowPosition: "-right-16 -top-18",
+  },
+  {
+    title: "Bonus Hunter Detection",
+    description:
+      "Detects repetitive, coordinated, or exploitative behavior by cross-referencing wallet usage, RTP anomalies, and timing patterns",
+    value: (
+      <span className="underline">
+        Protect promotional ROI and safeguard your margins.
+      </span>
+    ),
+    hasImage: false,
+    imgPosition: "none",
+  },
+  {
+    title: "Churn Risk Model",
+    description:
+      "Predicts player drop-off based on AI-powered system learning from declining engagement, deposit frequency, and win/loss patterns.",
+    value: (
+      <span className="underline">
+        Trigger targeted CRM actions to prevent revenue loss.
+      </span>
+    ),
+    hasImage: true,
+    imgPosition: "-left-10 -bottom-14",
+    imgArrowRotation: "rotate-180 ",
+    imgArrowPosition: " -left-16 -bottom-18",
+  },
+  {
+    title: "Responsible Gaming Monitoring",
+    description:
+      "Flags behavior patterns aligned with potential harm — escalating bet sizes, rapid deposits, long sessions.",
+    value: (
+      <span className="underline">
+        Strengthen compliance posture and support safer play.
+      </span>
+    ),
+    hasImage: true,
+    imgPosition: "-right-10 -bottom-14",
+    imgArrowRotation: "rotate-90",
+    imgArrowPosition: "-right-16 -bottom-18",
+  },
+];
+const predictConnections: Connection[] = [
+  {
+    from: 0,
+    to: 1,
+    fromSide: "bottom",
+    toSide: "left",
+  },
+
+  {
+    from: 1,
+    to: 2,
+    fromSide: "top",
+    toSide: "left",
+  },
+
+  {
+    from: 2,
+    to: 3,
+    fromSide: "bottom",
+    toSide: "left",
+  },
+  {
+    from: 3,
+    to: 2,
+    fromSide: "top",
+    toSide: "right",
+  },
+];

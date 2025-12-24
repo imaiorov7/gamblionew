@@ -55,11 +55,12 @@ export default function NavBar() {
     }
   };
 
-  const handleServiceTriggerClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    window.location.href = "/#services";
-  };
+  // uncomment this if you want to navigate to the services section when the services trigger is clicked
+  // const handleServiceTriggerClick = (e: React.MouseEvent) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   window.location.href = "/#services";
+  // };
 
   return (
     <div className="fixed top-0 z-50 flex flex-col items-center justify-center w-full gap-3 mt-5">
@@ -80,14 +81,11 @@ export default function NavBar() {
                 <NavigationMenu key={page.name}>
                   <NavigationMenuList>
                     <NavigationMenuItem>
-                      <NavigationMenuTrigger
-                        onClick={handleServiceTriggerClick}
-                        className="text-sm text-white !bg-transparent focus:!bg-transparent focus-visible:!bg-transparent hover:!bg-transparent active:!bg-transparent disabled:!bg-transparent data-[state=open]:!bg-transparent data-[active]:!bg-transparent data-[disabled]:!bg-transparent hover:text-gray-300 data-[state=open]:text-gray-300 cursor-pointer"
-                      >
+                      <NavigationMenuTrigger className="text-sm text-white !bg-transparent focus:!bg-transparent focus-visible:!bg-transparent hover:!bg-transparent active:!bg-transparent disabled:!bg-transparent data-[state=open]:!bg-transparent data-[active]:!bg-transparent data-[disabled]:!bg-transparent hover:text-gray-300 data-[state=open]:text-gray-300 cursor-pointer">
                         {page.name}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent className="!bg-transparent">
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                        <ul className="flex flex-col p-2 gap-4 ">
                           <li>
                             <NavigationMenuLink asChild>
                               <Link
@@ -97,10 +95,10 @@ export default function NavBar() {
                                 <div className="text-sm font-medium leading-none text-white">
                                   Analytics
                                 </div>
-                                <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
+                                {/* <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
                                   Real-time business intelligence to optimize
                                   profitability and scale operations.
-                                </p>
+                                </p> */}
                               </Link>
                             </NavigationMenuLink>
                           </li>
@@ -113,26 +111,26 @@ export default function NavBar() {
                                 <div className="text-sm font-medium leading-none text-white">
                                   Predict
                                 </div>
-                                <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
+                                {/* <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
                                   AI-powered player profiling and behavioral
                                   forecasting to prevent losses.
-                                </p>
+                                </p> */}
                               </Link>
                             </NavigationMenuLink>
                           </li>
                           <li>
                             <NavigationMenuLink asChild>
                               <Link
-                                href="#"
+                                href="/uChoose"
                                 className="block p-3 space-y-1 leading-none no-underline transition-colors rounded-md outline-none select-none  hover:text-accent-foreground "
                               >
                                 <div className="text-sm font-medium leading-none text-white">
                                   uChoose
                                 </div>
-                                <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
+                                {/* <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
                                   AI-powered recommendation engine to maximize
                                   player engagement.
-                                </p>
+                                </p> */}
                               </Link>
                             </NavigationMenuLink>
                           </li>
@@ -145,10 +143,10 @@ export default function NavBar() {
                                 <div className="text-sm font-medium leading-none text-white">
                                   Care
                                 </div>
-                                <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
+                                {/* <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
                                   AI and live support providing 24/7 service and
                                   faster resolutions.
-                                </p>
+                                </p> */}
                               </Link>
                             </NavigationMenuLink>
                           </li>
