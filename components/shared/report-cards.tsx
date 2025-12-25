@@ -32,7 +32,7 @@ const ReportCards = ({ title, description, data }: ReportCardsProps) => {
         {description}
       </Description>
 
-      <div className="relative w-full px-4 mt-14">
+      <div className="relative w-full md:px-4 mt-14">
         {/* Grid of report cards */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {data?.map(

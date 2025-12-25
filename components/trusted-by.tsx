@@ -5,7 +5,7 @@ import { Description } from "./ui/typography";
 export default function TrustedBy() {
   return (
     <>
-      <DashedBorder sides="x" className="py-12 mx-3 md:mx-7">
+      <DashedBorder sides="x" className="py-12 mx-0 md:mx-7">
         <Description className="text-xl font-medium text-center text-muted-foreground">
           Trusted by
         </Description>
@@ -30,7 +30,7 @@ export default function TrustedBy() {
           );
         })}
       </DashedBorder>
-      <div className="h-12 mx-3 md:mx-7 border-x"></div>
+      <div className="h-12 mx-0 md:mx-7 border-x"></div>
     </>
   );
 }

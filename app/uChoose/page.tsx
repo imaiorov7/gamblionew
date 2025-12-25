@@ -46,8 +46,7 @@ const uChoosePage = () => {
           </>
         }
         description="
-            uChoose is Gamblio’s AI-driven game recommendation engine, designed to understand each player’s behavior and deliver the content they’re most likely to engage with.It blends behavioral modeling, machine learning, and operator-controlled business rules"
-        description2=" — ensuring maximum engagement while keeping strategy in your hands."
+            uChoose is Gamblio’s AI-driven game recommendation engine, designed to understand each player’s behavior and deliver the content they’re most likely to engage with.It blends behavioral modeling, machine learning, and operator-controlled business rules — ensuring maximum engagement while keeping strategy in your hands."
         processFlowchart={
           <ProcessFlowchart
             steps={[
@@ -116,7 +115,7 @@ const uChoosePage = () => {
         title={
           <>
             See Engagement and Revenue Rise in
-            <span className="text-primary">Real Time</span>
+            <span className="text-primary"> Real Time</span>
           </>
         }
         description="Gamblio Predict includes a visualization suite built for clarity, precision, and operational actionability."
@@ -213,7 +212,7 @@ const uChoosePage = () => {
       <ValueProposition
         title={
           <>
-            Core Value <span className="text-primary">Proposition </span>?
+            Core Value <span className="text-primary">Proposition</span>
           </>
         }
         description="uChoose turns personalization into performance, using AI to deliver the right game to the right player at the right moment, increasing engagement, session value, and overall retention while keeping operators firmly in control."
