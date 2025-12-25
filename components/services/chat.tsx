@@ -1,8 +1,7 @@
 "use client";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { motion } from "motion/react";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 interface Message {
   id: string;
@@ -12,67 +11,56 @@ interface Message {
 }
 
 const TypingIndicator = () => {
-  const dot1Ref = useRef<HTMLDivElement>(null);
-  const dot2Ref = useRef<HTMLDivElement>(null);
-  const dot3Ref = useRef<HTMLDivElement>(null);
+  const containerVariants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+  };
 
-  useGSAP(() => {
-    if (!dot1Ref.current || !dot2Ref.current || !dot3Ref.current) return;
-
-    const timeline = gsap.timeline({ repeat: -1 });
-
-    timeline
-      .to(dot1Ref.current, {
-        opacity: 1,
-        scale: 1.2,
-        duration: 0.4,
-        ease: "power2.out",
-      })
-      .to(
-        dot2Ref.current,
-        {
-          opacity: 1,
-          scale: 1.2,
-          duration: 0.4,
-          ease: "power2.out",
-        },
-        "-=0.2",
-      )
-      .to(
-        dot3Ref.current,
-        {
-          opacity: 1,
-          scale: 1.2,
-          duration: 0.4,
-          ease: "power2.out",
-        },
-        "-=0.2",
-      )
-      .to(
-        [dot1Ref.current, dot2Ref.current, dot3Ref.current],
-        {
-          opacity: 0.3,
-          scale: 1,
-          duration: 0.4,
-          ease: "power2.in",
-        },
-        "-=0.2",
-      );
-  }, []);
+  const dotVariants = {
+    initial: { opacity: 0.3, scale: 1 },
+    animate: { opacity: 1, scale: 1.2 },
+  };
 
   return (
     <div className="flex items-center gap-1 px-4 py-3">
-      <div
-        ref={dot1Ref}
-        className="w-2 h-2 rounded-full bg-muted-foreground opacity-30"
+      <motion.div
+        className="w-2 h-2 rounded-full bg-muted-foreground"
+        variants={dotVariants}
+        initial="initial"
+        animate="animate"
+        transition={{
+          duration: 0.4,
+          repeat: Infinity,
+          repeatType: "reverse",
+          delay: 0,
+          repeatDelay: 0.8,
+        }}
       />
-      <div
-        ref={dot2Ref}
-        className="w-2 h-2 rounded-full bg-muted-foreground opacity-30"
+      <motion.div
+        className="w-2 h-2 rounded-full bg-muted-foreground"
+        variants={dotVariants}
+        initial="initial"
+        animate="animate"
+        transition={{
+          duration: 0.4,
+          repeat: Infinity,
+          repeatType: "reverse",
+          delay: 0.2,
+          repeatDelay: 0.8,
+        }}
       />
-      <div
-        ref={dot3Ref}
-        className="w-2 h-2 rounded-full bg-muted-foreground opacity-30"
+      <motion.div
+        className="w-2 h-2 rounded-full bg-muted-foreground"
+        variants={dotVariants}
+        initial="initial"
+        animate="animate"
+        transition={{
+          duration: 0.4,
+          repeat: Infinity,
+          repeatType: "reverse",
+          delay: 0.4,
+          repeatDelay: 0.8,
+        }}
       />
     </div>
   );
@@ -81,85 +69,64 @@ const TypingIndicator = () => {
 export default function Chat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [displayedText, setDisplayedText] = useState("");
   const userTextRef = useRef<HTMLParagraphElement>(null);
-  const hasStartedRef = useRef(false);
 
   const userMessage = "Hello how do I register on your platform?";
   const botResponse =
     "Hello! Thank you for contacting our customer support. To register, click on REGISTRATION in the upper right corner of the home page, enter the requested information, and accept the Terms of Use. Then activate your account by clicking on the link you will receive in your email. If you need further assistance, please let me know!";
 
-  useGSAP(() => {
-    if (hasStartedRef.current || !userTextRef.current) return;
-    hasStartedRef.current = true;
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
 
-    // Main timeline for the entire animation sequence
-    const timeline = gsap.timeline({ repeat: -1 });
+    const runAnimation = async () => {
+      // Step 1: Typewriter effect for user message
+      for (let i = 0; i <= userMessage.length; i++) {
+        setDisplayedText(userMessage.slice(0, i));
+        await new Promise((resolve) => setTimeout(resolve, 50)); // ~50ms per character
+      }
 
-    // Step 1: Typewriter effect for user message
-    timeline.to(
-      { progress: 0 },
-      {
-        progress: userMessage.length,
-        duration: userMessage.length * 0.05, // ~50ms per character
-        ease: "none",
-        onUpdate: function () {
-          if (userTextRef.current) {
-            const currentLength = Math.floor(this.targets()[0].progress);
-            userTextRef.current.textContent =
-              userMessage.slice(0, currentLength) + "|";
-          }
-        },
-        onComplete: () => {
-          // Remove cursor and add completed message
-          if (userTextRef.current) {
-            userTextRef.current.textContent = userMessage;
-          }
-
-          const userMsg: Message = {
-            id: Date.now().toString(),
-            text: userMessage,
-            sender: "user",
-            timestamp: new Date(),
-          };
-          setMessages([userMsg]);
-        },
-      },
-    );
-
-    // Step 2: Show typing indicator (after user message completes)
-    timeline.call(() => {
+      // Step 2: Add user message to messages and show typing indicator
+      const userMsg: Message = {
+        id: Date.now().toString(),
+        text: userMessage,
+        sender: "user",
+        timestamp: new Date(),
+      };
+      setMessages([userMsg]);
+      setDisplayedText("");
       setIsTyping(true);
-    });
 
-    // Step 3: Wait for bot typing duration (1.5-2.5 seconds)
-    timeline.to(
-      {},
-      {
-        duration: 1.5 + Math.random() * 1,
-        onComplete: () => {
-          setIsTyping(false);
-          const botMessage: Message = {
-            id: (Date.now() + 1).toString(),
-            text: botResponse,
-            sender: "bot",
-            timestamp: new Date(),
-          };
-          setMessages((prev) => [...prev, botMessage]);
-        },
-      },
-    );
+      // Step 3: Wait for bot typing duration
+      await new Promise((resolve) =>
+        setTimeout(resolve, 1500 + Math.random() * 1000),
+      );
 
-    // Step 4: Wait before resetting (so user can see the bot response)
-    timeline.to({}, { duration: 2 });
+      // Step 4: Add bot message and hide typing indicator
+      setIsTyping(false);
+      const botMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: botResponse,
+        sender: "bot",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, botMessage]);
 
-    // Step 5: Reset state for next cycle (happens after delay)
-    timeline.call(() => {
+      // Step 5: Wait before resetting
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      // Step 6: Reset and repeat
       setMessages([]);
       setIsTyping(false);
-      if (userTextRef.current) {
-        userTextRef.current.textContent = "";
-      }
-    });
+      setDisplayedText("");
+
+      // Restart animation after a short delay
+      timeoutId = setTimeout(runAnimation, 1000);
+    };
+
+    runAnimation();
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   return (
@@ -172,13 +139,16 @@ export default function Chat() {
             messages.length > 0 ? "hidden" : ""
           }`}
         >
-        <div className="p-4 text-white shadow bg-primary rounded-2xl">
-            <p ref={userTextRef} className="text-sm"></p>
-        </div>
+          <div className="p-4 text-white shadow bg-primary rounded-2xl">
+            <p ref={userTextRef} className="text-sm">
+              {displayedText}
+              {displayedText.length < userMessage.length && "|"}
+            </p>
+          </div>
           <div className="flex items-center justify-center rounded-full size-10 bg-primary aspect-square flex-shrink-0">
-          <p>U</p>
+            <p>U</p>
+          </div>
         </div>
-      </div>
 
         {/* Completed messages */}
         {messages.map((message) => (
@@ -190,12 +160,12 @@ export default function Chat() {
           >
             {message.sender === "bot" && (
               <Image
-          src="/images/logotip-dark.svg"
-          alt="Bot Avatar"
+                src="/images/logotip-dark.svg"
+                alt="Bot Avatar"
                 width={40}
                 height={40}
                 className="p-1 border rounded-full size-10 flex-shrink-0"
-        />
+              />
             )}
             <div
               className={`p-4 shadow rounded-2xl ${
@@ -212,8 +182,8 @@ export default function Chat() {
                 }`}
               >
                 {message.text}
-          </p>
-        </div>
+              </p>
+            </div>
             {message.sender === "user" && (
               <div className="flex items-center justify-center rounded-full size-10 bg-primary aspect-square flex-shrink-0">
                 <p>U</p>

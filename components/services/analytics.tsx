@@ -1,64 +1,44 @@
 "use client";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { useRef } from "react";
+import { motion } from "motion/react";
+import { useRef, useState, useEffect } from "react";
 
 export default function Analytics() {
   const pathRef = useRef<SVGPathElement>(null);
-  const mainCircleRef = useRef<SVGCircleElement>(null);
-  const ripple1Ref = useRef<SVGCircleElement>(null);
-  const ripple2Ref = useRef<SVGCircleElement>(null);
-  const ripple3Ref = useRef<SVGCircleElement>(null);
+  const [pathLength, setPathLength] = useState(0);
+  const [positions, setPositions] = useState({ x: 0, y: 0 });
 
-  useGSAP(() => {
-    if (!pathRef.current || !mainCircleRef.current) return;
+  useEffect(() => {
+    if (!pathRef.current) return;
 
     const path = pathRef.current;
-    const pathLength = path.getTotalLength();
+    const length = path.getTotalLength();
+    setPathLength(length);
 
-    // Function to get point at a specific progress along the path
-    const getPointAtProgress = (progress: number) => {
-      const point = path.getPointAtLength(progress * pathLength);
-      return { x: point.x, y: point.y };
+    const animate = () => {
+      const getPointAtProgress = (progress: number) => {
+        const point = path.getPointAtLength(progress * length);
+        return { x: point.x, y: point.y };
+      };
+
+      let animationFrameId: number;
+      let startTime: number;
+
+      const animateFrame = (currentTime: number) => {
+        if (!startTime) startTime = currentTime;
+
+        const elapsed = (currentTime - startTime) / 1000;
+        const progress = (elapsed / 15) % 1; // 15 second cycle
+        const point = getPointAtProgress(progress);
+
+        setPositions(point);
+        animationFrameId = requestAnimationFrame(animateFrame);
+      };
+
+      animationFrameId = requestAnimationFrame(animateFrame);
+      return () => cancelAnimationFrame(animationFrameId);
     };
 
-    // Create a timeline that animates progress from 0 to 1
-    const timeline = gsap.timeline({ repeat: -1, ease: "power1.inOut" });
-
-    // Create an object to hold the progress value
-    const progress = { value: 0 };
-
-    // Animate progress from 0 to 1
-    timeline.to(progress, {
-      value: 1,
-      duration: 15,
-      ease: "power1.inOut",
-      onUpdate: () => {
-        const point = getPointAtProgress(progress.value);
-
-        // Update all circles to the same position
-        if (mainCircleRef.current) {
-          gsap.set(mainCircleRef.current, {
-            attr: { cx: point.x, cy: point.y },
-          });
-        }
-        if (ripple1Ref.current) {
-          gsap.set(ripple1Ref.current, {
-            attr: { cx: point.x, cy: point.y },
-          });
-        }
-        if (ripple2Ref.current) {
-          gsap.set(ripple2Ref.current, {
-            attr: { cx: point.x, cy: point.y },
-          });
-        }
-        if (ripple3Ref.current) {
-          gsap.set(ripple3Ref.current, {
-            attr: { cx: point.x, cy: point.y },
-          });
-        }
-      },
-    });
+    animate();
   }, []);
 
   return (
@@ -109,44 +89,40 @@ export default function Analytics() {
         <g>
           <circle
             className="animate-pulse"
-            ref={mainCircleRef}
             r="4"
             fill="var(--primary)"
-            cx="0"
-            cy="150"
+            cx={positions.x}
+            cy={positions.y}
           />
           <circle
             className="animate-pulse"
-            ref={ripple1Ref}
             r="10"
             stroke="var(--primary)"
             strokeWidth="2"
             fill="none"
             opacity="0.66"
-            cx="0"
-            cy="150"
+            cx={positions.x}
+            cy={positions.y}
           />
           <circle
             className="animate-pulse"
-            ref={ripple2Ref}
             r="14"
             stroke="var(--primary)"
             strokeWidth="2"
             fill="none"
             opacity="0.25"
-            cx="0"
-            cy="150"
+            cx={positions.x}
+            cy={positions.y}
           />
           <circle
             className="animate-pulse"
-            ref={ripple3Ref}
             r="20"
             stroke="var(--primary)"
             strokeWidth="2"
             fill="none"
             opacity="0.1"
-            cx="0"
-            cy="150"
+            cx={positions.x}
+            cy={positions.y}
           />
         </g>
       </svg>

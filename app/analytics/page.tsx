@@ -50,7 +50,7 @@ const AnalyticsPage = () => {
     },
   ];
   return (
-    <div className="w-full">
+    <div className="w-full border-b-0">
       <Hero {...HeroDetails} />
       <DashedBorder
         sides="x"

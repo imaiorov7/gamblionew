@@ -32,7 +32,7 @@ const ReportCards = ({ title, description, data }: ReportCardsProps) => {
         {description}
       </Description>
 
-      <div className="relative w-full px-4 mt-8">
+      <div className="relative w-full px-4 mt-14">
         {/* Grid of report cards */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {data?.map(
@@ -52,7 +52,7 @@ const ReportCards = ({ title, description, data }: ReportCardsProps) => {
                 key={title}
                 className={`p-2 border rounded-md ${
                   data?.length === 3 && index === 2
-                    ? "md:col-span-2 md:justify-self-center w-[80%] "
+                    ? "md:col-span-2 md:justify-self-center md:w-1/2 "
                     : ""
                 }`}
               >
@@ -89,7 +89,7 @@ const ReportCards = ({ title, description, data }: ReportCardsProps) => {
                   <Description className="mb-2 text-muted-foreground px-4">
                     {description}
                   </Description>
-                  <Description className=" text-muted-foreground">
+                  <Description className="px-4 text-muted-foreground">
                     <span className="text-primary">Value:</span> {value}
                   </Description>
                 </DashedBorder>

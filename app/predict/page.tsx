@@ -16,7 +16,7 @@ import { HeroVideoDialog } from "@/components/video-dialog";
 
 const Predict = () => {
   return (
-    <div className="w-full">
+    <div className="w-full border-b-0">
       <Hero {...HeroDetails} />
       <DashedBorder
         sides="x"
@@ -309,6 +309,11 @@ const predictConnections: Connection[] = [
     to: 1,
     fromSide: "bottom",
     toSide: "left",
+    animated: true,
+    animationDuration: 4,
+    animationDelay: 0,
+    reverse: false,
+    showDots: true,
   },
 
   {
@@ -316,6 +321,11 @@ const predictConnections: Connection[] = [
     to: 2,
     fromSide: "top",
     toSide: "left",
+    animated: true,
+    animationDuration: 4.5,
+    animationDelay: 0.5,
+    reverse: false,
+    showDots: true,
   },
 
   {
@@ -323,11 +333,21 @@ const predictConnections: Connection[] = [
     to: 3,
     fromSide: "bottom",
     toSide: "left",
+    animated: true,
+    animationDuration: 3.5,
+    animationDelay: 1,
+    reverse: false,
+    showDots: true,
   },
   {
     from: 3,
     to: 2,
     fromSide: "top",
     toSide: "right",
+    animated: true,
+    animationDuration: 4,
+    animationDelay: 1.5,
+    reverse: true,
+    showDots: true,
   },
 ];

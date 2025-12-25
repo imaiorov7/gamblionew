@@ -138,7 +138,7 @@ const DashedBorder = ({
       id={id}
       ref={ref}
       className={cn(
-        "flex flex-col justify-center items-center md:mx-7 mx-3",
+        "flex flex-col justify-center items-center md:mx-7 mx-0",
         getBorderClasses(),
         borderColor,
         padding,

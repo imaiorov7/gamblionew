@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/navigation/footer";
-import NavBar from "@/components/navigation/navbar";
+import { NavbarMenu } from "@/components/navigation/navbar";
 import DashedBorder from "@/components/shared/dashed-border";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -24,9 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.className} dark antialiased w-full overflow-x-hidden`}
+        className={`${poppins.className} dark antialiased w-full overflow-x-hidden relative`}
       >
-        <NavBar />
+        <NavbarMenu />
         <DashedBorder
           sides="x"
           className="w-full pt-0 divide-y divide-dashed md:mx-0"

@@ -11,7 +11,7 @@ import { HeroVideoDialog } from "@/components/video-dialog";
 
 export default function Home() {
   return (
-    <div className="w-full ">
+    <div className="w-full border-b-0">
       <Hero {...HeroDetails} />
       <DashedBorder
         sides="x"

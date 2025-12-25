@@ -19,7 +19,7 @@ export function Footer() {
     },
     {
       title: "Gamblio uChoose",
-      href: "/u-choose",
+      href: "/uChoose",
     },
     {
       title: "Gamblio Care",
@@ -53,7 +53,7 @@ export function Footer() {
   ];
 
   return (
-    <div className="relative w-full px-8 py-20 overflow-hidden bg-white dark:bg-neutral-950">
+    <div className="relative w-full px-8 py-20 overflow-hidden bg-neutral-950">
       <div className="flex flex-col items-start justify-between mx-auto text-sm max-w-7xl text-neutral-500 sm:flex-row md:px-8">
         <div>
           <div className="mb-4 mr-0 md:mr-4 md:flex">
@@ -122,7 +122,7 @@ export function Footer() {
         </div>
       </div>
       {/* <p className="text-center mt-20 text-5xl md:text-9xl lg:text-[12rem] xl:text-[13rem] font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 dark:from-neutral-950 to-neutral-200 dark:to-neutral-800 inset-x-0">
-       Gamblio
+        Gamblio
       </p> */}
     </div>
   );

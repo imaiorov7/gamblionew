@@ -16,7 +16,7 @@ import { HeroVideoDialog } from "@/components/video-dialog";
 
 const uChoosePage = () => {
   return (
-    <div className="w-full">
+    <div className="w-full border-b-0">
       <Hero {...HeroDetails} />
       <DashedBorder
         sides="x"
@@ -104,7 +104,7 @@ const uChoosePage = () => {
         title={
           <>
             <span className="text-primary">Intelligence </span>+
-            <span className="text-primary"> Control </span>- The Perfect
+            <span className="text-primary"> Control</span> = The Perfect
             <span className="text-primary"> Balance</span>
           </>
         }
@@ -115,9 +115,8 @@ const uChoosePage = () => {
       <VisualizationSuite
         title={
           <>
-            Clear <span className="text-primary">Segments</span>. Clear{" "}
-            <span className="text-primary">Signals</span>. Clear{" "}
-            <span className="text-primary">Actions</span>.
+            See Engagement and Revenue Rise in
+            <span className="text-primary">Real Time</span>
           </>
         }
         description="Gamblio Predict includes a visualization suite built for clarity, precision, and operational actionability."
@@ -214,7 +213,7 @@ const uChoosePage = () => {
       <ValueProposition
         title={
           <>
-            Core Value <span className="text-primary">Proposition</span>?
+            Core Value <span className="text-primary">Proposition </span>?
           </>
         }
         description="uChoose turns personalization into performance, using AI to deliver the right game to the right player at the right moment, increasing engagement, session value, and overall retention while keeping operators firmly in control."
@@ -241,7 +240,7 @@ const HeroDetails = {
   title: (
     <>
       The
-      <span className="text-primary">right game. </span>At the{" "}
+      <span className="text-primary"> right game. </span>At the{" "}
       <span className="text-primary">right time. </span>Maximum{" "}
       <span className="text-primary">retention. </span>
     </>
@@ -298,7 +297,7 @@ const uChooseData = [
     imgPosition: "none",
   },
   {
-    title: "Churn Risk Model",
+    title: "Operator-Controlled Promotion Layer",
     description: "Manual boosts for campaigns, vendor deals, or new launches.",
     value: (
       <span className="underline">
