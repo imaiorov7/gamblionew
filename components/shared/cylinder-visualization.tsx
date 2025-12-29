@@ -35,7 +35,7 @@ const CylinderVisualization: React.FC<CylinderVisualizationProps> = ({
       <Description className="max-w-3xl text-center md:w-2/3">
         {description}
       </Description>
-      <div className="flex flex-col md:flex-row gap-8 md:gap-8 justify-center items-center">
+      <div className="flex flex-col lg:flex-row gap-8 md:gap-8 justify-center items-center">
         {cards.map((card, index) => {
           const isMiddle = index === 1; // Middle cylinder (index 1)
           return (

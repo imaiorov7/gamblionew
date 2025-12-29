@@ -1,20 +1,20 @@
 "use client";
-import {
-  Navbar,
-  NavBody,
-  NavItems,
-  MobileNav,
-  NavbarLogo,
-  NavbarButton,
-  MobileNavHeader,
-  MobileNavToggle,
-  MobileNavMenu,
-  NavServices,
-  MobileDropdown,
-} from "@/components/ui/resizable-navbar";
-import { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+import {
+  MobileDropdown,
+  MobileNav,
+  MobileNavHeader,
+  MobileNavMenu,
+  MobileNavToggle,
+  NavBody,
+  Navbar,
+  NavbarButton,
+  NavbarLogo,
+  NavItems,
+  NavServices,
+} from "@/components/ui/resizable-navbar";
 
 export function NavbarMenu() {
   const pathname = usePathname();
@@ -58,7 +58,7 @@ export function NavbarMenu() {
     { name: "Analytics", link: "/analytics" },
     { name: "Predict", link: "/predict" },
     { name: "uChoose", link: "/uChoose" },
-    { name: "Care", link: "#" },
+    { name: "Care", link: "/care" },
   ];
 
   const navItems: Array<NavLinkItem | NavDropdownItem> = [
