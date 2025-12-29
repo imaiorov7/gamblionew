@@ -395,7 +395,7 @@ const uChooseConnections: Connection[] = [
     from: 2,
     to: 3,
     fromSide: "left",
-    toSide: "right",
+    toSide: "left",
     animated: true,
     animationDuration: 4.5,
     animationDelay: 1,

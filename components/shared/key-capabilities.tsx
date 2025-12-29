@@ -29,15 +29,15 @@ const KeyCapabilities = ({
         {description}
       </Description>
 
-      <div className="w-full h-fit md:max-w-[80%] px-4">
-        <div className="p-4 border rounded-lg bg-background border-border">
+      <div className="w-full h-fit md:max-w-[80%] px-2 md:px-4">
+        <div className="p-2 md:p-4 border rounded-lg bg-background border-border">
           <DashedBorder
             sides="all"
             className="flex flex-col mx-0 md:mx-0 bg-custom-dark"
           >
             <DashedBorder
               sides="all"
-              className="flex-wrap justify-end w-full px-0 mx-0 text-left md:mx-0 text-muted-foreground text-xl"
+              className="flex-wrap justify-end w-full px-0 mx-0 text-left md:mx-0 text-muted-foreground text-lg md:text-xl"
             >
               {subTitle}
             </DashedBorder>
@@ -45,16 +45,16 @@ const KeyCapabilities = ({
               <DashedBorder
                 key={capability}
                 sides="all"
-                className="flex items-center w-full h-full gap-4 p-0 mx-0 md:flex-row md:mx-0"
+                className="flex flex-col md:flex-row items-center w-full h-full gap-0 md:gap-4 p-0 mx-0 md:mx-0"
               >
                 <DashedBorder
-                  sides="none"
+                  sides="bottom"
                   sidesMd="x"
-                  className="text-muted-foreground font-bold px-8 py-6 text-lg w-[2rem] mx-0 md:mx-0"
+                  className="text-muted-foreground font-bold px-4 md:px-8 py-3 md:py-6 text-base md:text-lg w-full md:w-[2rem] mx-0 md:mx-0 text-center md:text-left"
                 >
                   {index + 1}.
                 </DashedBorder>
-                <Description className="flex-1 px-4 py-3 md:px-0 text-muted-foreground h-fit">
+                <Description className="flex-1 px-4 py-4 md:px-0 md:py-3 text-muted-foreground h-fit text-center md:text-left text-sm md:text-base">
                   {capability}
                 </Description>
               </DashedBorder>

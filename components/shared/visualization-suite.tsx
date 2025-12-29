@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { Description, Title } from "../ui/typography";
 import DashedBorder from "./dashed-border";
 import { FlowLine } from "./flow-line";
+import { cn } from "@/lib/utils";
 
 interface VisualizationCard {
   title?: string;
@@ -23,6 +24,7 @@ interface VisualizationSuiteProps {
   buttonLink?: string;
   connections?: Connection[];
   connections2?: Connection[];
+  className?: string;
 }
 
 export type Connection = {
@@ -50,6 +52,7 @@ const VisualizationSuite = ({
   buttonLink = "#",
   connections = [],
   connections2 = [],
+  className,
 }: VisualizationSuiteProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const containerRef2 = useRef<HTMLDivElement>(null);
@@ -92,12 +95,15 @@ const VisualizationSuite = ({
         className={`relative hidden w-full gap-8  px-4 mt-12 pb-4 ${
           hasMoreThan4Cards
             ? "lg:grid lg:grid-cols-3 lg:items-center lg:justify-items-center lg:auto-rows-[minmax(150px,auto)] min-h-[400px]"
-            : "lg:flex lg:justify-center lg:items-end min-h-[250px]"
+            : cn(
+                "lg:flex lg:justify-center lg:items-end min-h-[250px]",
+                className,
+              )
         }`}
         ref={containerRef as RefObject<HTMLDivElement>}
       >
         {cardsTitle && (
-          <Description className=" absolute -top-20 left-0  px-4 text-xl font-semibold">
+          <Description className=" absolute -top-20 left-0  px-4 text-xl font-semibold bg-custom-dark">
             {cardsTitle}
           </Description>
         )}
@@ -134,8 +140,13 @@ const VisualizationSuite = ({
             >
               <DashedBorder
                 sides="all"
-                className="relative h-full z-10 p-0 mx-0 bg-background md:mx-0"
+                className="relative h-full z-10 p-0 mx-0 md:mx-0 bg-custom-dark "
               >
+                {cards2 && (
+                  <p className="absolute text-muted-foreground  -top-6 -left-4 bg-background rounded-md px-4 border border-border font-extrabold py-2">
+                    {index + 1}
+                  </p>
+                )}
                 <DashedBorder
                   sides={card.description ? "bottom" : "none"}
                   className={`w-full mx-0 ${card.description ? "mb-4" : ""}`}
@@ -218,7 +229,7 @@ const VisualizationSuite = ({
               >
                 <DashedBorder
                   sides="all"
-                  className="relative h-full z-10 p-0 mx-0 bg-background md:mx-0"
+                  className="relative h-full z-10 p-0 mx-0 b md:mx-0 bg-custom-dark "
                 >
                   <DashedBorder
                     sides={card.description ? "bottom" : "none"}

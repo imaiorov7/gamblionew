@@ -137,6 +137,7 @@ function getPointOnLine(points: Point[], position: number): Point {
 
 /**
  * Auto-calculates bend points for orthogonal routing
+ * Handles complex cases where exit direction contradicts target position
  */
 function autoCalculateBends(
   start: Point,
@@ -145,36 +146,109 @@ function autoCalculateBends(
   toSide: Side,
 ): Point[] {
   const bends: Point[] = [];
+  const offset = 40; // Offset for routing around elements
 
-  // Vertical start (top/bottom) to horizontal end (left/right)
-  if (
-    (fromSide === "top" || fromSide === "bottom") &&
-    (toSide === "left" || toSide === "right")
-  ) {
-    bends.push({ x: start.x, y: end.y });
-  }
+  // Helper to check if we're going the "wrong" direction
+  const isWrongHorizontalDirection =
+    (fromSide === "left" && end.x > start.x) ||
+    (fromSide === "right" && end.x < start.x);
+  const isWrongVerticalDirection =
+    (fromSide === "top" && end.y > start.y) ||
+    (fromSide === "bottom" && end.y < start.y);
+
   // Horizontal start (left/right) to vertical end (top/bottom)
-  else if (
+  if (
     (fromSide === "left" || fromSide === "right") &&
     (toSide === "top" || toSide === "bottom")
   ) {
-    bends.push({ x: end.x, y: start.y });
+    // Check if we need complex routing (exit direction contradicts target position)
+    if (isWrongHorizontalDirection) {
+      // We need to go out, down/up, across, then approach from the correct side
+      const horizontalOffset = fromSide === "left" ? -offset : offset;
+      const verticalOffset = toSide === "top" ? -offset : offset;
+
+      // Point 1: Go out horizontally in the specified direction
+      bends.push({ x: start.x + horizontalOffset, y: start.y });
+      // Point 2: Go vertically to align with target entry level
+      bends.push({ x: start.x + horizontalOffset, y: end.y + verticalOffset });
+      // Point 3: Go horizontally to position above/below target
+      bends.push({ x: end.x, y: end.y + verticalOffset });
+    } else {
+      // Simple case: direct L-shaped path
+      bends.push({ x: end.x, y: start.y });
+    }
   }
-  // Same axis connections - use midpoint
+  // Vertical start (top/bottom) to horizontal end (left/right)
+  else if (
+    (fromSide === "top" || fromSide === "bottom") &&
+    (toSide === "left" || toSide === "right")
+  ) {
+    // Check if we need complex routing
+    if (isWrongVerticalDirection) {
+      const verticalOffset = fromSide === "top" ? -offset : offset;
+      const horizontalOffset = toSide === "left" ? -offset : offset;
+
+      // Point 1: Go out vertically in the specified direction
+      bends.push({ x: start.x, y: start.y + verticalOffset });
+      // Point 2: Go horizontally to align with target entry level
+      bends.push({ x: end.x + horizontalOffset, y: start.y + verticalOffset });
+      // Point 3: Go vertically to position left/right of target
+      bends.push({ x: end.x + horizontalOffset, y: end.y });
+    } else {
+      // Simple case: direct L-shaped path
+      bends.push({ x: start.x, y: end.y });
+    }
+  }
+  // Same vertical axis (top/bottom to top/bottom)
   else if (
     (fromSide === "top" || fromSide === "bottom") &&
     (toSide === "top" || toSide === "bottom")
   ) {
-    const midY = (start.y + end.y) / 2;
-    bends.push({ x: start.x, y: midY });
-    bends.push({ x: end.x, y: midY });
-  } else if (
+    // Check if exit direction contradicts where target is
+    if (isWrongVerticalDirection) {
+      // Need to go out, across, then approach
+      const verticalOffset = fromSide === "top" ? -offset : offset;
+      const entryVerticalOffset = toSide === "top" ? -offset : offset;
+
+      bends.push({ x: start.x, y: start.y + verticalOffset });
+      bends.push({ x: end.x, y: start.y + verticalOffset });
+      if (
+        Math.abs(start.y + verticalOffset - (end.y + entryVerticalOffset)) >
+        offset
+      ) {
+        bends.push({ x: end.x, y: end.y + entryVerticalOffset });
+      }
+    } else {
+      // Simple S-curve using midpoint
+      const midY = (start.y + end.y) / 2;
+      bends.push({ x: start.x, y: midY });
+      bends.push({ x: end.x, y: midY });
+    }
+  }
+  // Same horizontal axis (left/right to left/right)
+  else if (
     (fromSide === "left" || fromSide === "right") &&
     (toSide === "left" || toSide === "right")
   ) {
-    const midX = (start.x + end.x) / 2;
-    bends.push({ x: midX, y: start.y });
-    bends.push({ x: midX, y: end.y });
+    // Check if exit direction contradicts where target is
+    if (isWrongHorizontalDirection) {
+      const horizontalOffset = fromSide === "left" ? -offset : offset;
+      const entryHorizontalOffset = toSide === "left" ? -offset : offset;
+
+      bends.push({ x: start.x + horizontalOffset, y: start.y });
+      bends.push({ x: start.x + horizontalOffset, y: end.y });
+      if (
+        Math.abs(start.x + horizontalOffset - (end.x + entryHorizontalOffset)) >
+        offset
+      ) {
+        bends.push({ x: end.x + entryHorizontalOffset, y: end.y });
+      }
+    } else {
+      // Simple S-curve using midpoint
+      const midX = (start.x + end.x) / 2;
+      bends.push({ x: midX, y: start.y });
+      bends.push({ x: midX, y: end.y });
+    }
   }
 
   return bends;

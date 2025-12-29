@@ -5,12 +5,12 @@ import DashedBorder from "./dashed-border";
 interface ValuePropositionProps {
   title?: string | React.ReactNode;
   description?: string | React.ReactNode;
-  box1: string;
-  box2: string;
-  box3: string;
-  box4: string;
-  box5: string;
-  box6: string;
+  box1?: string;
+  box2?: string;
+  box3?: string;
+  box4?: string;
+  box5?: string;
+  box6?: string;
 }
 
 const ValueProposition = ({
@@ -30,7 +30,9 @@ const ValueProposition = ({
         <div className="flex items-center justify-center row-span-3 border-l border-dashed border-border"></div>
         <div className="flex items-center justify-center row-span-3 border-l border-dashed border-border"></div>
         <div className="flex items-start justify-center row-span-3 pt-8 border-l border-dashed border-border">
-          <Title className="text-center">{title}</Title>
+          <Title className="text-center absolute z-10 w-4xl left-1/2 -translate-x-1/2 top-10">
+            {title}
+          </Title>
           <Description className="absolute z-10 max-w-xl px-4 text-center -translate-x-1/2 left-1/2 top-32">
             {description}
           </Description>
@@ -38,24 +40,24 @@ const ValueProposition = ({
         <div className="flex items-center justify-center row-span-3 border-l border-dashed border-border"></div>
         <div className="flex items-center justify-center row-span-3 border-l border-dashed border-border"></div>
         <div className="flex items-center justify-center row-start-4 border-r border-dashed border-y border-border"></div>
-        <div className="flex items-center justify-center row-start-4 border-r border-dashed border-y border-border bg-custom-dark">
+        <div className="text-center p-2 flex items-center justify-center row-start-4 border-r border-dashed border-y border-border bg-custom-dark">
           <p>{box1}</p>
         </div>
-        <div className="flex items-center justify-center row-start-4 border-r border-dashed border-y border-border bg-custom-dark">
+        <div className="text-center p-2 flex items-center justify-center row-start-4 border-r border-dashed border-y border-border bg-custom-dark">
           <p>{box2}</p>
         </div>
-        <div className="flex items-center justify-center row-start-4 border-r border-dashed border-y border-border bg-custom-dark">
+        <div className="text-center p-2 flex items-center justify-center row-start-4 border-r border-dashed border-y border-border bg-custom-dark">
           <p>{box3}</p>
         </div>
         <div className="flex items-center justify-center row-start-4 border-dashed border-y border-border"></div>
         <div className="flex items-center justify-center row-start-5 border-r border-dashed border-border"></div>
-        <div className="flex items-center justify-center row-start-5 border-r border-dashed border-border bg-custom-dark">
+        <div className="text-center p-2 flex items-center justify-center row-start-5 border-r border-dashed border-border bg-custom-dark">
           <p>{box4}</p>
         </div>
-        <div className="flex items-center justify-center row-start-5 border-r border-dashed border-border bg-custom-dark">
+        <div className="text-center p-2 flex items-center justify-center row-start-5 border-r border-dashed border-border bg-custom-dark">
           <p>{box5}</p>
         </div>
-        <div className="flex items-center justify-center row-start-5 border-r border-dashed border-border bg-custom-dark">
+        <div className="text-center p-2 flex items-center justify-center row-start-5 border-r border-dashed border-border bg-custom-dark">
           <p>{box6}</p>
         </div>
         <div className="flex items-center justify-center row-start-5 border-r border-dashed border-border"></div>
@@ -69,45 +71,28 @@ const ValueProposition = ({
       {/* Mobile View */}
       <div className="flex flex-col w-full gap-8 px-4 py-12 lg:hidden">
         <div className="flex flex-col gap-4 text-center">
-          <Title>
-            Core Value <span className="text-primary">Proposition</span>
-          </Title>
-          <Description className="max-w-2xl mx-auto">
-            Gamblio Predict turns raw player data into predictive intelligence —
-            empowering operators to identify opportunity, prevent loss, compress
-            churn, and ensure compliance through AI-driven segmentation and
-            behavior modeling.
-          </Description>
+          <Title>{title}</Title>
+          <Description className="max-w-2xl mx-auto">{description}</Description>
         </div>
 
         <div className="flex flex-col w-full gap-4">
           <DashedBorder sides="all" className="p-6 mx-0 bg-custom-dark">
-            <p className="text-sm font-medium text-center">
-              Predictive Intelligence
-            </p>
+            <p className="text-sm font-medium text-center">{box1}</p>
           </DashedBorder>
           <DashedBorder sides="all" className="p-6 mx-0 bg-custom-dark">
-            <p className="text-sm font-medium text-center">
-              Automated Detection
-            </p>
+            <p className="text-sm font-medium text-center">{box2}</p>
           </DashedBorder>
           <DashedBorder sides="all" className="p-6 mx-0 bg-custom-dark">
-            <p className="text-sm font-medium text-center">
-              Early Warning System
-            </p>
+            <p className="text-sm font-medium text-center">{box3}</p>
           </DashedBorder>
           <DashedBorder sides="all" className="p-6 mx-0 bg-custom-dark">
-            <p className="text-sm font-medium text-center">
-              Anticipation Over Reaction
-            </p>
+            <p className="text-sm font-medium text-center">{box4}</p>
           </DashedBorder>
           <DashedBorder sides="all" className="p-6 mx-0 bg-custom-dark">
-            <p className="text-sm font-medium text-center">
-              Data-Driven Retention
-            </p>
+            <p className="text-sm font-medium text-center">{box5}</p>
           </DashedBorder>
           <DashedBorder sides="all" className="p-6 mx-0 bg-custom-dark">
-            <p className="text-sm font-medium text-center">Player Foresight</p>
+            <p className="text-sm font-medium text-center">{box6}</p>
           </DashedBorder>
         </div>
       </div>
