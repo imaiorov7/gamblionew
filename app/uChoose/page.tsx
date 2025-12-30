@@ -13,6 +13,7 @@ import VisualizationSuite, {
 } from "@/components/shared/visualization-suite";
 import WorkflowVisualization from "@/components/shared/workflow-visualization";
 import { HeroVideoDialog } from "@/components/video-dialog";
+import FeatureShowcase from "@/components/shared/feature-showcase";
 
 const uChoosePage = () => {
   return (
@@ -209,7 +210,7 @@ const uChoosePage = () => {
         ]}
       />
 
-      <ValueProposition
+      {/* <ValueProposition
         title={
           <>
             Core Value <span className="text-primary">Proposition</span>
@@ -222,6 +223,20 @@ const uChoosePage = () => {
         box4="Player-Centric Recommendations"
         box5="Real-Time Performance Metrics"
         box6="Smart Content Exposure"
+      /> */}
+      <FeatureShowcase
+        title={
+          <>
+            Core Value <span className="text-primary">Proposition</span>
+          </>
+        }
+        description="uChoose turns personalization into performance, using AI to deliver the right game to the right player at the right moment, increasing engagement, session value, and overall retention while keeping operators firmly in control."
+        chat1="Personalized Engagement"
+        chat2="AI-Optimized Discovery"
+        chat3="Strategic Promotion Control"
+        chat4="Player-Centric Recommendations"
+        chat5="Real-Time Performance Metrics"
+        chat6="Smart Content Exposure"
       />
       <CTASection
         title="Ready to Boost Player Engagement With Precision?"

@@ -2,6 +2,7 @@ import CTASection from "@/components/cta-section";
 import Hero from "@/components/hero";
 import DashedBorder from "@/components/shared/dashed-border";
 import FeatureIntro from "@/components/shared/feature-intro";
+import FeatureShowcase from "@/components/shared/feature-showcase";
 
 import KeyCapabilities from "@/components/shared/key-capabilities";
 import ObjectiveDeliverables from "@/components/shared/objective-deliverables";
@@ -182,7 +183,7 @@ const Predict = () => {
         ]}
       />
 
-      <ValueProposition
+      {/* <ValueProposition
         title={
           <>
             Core Value <span className="text-primary">Proposition</span>
@@ -198,6 +199,23 @@ const Predict = () => {
         box4="Anticipation Over Reaction"
         box5="Data-Driven Retention"
         box6="Player Foresight"
+      /> */}
+      <FeatureShowcase
+        title={
+          <>
+            Core Value <span className="text-primary">Proposition</span>
+          </>
+        }
+        description="Gamblio Predict turns raw player data into predictive intelligence —
+            empowering operators to identify opportunity, prevent loss, compress
+            churn, and ensure compliance through AI-driven segmentation and
+            behavior modeling."
+        chat1="Predictive Intelligence"
+        chat2="Automated Detection"
+        chat3="Early Warning System"
+        chat4="Anticipation Over Reaction"
+        chat5="Data-Driven Retention"
+        chat6="Player Foresight"
       />
       {/* Section 7: Call to Action */}
       <CTASection

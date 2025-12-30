@@ -46,7 +46,7 @@ export default function Home() {
             console) in one all-around AI solution.
             <br />
             <br />
-            <span className="underline">
+            <span className="">
               No generic software. No noise. Just outcomes that matter
             </span>
           </>

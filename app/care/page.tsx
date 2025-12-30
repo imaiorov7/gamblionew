@@ -15,6 +15,7 @@ import VisualizationSuite, {
   type Connection,
 } from "@/components/shared/visualization-suite";
 import { HeroVideoDialog } from "@/components/video-dialog";
+import FeatureShowcase from "@/components/shared/feature-showcase";
 
 const Care = () => {
   const ticketTreeData = {
@@ -405,7 +406,7 @@ const Care = () => {
           <>
             <span className="text-primary">Lower </span>Costs.{" "}
             <span className="text-primary">Faster </span>Support.
-            <span className="text-primary">Happier </span>Players.
+            <span className="text-primary"> Happier </span>Players.
           </>
         }
         description="Every feature in Gamblio Analytics is designed to directly influence performance — reducing blind spots, increasing Lifetime Value of players, and driving profitability."
@@ -427,7 +428,7 @@ const Care = () => {
         ]}
       />
 
-      <ValueProposition
+      {/* <ValueProposition
         title={
           <>
             Core Value <span className="text-primary">Proposition</span>
@@ -440,6 +441,20 @@ const Care = () => {
         box4="Smarter Ticketing"
         box5="Operational Insight"
         box6="Human + AI Synergy"
+      /> */}
+      <FeatureShowcase
+        title={
+          <>
+            Core Value <span className="text-primary">Proposition</span>
+          </>
+        }
+        description="Gamblio Care delivers the perfect balance between automation and human expertise — creating a support ecosystem that is faster, more reliable, and dramatically more efficient than traditional chat solutions."
+        chat1="Always-On Support"
+        chat2="AI-Enhanced Communication"
+        chat3="Player-Centric Assistance"
+        chat4="Smarter Ticketing"
+        chat5="Operational Insight"
+        chat6="Human + AI Synergy"
       />
       {/* Section 7: Call to Action */}
       <CTASection

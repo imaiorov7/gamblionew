@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Eye } from "lucide-react";
 
 const Predict = () => {
-  const animationDuration = 5;
+  const animationDuration = 2;
   const circles = [
     { opacity: [0.3, 0.6, 0.3], delay: 0 },
     { opacity: [0.5, 0.7, 0.5], delay: animationDuration },

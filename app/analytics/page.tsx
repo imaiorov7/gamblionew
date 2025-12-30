@@ -178,7 +178,20 @@ const AnalyticsPage = () => {
       {/* Section 5: Services Section */}
       <GlobalReach />
       {/* Section 6: Core Value Proposition */}
-      <FeatureShowcase />
+      <FeatureShowcase
+        title={
+          <>
+            <span className="text-primary">Core Value</span> Proposition
+          </>
+        }
+        description="Gamblio Analytics turns fragmented gaming data into measurable
+                performance intelligence — empowering operators to grow revenue, reduce
+                manual effort, and optimize player experiences with every decision."
+        chat1="Turn complexity into clarity"
+        chat2="Compress time-to-decision"
+        chat3="Transform data into decisions"
+        chat4="Empower your team with operational intelligence"
+      />
       {/* Section 7: Call to Action */}
       <CTASection
         title="Ready to See Gamblio Analytics in Action?"

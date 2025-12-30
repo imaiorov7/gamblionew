@@ -54,10 +54,6 @@ export function CoreFeaturesSection({
           </Fragment>
         ))}
       </div>
-
-      <Button className="text-white cursor-pointer">
-        Explore Our Services
-      </Button>
     </DashedBorder>
   );
 }
