@@ -86,9 +86,9 @@ const faqData = [
 
 export default function FAQPage() {
   return (
-    <div className="w-full pt-24">
+    <div className="w-full my-24 border-b-0">
       <DashedBorder
-        sides="x"
+        sides="all"
         className="flex flex-col items-center gap-4 py-12"
       >
         <H1 className="font-medium text-center md:text-3xl lg:text-4xl">
@@ -100,7 +100,7 @@ export default function FAQPage() {
           to assist—just get in touch with us anytime.
         </Description>
       </DashedBorder>
-      <section className="flex justify-center py-12 mx-3 md:mx-7 border-x">
+      <DashedBorder sides="all">
         <ol className="w-full max-w-4xl space-y-6 list-decimal list-inside">
           {faqData.map((faq) => (
             <li key={faq.question} className="list-none">
@@ -113,7 +113,7 @@ export default function FAQPage() {
             </li>
           ))}
         </ol>
-      </section>
+      </DashedBorder>
     </div>
   );
 }

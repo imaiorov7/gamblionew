@@ -271,7 +271,7 @@ const Care = () => {
           <>
             AI That <span className="text-primary"> Resolves First</span>.
             Agents That Take Over
-            <span className="text-primary"> When Needed.</span>.
+            <span className="text-primary"> When Needed</span>.
           </>
         }
         description="With Gamblio Care, players get instant answers, agents get full context, and managers get complete visibility into performance, all in real time"

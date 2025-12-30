@@ -57,7 +57,7 @@ const CylinderVisualization: React.FC<CylinderVisualizationProps> = ({
                 </DashedBorder>
               </div>
 
-              <div className="relative z-0">
+              <div className="relative z-0 lg:block hidden">
                 <div className="w-[280px] md:w-[400px] rounded-[40%] border-t border-dashed border-border h-[70px] md:h-[100px] bg-[#131315]"></div>
                 <div
                   className="bg-custom-dark border-l border-b border-r border-dashed border-border h-[210px] md:h-[300px] w-[280px] md:w-[400px] absolute top-[28px] md:top-[40px] z-10"

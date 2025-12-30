@@ -24,7 +24,7 @@ const ReportCards = ({ title, description, data }: ReportCardsProps) => {
   return (
     <DashedBorder
       sides="all"
-      className="relative flex flex-col items-center gap-4 py-12"
+      className="relative flex flex-col items-center gap-4 py-12 overflow-x-hidden"
     >
       <Title className="text-3xl font-medium text-center">{title}</Title>
 
