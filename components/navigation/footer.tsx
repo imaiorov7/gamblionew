@@ -40,15 +40,15 @@ export function Footer() {
   const legals = [
     {
       title: "Privacy Policy",
-      href: "#",
+      href: "/privacy-policy",
     },
     {
       title: "Terms of Service",
-      href: "#",
+      href: "/terms-of-service",
     },
     {
       title: "Cookie Policy",
-      href: "#",
+      href: "/cookie-policy",
     },
   ];
 

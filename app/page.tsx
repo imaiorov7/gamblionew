@@ -47,7 +47,7 @@ export default function Home() {
             <br />
             <br />
             <span className="">
-              No generic software. No noise. Just outcomes that matter
+              No generic software. No noise. Just outcomes that matter.
             </span>
           </>
         }
