@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import CTASection from "@/components/cta-section";
 import Hero from "@/components/hero";
 import DashedBorder from "@/components/shared/dashed-border";
@@ -9,6 +10,29 @@ import ObjectiveDeliverables from "@/components/shared/objective-deliverables";
 import ProcessFlowchart from "@/components/shared/process-flowchart";
 import ReportCards from "@/components/shared/report-cards";
 import { HeroVideoDialog } from "@/components/video-dialog";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title:
+    "Gamblio Analytics - Real-Time Business Intelligence for Gambling Operators",
+  description:
+    "Turn complexity into clarity with real-time performance intelligence. Gamblio Analytics transforms gaming data into measurable business outcomes, empowering operators to make confident, data-driven decisions with predefined and custom KPI reports.",
+  path: "/analytics",
+  keywords: [
+    "gambling analytics",
+    "casino business intelligence",
+    "real-time KPI tracking",
+    "gambling reporting",
+    "casino analytics dashboard",
+    "gambling performance metrics",
+    "financial reporting gambling",
+    "bonus ROI tracking",
+    "player performance analytics",
+    "gambling data analytics",
+    "casino BI platform",
+    "gambling KPIs",
+  ],
+});
 
 const AnalyticsPage = () => {
   const reportData = [

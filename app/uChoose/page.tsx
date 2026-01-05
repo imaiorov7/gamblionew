@@ -1,19 +1,39 @@
-import React from "react";
+import type { Metadata } from "next";
 import CTASection from "@/components/cta-section";
 import Hero from "@/components/hero";
 import DashedBorder from "@/components/shared/dashed-border";
 import FeatureIntro from "@/components/shared/feature-intro";
+import FeatureShowcase from "@/components/shared/feature-showcase";
 import KeyCapabilities from "@/components/shared/key-capabilities";
 import ObjectiveDeliverables from "@/components/shared/objective-deliverables";
 import ProcessFlowchart from "@/components/shared/process-flowchart";
 import ReportCards from "@/components/shared/report-cards";
-import ValueProposition from "@/components/shared/value-proposition";
 import VisualizationSuite, {
   type Connection,
 } from "@/components/shared/visualization-suite";
-import WorkflowVisualization from "@/components/shared/workflow-visualization";
 import { HeroVideoDialog } from "@/components/video-dialog";
-import FeatureShowcase from "@/components/shared/feature-showcase";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title: "Gamblio uChoose - AI-Powered Game Recommendation Engine",
+  description:
+    "The right game. At the right time. Maximum retention. uChoose is the AI-powered game recommendation engine that personalizes every player's journey, increasing engagement, boosting session value, and maximizing revenue with precision.",
+  path: "/uChoose",
+  keywords: [
+    "game recommendations",
+    "personalized game suggestions",
+    "casino game discovery",
+    "player engagement AI",
+    "game recommendation engine",
+    "casino personalization",
+    "player retention games",
+    "gambling AI recommendations",
+    "game discovery platform",
+    "casino content optimization",
+    "personalized gaming",
+    "game recommendation widget",
+  ],
+});
 
 const uChoosePage = () => {
   return (

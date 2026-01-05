@@ -1,21 +1,43 @@
+import type { Metadata } from "next";
 import React from "react";
 import CTASection from "@/components/cta-section";
 import Hero from "@/components/hero";
 import CylinderVisualization from "@/components/shared/cylinder-visualization";
 import DashedBorder from "@/components/shared/dashed-border";
 import FeatureIntro from "@/components/shared/feature-intro";
+import FeatureShowcase from "@/components/shared/feature-showcase";
 import KeyCapabilities from "@/components/shared/key-capabilities";
 import ObjectiveDeliverables from "@/components/shared/objective-deliverables";
 import ProcessFlowchart from "@/components/shared/process-flowchart";
 import ReportCardsSimple from "@/components/shared/report-cards-simple";
-import Ticket from "@/components/shared/ticket";
 import TicketTree from "@/components/shared/ticket-tree";
 import ValueProposition from "@/components/shared/value-proposition";
 import VisualizationSuite, {
   type Connection,
 } from "@/components/shared/visualization-suite";
 import { HeroVideoDialog } from "@/components/video-dialog";
-import FeatureShowcase from "@/components/shared/feature-showcase";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title: "Gamblio Care - AI-Powered Customer Support for Gambling Operators",
+  description:
+    "Support that never sleeps. AI that never stops learning. Gamblio Care combines AI-driven chat automation with live agent tools, smart ticketing, and real-time analytics — empowering operators to deliver faster, smarter, and more efficient player support.",
+  path: "/care",
+  keywords: [
+    "AI customer support",
+    "gambling customer care",
+    "casino support automation",
+    "AI chat agent gambling",
+    "customer support software",
+    "ticketing system gambling",
+    "player support AI",
+    "casino customer service",
+    "automated support gambling",
+    "live agent support",
+    "customer care platform",
+    "support analytics gambling",
+  ],
+});
 
 const Care = () => {
   const ticketTreeData = {

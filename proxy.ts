@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (
@@ -15,7 +15,3 @@ export function middleware(request: NextRequest) {
 
   // return NextResponse.redirect(new URL("/under-construction", request.url));
 }
-
-export const config = {
-  matcher: "/:path*",
-};

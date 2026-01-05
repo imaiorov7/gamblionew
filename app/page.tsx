@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { CoreFeaturesSection } from "@/components/core-features-section";
 import CTASection from "@/components/cta-section";
 import { FAQSection } from "@/components/faq-section";
@@ -6,8 +7,30 @@ import { ServicesSection } from "@/components/services/services-section";
 import DashedBorder from "@/components/shared/dashed-border";
 import { TeamSection } from "@/components/team-section";
 import TrustedBy from "@/components/trusted-by";
-import { Description, H1, Title } from "@/components/ui/typography";
+import { Description, Title } from "@/components/ui/typography";
 import { HeroVideoDialog } from "@/components/video-dialog";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title: "AI to Amplify, Gamblio to Simplify",
+  description:
+    "AI-driven platform built exclusively for gambling operators: designed to reduce churn, improve retention rate, increase player value, and cut operational costs. Everything you need to skyrocket your operation in one place.",
+  path: "/",
+  keywords: [
+    "gambling AI platform",
+    "casino analytics",
+    "player retention software",
+    "gambling business intelligence",
+    "AI for gambling operators",
+    "player behavior prediction",
+    "VIP detection",
+    "churn prevention",
+    "game recommendations",
+    "AI customer support",
+    "gambling technology",
+    "online casino solutions",
+  ],
+});
 
 export default function Home() {
   return (

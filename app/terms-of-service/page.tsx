@@ -1,5 +1,22 @@
+import type { Metadata } from "next";
 import DashedBorder from "@/components/shared/dashed-border";
 import { Description, H1, Title } from "@/components/ui/typography";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title: "Terms of Service - Gamblio Platform Terms and Conditions",
+  description:
+    "Gamblio Terms of Service govern the use of our AI-powered platform for gambling operators. Learn about licensing, data processing, security, intellectual property, and service agreements.",
+  path: "/terms-of-service",
+  keywords: [
+    "Gamblio terms of service",
+    "gambling platform terms",
+    "casino software license",
+    "service agreement gambling",
+    "platform terms and conditions",
+  ],
+  noIndex: false,
+});
 
 const termsSections = [
   {
@@ -128,9 +145,9 @@ export default function TermsOfServicePage() {
       </DashedBorder>
       <DashedBorder sides="all">
         <div className="w-full  space-y-6">
-          {termsSections.map((section, index) => (
+          {termsSections.map((section) => (
             <DashedBorder
-              key={index}
+              key={section.title}
               sides="all"
               className="flex flex-col items-start gap-4 p-6"
             >

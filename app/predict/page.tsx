@@ -1,9 +1,9 @@
+import type { Metadata } from "next";
 import CTASection from "@/components/cta-section";
 import Hero from "@/components/hero";
 import DashedBorder from "@/components/shared/dashed-border";
 import FeatureIntro from "@/components/shared/feature-intro";
 import FeatureShowcase from "@/components/shared/feature-showcase";
-
 import KeyCapabilities from "@/components/shared/key-capabilities";
 import ObjectiveDeliverables from "@/components/shared/objective-deliverables";
 import ProcessFlowchart from "@/components/shared/process-flowchart";
@@ -14,6 +14,28 @@ import VisualizationSuite, {
 } from "@/components/shared/visualization-suite";
 import WorkflowVisualization from "@/components/shared/workflow-visualization";
 import { HeroVideoDialog } from "@/components/video-dialog";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title: "Gamblio Predict - AI-Powered Player Behavior Prediction",
+  description:
+    "Predict behavior. Prevent losses. Protect growth. Gamblio Predict uses AI-driven segmentation and behavioral forecasting to help operators anticipate player actions, identifying VIPs early, preventing churn, stopping bonus abuse, and ensuring responsible play.",
+  path: "/predict",
+  keywords: [
+    "player behavior prediction",
+    "VIP detection AI",
+    "churn prediction gambling",
+    "bonus abuse detection",
+    "responsible gaming monitoring",
+    "player segmentation",
+    "gambling AI predictions",
+    "casino player analytics",
+    "predictive analytics gambling",
+    "player risk assessment",
+    "gambling machine learning",
+    "behavioral forecasting",
+  ],
+});
 
 const Predict = () => {
   return (

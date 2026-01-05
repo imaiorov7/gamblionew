@@ -1,5 +1,23 @@
+import type { Metadata } from "next";
 import DashedBorder from "@/components/shared/dashed-border";
 import { Description, H1, Title } from "@/components/ui/typography";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title: "Privacy Policy - Gamblio Data Protection and Privacy",
+  description:
+    "Gamblio Privacy Policy explains how we collect, use, store, share, and protect personal data. We are ISO 27001 certified and committed to GDPR compliance, ensuring robust data protection for gambling operators and their players.",
+  path: "/privacy-policy",
+  keywords: [
+    "Gamblio privacy policy",
+    "data protection gambling",
+    "GDPR compliance gambling",
+    "player data privacy",
+    "ISO 27001 gambling",
+    "data security gambling",
+  ],
+  noIndex: false,
+});
 
 const privacySections = [
   {
@@ -115,9 +133,9 @@ export default function PrivacyPolicyPage() {
       </DashedBorder>
       <DashedBorder sides="all">
         <div className="w-full  space-y-6">
-          {privacySections.map((section, index) => (
+          {privacySections.map((section) => (
             <DashedBorder
-              key={index}
+              key={section.title}
               sides="all"
               className="flex flex-col items-start gap-4 p-6"
             >

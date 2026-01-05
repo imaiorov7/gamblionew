@@ -1,5 +1,7 @@
+import type { Metadata } from "next";
 import DashedBorder from "@/components/shared/dashed-border";
 import { Description, H1 } from "@/components/ui/typography";
+import { createMetadata } from "@/lib/metadata";
 
 const faqData = [
   {
@@ -83,6 +85,32 @@ const faqData = [
       "We tune VIP and churn thresholds per market and allow percentile-based definitions. Models and business rules can be adjusted for market-specific betting behavior during onboarding.",
   },
 ];
+
+// Prepare FAQ schema items for layout
+export const faqSchemaItems = faqData.map((faq) => ({
+  "@type": "Question" as const,
+  name: faq.question,
+  acceptedAnswer: {
+    "@type": "Answer" as const,
+    text: faq.answer,
+  },
+}));
+
+export const metadata: Metadata = createMetadata({
+  title: "FAQ - Frequently Asked Questions About Gamblio",
+  description:
+    "Find answers to the most common questions about Gamblio and its features. Learn about integration, security, compliance, prediction models, analytics, recommendations, and customer support solutions for gambling operators.",
+  path: "/faq",
+  keywords: [
+    "Gamblio FAQ",
+    "gambling platform questions",
+    "casino software FAQ",
+    "AI gambling platform FAQ",
+    "integration questions",
+    "gambling analytics FAQ",
+    "player prediction FAQ",
+  ],
+});
 
 export default function FAQPage() {
   return (

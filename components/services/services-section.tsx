@@ -1,6 +1,6 @@
 import Link from "next/link";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import React from "react";
-import type, { type ComponentPropsWithoutRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import DashedBorder from "../shared/dashed-border";
 import { buttonVariants } from "../ui/button";

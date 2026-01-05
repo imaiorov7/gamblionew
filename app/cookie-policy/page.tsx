@@ -1,5 +1,21 @@
+import type { Metadata } from "next";
 import DashedBorder from "@/components/shared/dashed-border";
 import { Description, H1, Title } from "@/components/ui/typography";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title: "Cookie Policy - Gamblio Website Cookie Information",
+  description:
+    "Gamblio Cookie Policy explains how we use cookies on our website. We only use strictly necessary cookies essential for website functionality. No tracking, analytics, or third-party cookies.",
+  path: "/cookie-policy",
+  keywords: [
+    "Gamblio cookie policy",
+    "website cookies",
+    "cookie information",
+    "privacy cookies",
+  ],
+  noIndex: false,
+});
 
 const cookieSections = [
   {
@@ -54,9 +70,9 @@ export default function CookiePolicyPage() {
       </DashedBorder>
       <DashedBorder sides="all">
         <div className="w-full  space-y-6">
-          {cookieSections.map((section, index) => (
+          {cookieSections.map((section) => (
             <DashedBorder
-              key={index}
+              key={section.title}
               sides="all"
               className="flex flex-col items-start gap-4 p-6"
             >
