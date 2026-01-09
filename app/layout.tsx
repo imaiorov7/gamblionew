@@ -17,15 +17,27 @@ export const metadata: Metadata = {
     template: "%s | Gamblio",
   },
   metadataBase: new URL("https://gamblio.ai"),
+  verification: {
+    google: "GdcYdmUvcUlMe97AUj-1moCr-iYa0-47T6Id5SIu0Pk",
+  },
   // Site-wide OpenGraph defaults (pages can override)
   openGraph: {
     siteName: "Gamblio",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/logotip-gr.png", // Place your image in public folder
+        width: 1200,
+        height: 630,
+        alt: "Gamblio",
+      },
+    ],
   },
   // Site-wide Twitter defaults (pages can override)
   twitter: {
     card: "summary_large_image",
+    images: ["/logotip-gr.png"],
   },
 };
 
