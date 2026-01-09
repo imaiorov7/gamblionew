@@ -16,28 +16,38 @@ export const metadata: Metadata = {
     default: "Gamblio",
     template: "%s | Gamblio",
   },
+  description:
+    "AI-powered gaming intelligence platform for operators and players",
   metadataBase: new URL("https://website.gamblio.ai"),
   verification: {
     google: "GdcYdmUvcUlMe97AUj-1moCr-iYa0-47T6Id5SIu0Pk",
   },
   // Site-wide OpenGraph defaults (pages can override)
   openGraph: {
+    title: "Gamblio",
+    description:
+      "AI-powered gaming intelligence platform for operators and players",
     siteName: "Gamblio",
     locale: "en_US",
     type: "website",
+    url: "https://website.gamblio.ai",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://website.gamblio.ai/og-image.png",
         width: 1200,
         height: 630,
         alt: "Gamblio",
+        type: "image/png",
       },
     ],
   },
   // Site-wide Twitter defaults (pages can override)
   twitter: {
     card: "summary_large_image",
-    images: ["/og-image.png"],
+    title: "Gamblio",
+    description:
+      "AI-powered gaming intelligence platform for operators and players",
+    images: ["https://website.gamblio.ai/og-image.png"],
   },
 };
 
