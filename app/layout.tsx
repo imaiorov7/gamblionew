@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/logotip-gr.png", // Place your image in public folder
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Gamblio",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   // Site-wide Twitter defaults (pages can override)
   twitter: {
     card: "summary_large_image",
-    images: ["/logotip-gr.png"],
+    images: ["/og-image.png"],
   },
 };
 
