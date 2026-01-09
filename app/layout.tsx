@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     default: "Gamblio",
     template: "%s | Gamblio",
   },
-  metadataBase: new URL("https://gamblio.ai"),
+  metadataBase: new URL("https://website.gamblio.ai"),
   verification: {
     google: "GdcYdmUvcUlMe97AUj-1moCr-iYa0-47T6Id5SIu0Pk",
   },
