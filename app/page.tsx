@@ -55,9 +55,6 @@ export default function Home() {
           thumbnailAlt="Hero Video"
         />
       </DashedBorder>
-      <DashedBorder sides="all" className="overflow-x-hidden">
-        <div id="vendor-swiper-container" className="w-full max-w-full" />
-      </DashedBorder>
 
       <CoreFeaturesSection
         title={
