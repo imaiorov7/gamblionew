@@ -519,17 +519,17 @@ export function FlowLine({
       <path
         d={path}
         fill="none"
-        stroke={animated ? pathColor : "rgba(33, 34, 36, 1)"}
+        stroke={animated && !showDots ? pathColor : "rgba(33, 34, 36, 1)"}
         strokeWidth={strokeWidth}
         strokeDasharray={dashed ? "6 6" : undefined}
-        strokeOpacity={animated ? pathOpacity : 1}
+        strokeOpacity={animated && !showDots ? pathOpacity : 1}
         strokeLinecap="round"
         strokeLinejoin="round"
         style={{ transition: "d 150ms ease-out" }}
       />
 
-      {/* Animated gradient path */}
-      {animated && (
+      {/* Animated gradient path - hidden when showDots is true */}
+      {animated && !showDots && (
         <>
           <path
             d={path}

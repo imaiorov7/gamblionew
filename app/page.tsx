@@ -55,7 +55,11 @@ export default function Home() {
           thumbnailAlt="Hero Video"
         />
       </DashedBorder>
-
+      <iframe
+        title="Gamification Demo"
+        src="https://gamification.gamblio.ai/"
+        className="w-full h-full aspect-video"
+      ></iframe>
       <CoreFeaturesSection
         title={
           <>
@@ -106,7 +110,7 @@ export default function Home() {
         features={certifications}
         className="px-0"
       />
-      <TeamSection />
+      {/* <TeamSection /> */}
       <FAQSection />
       <CTASection
         title="See Gamblio in Action"
