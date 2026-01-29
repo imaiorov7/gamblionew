@@ -1,7 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Button, buttonVariants } from "./ui/button";
-import React from "react";
+import type React from "react";
 import DashedBorder from "./shared/dashed-border";
+import { Button, buttonVariants } from "./ui/button";
 
 interface CTASectionProps {
   title?: string | React.ReactNode;
@@ -42,10 +43,17 @@ export default function CTASection({
         )}
       </div>
 
-      <img
-        src="/images/logotip-gr.png"
+      {/* <img
+        src="/images/cta-3d.png"
         alt=""
-        className="absolute hidden md:block opacity-45 left-1/3 md:scale-75 rotate-12"
+        className="absolute hidden md:block opacity-45 left-1/3 md:scale-75 rotate-12 translate-3d "
+      /> */}
+      <Image
+        width={1300}
+        height={1300}
+        src="/images/cta-3d.png"
+        alt=""
+        className="absolute hidden md:block opacity-45 left-1/3 md:scale-75 rotate-12 translate-3d "
       />
     </DashedBorder>
   );

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 import { Footer } from "@/components/navigation/footer";
 import { NavbarMenu } from "@/components/navigation/navbar";
 import DashedBorder from "@/components/shared/dashed-border";
 import { Toaster } from "@/components/ui/sonner";
-import Script from "next/script";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],

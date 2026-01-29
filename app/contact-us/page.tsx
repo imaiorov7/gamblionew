@@ -23,6 +23,7 @@ export default function ContactUsPage() {
     company: "",
     role: "",
     email: "",
+    service: "",
     message: "",
   });
 
@@ -32,7 +33,9 @@ export default function ContactUsPage() {
   >("idle");
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -43,11 +46,29 @@ export default function ContactUsPage() {
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
-    // Simulate form submission - replace with actual API call
+    const payload = {
+      name: `${formData.firstName} ${formData.lastName}`.trim(),
+      company: formData.company || "",
+      role: formData.role || "",
+      services: formData.service || "",
+      sender_email: formData.email,
+      message: formData.message,
+    };
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch("https://core.gamblio.ai/api/send-email/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send email");
+      }
+
       setSubmitStatus("success");
-      console.log(formData);
       toast.success("Thank you for your message! We'll get back to you soon.");
 
       setFormData({
@@ -56,10 +77,13 @@ export default function ContactUsPage() {
         company: "",
         role: "",
         email: "",
+        service: "",
         message: "",
       });
-    } catch {
+    } catch (error) {
+      console.error(error);
       setSubmitStatus("error");
+      toast.error("Something went wrong while sending your message.");
     } finally {
       setIsSubmitting(false);
     }
@@ -161,18 +185,80 @@ export default function ContactUsPage() {
                     </Field>
                   </div>
 
-                  <Field>
-                    <FieldLabel htmlFor="email">E-mail</FieldLabel>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="E-mail"
-                    />
-                  </Field>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <Field>
+                      <FieldLabel htmlFor="email">E-mail</FieldLabel>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="E-mail"
+                      />
+                    </Field>
+                    <Field>
+                      <FieldLabel htmlFor="service">Service</FieldLabel>
+                      <select
+                        id="service"
+                        name="service"
+                        value={formData.service}
+                        onChange={handleChange}
+                        className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50 dark:bg-input/30 dark:border-input"
+                        style={{
+                          color: "var(--foreground)",
+                          backgroundColor: "var(--background)",
+                        }}
+                      >
+                        <option
+                          value=""
+                          style={{
+                            color: "var(--foreground)",
+                            backgroundColor: "var(--background)",
+                          }}
+                        >
+                          Select a service
+                        </option>
+                        <option
+                          value="analytics"
+                          style={{
+                            color: "var(--foreground)",
+                            backgroundColor: "var(--background)",
+                          }}
+                        >
+                          Analytics
+                        </option>
+                        <option
+                          value="predict"
+                          style={{
+                            color: "var(--foreground)",
+                            backgroundColor: "var(--background)",
+                          }}
+                        >
+                          Predict
+                        </option>
+                        <option
+                          value="uChoose"
+                          style={{
+                            color: "var(--foreground)",
+                            backgroundColor: "var(--background)",
+                          }}
+                        >
+                          uChoose
+                        </option>
+                        <option
+                          value="care"
+                          style={{
+                            color: "var(--foreground)",
+                            backgroundColor: "var(--background)",
+                          }}
+                        >
+                          Care
+                        </option>
+                      </select>
+                    </Field>
+                  </div>
 
                   <Field>
                     <FieldLabel htmlFor="message">Message...</FieldLabel>
