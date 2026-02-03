@@ -88,7 +88,7 @@ const TicketTree: React.FC<TicketTreeProps> = ({
 
       {/* Desktop Grid Layout with FlowLines */}
       <div
-        className="relative hidden w-full grid-cols-10 grid-rows-4 gap-18 px-2 xl:px-0 mt-12 xl:grid overflow-x-auto"
+        className="relative hidden w-full grid-cols-10 grid-rows-4 gap-y-18 gap-x-0  px-2 xl:px-0 mt-12 xl:grid overflow-x-auto"
         ref={containerRef as RefObject<HTMLDivElement>}
       >
         {tickets.map((ticket, index) => {
