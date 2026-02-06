@@ -99,7 +99,7 @@ const ReportCards = ({ title, description, data }: ReportCardsProps) => {
         </div>
       </div>
 
-      <Button className="mt-8 text-white cursor-pointer">
+      <Button className="mt-8 text-white cursor-default opacity-0">
         See a Sample Report
       </Button>
     </DashedBorder>

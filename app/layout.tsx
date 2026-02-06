@@ -61,7 +61,34 @@ export default function RootLayout({
           <Footer />
         </DashedBorder>
         <Toaster />
-        <Script
+      <iframe
+  id="chatWidget"
+  src="https://widget-refactor.vercel.app/"
+  className="fixed bottom-4 right-4 z-9999 pointer-events-auto"
+  style={{
+    width: "500px",
+    height: "800px",
+    border: "none",
+    background: "transparent",
+  }}
+/>
+        <Script id="chat-widget-init" strategy="afterInteractive">
+          {`
+            const iframe = document.getElementById('chatWidget');
+            
+            window.addEventListener('message', (event) => {
+              // Wait for iframe to signal it's ready
+              if (event.data?.type === 'gamblio-chat-ready') {
+                iframe.contentWindow.postMessage({
+                  type: 'gamblio-chat-init',
+                  clientId: 'your-client-id-here',
+                  playerToken: 'your-player-token-here'  // optional, omit for guest mode
+                }, 'https://your-widget-domain');
+              }
+            });
+          `}
+        </Script> 
+        {/* <Script
           src="https://nbg1.your-objectstorage.com/gamblio-widget/assets/sdk.min.js"
           strategy="beforeInteractive"
         />
@@ -89,7 +116,7 @@ export default function RootLayout({
               }
             `,
           }}
-        />
+        /> */}
       </body>
     </html>
   );

@@ -63,11 +63,11 @@ const KeyCapabilities = ({
         </div>
       </div>
 
-      {buttonTitle && (
+      {/* {buttonTitle && (
         <Button className="mt-4 text-white cursor-pointer">
           Explore Report Types
         </Button>
-      )}
+      )} */}
     </DashedBorder>
   );
 };

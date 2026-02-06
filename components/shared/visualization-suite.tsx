@@ -302,9 +302,9 @@ const VisualizationSuite = ({
         ))}
       </div>
 
-      <Link href={buttonLink}>
+      {/* <Link href={buttonLink}>
         <Button className="mt-8 text-white cursor-pointer">{buttonText}</Button>
-      </Link>
+      </Link> */}
     </DashedBorder>
   );
 };
