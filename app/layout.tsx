@@ -88,10 +88,11 @@ export default function RootLayout({
 
                 // Widget is ready, send config
                 if (data.type === 'gamblio-chat-ready') {
+                  const token = window.localStorage.getItem('token');
                   iframe.contentWindow.postMessage({
                     type: 'gamblio-chat-init',
                     clientId: '0b7e7dee87b1c3b98e72131173dfbbbf',
-                    playerToken: null,  // or get from your auth system
+                    playerToken: token ?? null,
                     language: 'en',
                   }, WIDGET_ORIGIN);
                 }
