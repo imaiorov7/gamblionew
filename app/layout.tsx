@@ -61,31 +61,47 @@ export default function RootLayout({
           <Footer />
         </DashedBorder>
         <Toaster />
-      <iframe
-  id="chatWidget"
-  src="https://widget-refactor.vercel.app/"
-  className="fixed bottom-4 right-4 z-9999 pointer-events-auto"
-  style={{
-    width: "500px",
-    height: "800px",
-    border: "none",
-    background: "transparent",
-  }}
-/>
+        <iframe
+          id="chatWidget"
+          title="Gamblio Chat Widget"
+          src="https://widget-refactor.vercel.app/embed"
+          className="fixed bottom-4 right-4 z-9999 pointer-events-auto"
+          style={{
+            width: "80px",
+            height: "80px",
+            border: "none",
+            background: "transparent",
+          }}
+        />
         <Script id="chat-widget-init" strategy="afterInteractive">
           {`
-            const iframe = document.getElementById('chatWidget');
-            
-            window.addEventListener('message', (event) => {
-              // Wait for iframe to signal it's ready
-              if (event.data?.type === 'gamblio-chat-ready') {
-                iframe.contentWindow.postMessage({
-                  type: 'gamblio-chat-init',
-                  clientId: 'your-client-id-here',
-                  playerToken: 'your-player-token-here'  // optional, omit for guest mode
-                }, 'https://your-widget-domain');
-              }
-            });
+            (function() {
+              const iframe = document.getElementById('chatWidget');
+              const WIDGET_ORIGIN = 'https://widget-refactor.vercel.app';
+
+              window.addEventListener('message', (event) => {
+                // Security: only accept messages from widget origin
+                if (event.origin !== WIDGET_ORIGIN) return;
+
+                const data = event.data;
+                if (!data?.type) return;
+
+                // Widget is ready, send config
+                if (data.type === 'gamblio-chat-ready') {
+                  iframe.contentWindow.postMessage({
+                    type: 'gamblio-chat-init',
+                    clientId: '0b7e7dee87b1c3b98e72131173dfbbbf',
+                    playerToken: null,  // or get from your auth system
+                    language: 'en',
+                  }, WIDGET_ORIGIN);
+                }
+                // Widget wants to resize (open/close)
+                if (data.type === 'gamblio-chat-resize') {
+                  iframe.style.width = data.width + 'px';
+                  iframe.style.height = data.height + 'px';
+                }
+              });
+            })();
           `}
         </Script> 
         {/* <Script
