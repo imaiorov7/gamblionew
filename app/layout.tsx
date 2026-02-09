@@ -76,35 +76,48 @@ export default function RootLayout({
         <Script id="chat-widget-init" strategy="afterInteractive">
           {`
             (function() {
-              const iframe = document.getElementById('chatWidget');
-              const WIDGET_ORIGIN = 'https://widget-refactor.vercel.app';
+  const WIDGET_ORIGIN = 'https://widget-refactor.vercel.app';
 
-              window.addEventListener('message', (event) => {
-                // Security: only accept messages from widget origin
-                if (event.origin !== WIDGET_ORIGIN) return;
+  window.addEventListener('message', function(event) {
+    if (event.origin !== WIDGET_ORIGIN) return;
+    var data = event.data;
+    if (!data?.type) return;
 
-                const data = event.data;
-                if (!data?.type) return;
+    if (data.type === 'gamblio-chat-ready') {
+      var chatIframe = document.getElementById('chatWidget');
+      if (chatIframe?.contentWindow) {
+        var token = window.localStorage.getItem('token');
+        chatIframe.contentWindow.postMessage({
+          type: 'gamblio-chat-init',
+          clientId: '0b7e7dee87b1c3b98e72131173dfbbbf',
+          playerToken: token ?? null,
+          language: 'en',
+        }, WIDGET_ORIGIN);
+      }
+    }
 
-                // Widget is ready, send config
-                if (data.type === 'gamblio-chat-ready') {
-                  const token = window.localStorage.getItem('token');
-                  iframe.contentWindow.postMessage({
-                    type: 'gamblio-chat-init',
-                    clientId: '0b7e7dee87b1c3b98e72131173dfbbbf',
-                    playerToken: token ?? null,
-                    language: 'en',
-                  }, WIDGET_ORIGIN);
-                }
-                // Widget wants to resize (open/close)
-                if (data.type === 'gamblio-chat-resize') {
-                  iframe.style.width = data.width + 'px';
-                  iframe.style.height = data.height + 'px';
-                }
-              });
-            })();
+    if (data.type === 'gamblio-recommendation-ready') {
+      var recIframe = document.getElementById('recommendationWidget');
+      if (recIframe?.contentWindow) {
+        recIframe.contentWindow.postMessage({
+          type: 'gamblio-recommendation-init',
+          clientId: '0b7e7dee87b1c3b98e72131173dfbbbf',
+          playerToken: window.localStorage.getItem('token') ?? null,
+        }, WIDGET_ORIGIN);
+      }
+    }
+
+    if (data.type === 'gamblio-chat-resize') {
+      var chatIframe = document.getElementById('chatWidget');
+      if (chatIframe) {
+        chatIframe.style.width = data.width + 'px';
+        chatIframe.style.height = data.height + 'px';
+      }
+    }
+  });
+})();
           `}
-        </Script> 
+        </Script>
         {/* <Script
           src="https://nbg1.your-objectstorage.com/gamblio-widget/assets/sdk.min.js"
           strategy="beforeInteractive"

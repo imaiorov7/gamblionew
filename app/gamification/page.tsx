@@ -9,7 +9,7 @@ import {
 
 const page = () => {
   return (
-    <div className="w-full h-screen flex items-center justify-center">
+    <div className="w-full h-screen flex flex-col items-center justify-center">
       <Dialog>
         <DialogTrigger>Open</DialogTrigger>
         <DialogContent className="!w-[90vw] !max-w-7xl h-[90vh] p-0 border-none !bg-transparent">
@@ -21,6 +21,17 @@ const page = () => {
           />
         </DialogContent>
       </Dialog>
+      <div className="w-full h-fit">
+        <iframe
+          id="recommendationWidget"
+          title="Gamblio Recommendations"
+          src="https://widget-refactor.vercel.app/embed/recommendation"
+          className="w-full "
+          style={{
+            height: "600px",
+          }}
+        />
+      </div>
     </div>
   );
 };
