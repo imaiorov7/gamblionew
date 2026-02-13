@@ -103,6 +103,27 @@ export default function RootLayout({
           type: 'gamblio-recommendation-init',
           clientId: '0b7e7dee87b1c3b98e72131173dfbbbf',
           playerToken: window.localStorage.getItem('token') ?? null,
+          recommendationSettings: {
+            headlineTitle: 'Your Perfect Match',
+            headlineSubtitle: 'Discover your new favorite game',
+            gameUrl: 'https://website.gamblio.ai/games/{gameId}',
+            demoUrl: 'https://website.gamblio.ai/games/{gameId}/demo',
+          },
+        }, WIDGET_ORIGIN);
+      }
+    }
+
+    if (data.type === 'gamblio-hotcold-ready') {
+      var hotColdIframe = document.getElementById('hotColdWidget');
+      if (hotColdIframe?.contentWindow) {
+        hotColdIframe.contentWindow.postMessage({
+          type: 'gamblio-hotcold-init',
+          clientId: '0b7e7dee87b1c3b98e72131173dfbbbf',
+          playerToken: window.localStorage.getItem('token') ?? null,
+          hotColdSettings: {
+            gameUrl: 'https://website.gamblio.ai/games/{gameId}',
+            backgroundType: 'vortex',
+          },
         }, WIDGET_ORIGIN);
       }
     }

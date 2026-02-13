@@ -21,14 +21,29 @@ const page = () => {
           />
         </DialogContent>
       </Dialog>
-      <div className="w-full h-fit">
+      <div className="w-full">
         <iframe
           id="recommendationWidget"
           title="Gamblio Recommendations"
           src="https://widget-refactor.vercel.app/embed/recommendation"
-          className="w-full "
+          className="w-full"
           style={{
             height: "600px",
+            border: "none",
+            background: "transparent",
+          }}
+        />
+      </div>
+      <div className="w-full">
+        <iframe
+          id="hotColdWidget"
+          title="Gamblio Hot/Cold"
+          src="https://widget-refactor.vercel.app/embed/hot-cold"
+          className="w-full"
+          style={{
+            height: "600px",
+            border: "none",
+            background: "transparent",
           }}
         />
       </div>
