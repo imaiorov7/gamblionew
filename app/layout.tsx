@@ -75,65 +75,54 @@ export default function RootLayout({
         />
         <Script id="chat-widget-init" strategy="afterInteractive">
           {`
-            (function() {
-  const WIDGET_ORIGIN = 'https://widget-refactor.vercel.app';
+(function() {
+  var O = 'https://widget-refactor.vercel.app';
+  var C = '0b7e7dee87b1c3b98e72131173dfbbbf';
+  var cfg = {
+    'gamblio-chat-ready': {
+      type: 'gamblio-chat-init',
+      clientId: C,
+      language: 'en',
+    },
+    'gamblio-recommendation-ready': {
+      type: 'gamblio-recommendation-init',
+      clientId: C,
+      recommendationSettings: {
+        headlineTitle: 'Your Perfect Match',
+        headlineSubtitle: 'Discover your new favorite game',
+        gameUrl: 'https://website.gamblio.ai/games/{gameId}',
+        demoUrl: 'https://website.gamblio.ai/games/{gameId}/demo',
+      },
+    },
+    'gamblio-hotcold-ready': {
+      type: 'gamblio-hotcold-init',
+      clientId: C,
+      hotColdSettings: {
+        gameUrl: 'https://website.gamblio.ai/games/{gameId}',
+        backgroundType: 'vortex',
+      },
+    },
+  };
+  var ids = {
+    'gamblio-chat-resize': 'chatWidget',
+    'gamblio-recommendation-resize': 'recommendationWidget',
+    'gamblio-hotcold-resize': 'hotColdWidget',
+  };
 
-  window.addEventListener('message', function(event) {
-    if (event.origin !== WIDGET_ORIGIN) return;
-    var data = event.data;
-    if (!data?.type) return;
-
-    if (data.type === 'gamblio-chat-ready') {
-      var chatIframe = document.getElementById('chatWidget');
-      if (chatIframe?.contentWindow) {
-        var token = window.localStorage.getItem('token');
-        chatIframe.contentWindow.postMessage({
-          type: 'gamblio-chat-init',
-          clientId: '0b7e7dee87b1c3b98e72131173dfbbbf',
-          playerToken: token ?? null,
-          language: 'en',
-        }, WIDGET_ORIGIN);
-      }
+  window.addEventListener('message', function(e) {
+    if (e.origin !== O || !e.data?.type) return;
+    var d = e.data;
+    var c = cfg[d.type];
+    if (c) {
+      e.source.postMessage(
+        Object.assign({}, c, { playerToken: localStorage.getItem('token') ?? null }),
+        O
+      );
     }
-
-    if (data.type === 'gamblio-recommendation-ready') {
-      var recIframe = document.getElementById('recommendationWidget');
-      if (recIframe?.contentWindow) {
-        recIframe.contentWindow.postMessage({
-          type: 'gamblio-recommendation-init',
-          clientId: '0b7e7dee87b1c3b98e72131173dfbbbf',
-          playerToken: window.localStorage.getItem('token') ?? null,
-          recommendationSettings: {
-            headlineTitle: 'Your Perfect Match',
-            headlineSubtitle: 'Discover your new favorite game',
-            gameUrl: 'https://website.gamblio.ai/games/{gameId}',
-            demoUrl: 'https://website.gamblio.ai/games/{gameId}/demo',
-          },
-        }, WIDGET_ORIGIN);
-      }
-    }
-
-    if (data.type === 'gamblio-hotcold-ready') {
-      var hotColdIframe = document.getElementById('hotColdWidget');
-      if (hotColdIframe?.contentWindow) {
-        hotColdIframe.contentWindow.postMessage({
-          type: 'gamblio-hotcold-init',
-          clientId: '0b7e7dee87b1c3b98e72131173dfbbbf',
-          playerToken: window.localStorage.getItem('token') ?? null,
-          hotColdSettings: {
-            gameUrl: 'https://website.gamblio.ai/games/{gameId}',
-            backgroundType: 'vortex',
-          },
-        }, WIDGET_ORIGIN);
-      }
-    }
-
-    if (data.type === 'gamblio-chat-resize') {
-      var chatIframe = document.getElementById('chatWidget');
-      if (chatIframe) {
-        chatIframe.style.width = data.width + 'px';
-        chatIframe.style.height = data.height + 'px';
-      }
+    var el = ids[d.type] && document.getElementById(ids[d.type]);
+    if (el) {
+      el.style.width = typeof d.width === 'number' ? d.width + 'px' : d.width;
+      el.style.height = typeof d.height === 'number' ? d.height + 'px' : d.height;
     }
   });
 })();
