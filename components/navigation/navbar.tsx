@@ -15,7 +15,7 @@ import {
   NavServices,
 } from "@/components/ui/resizable-navbar";
 
-export function NavbarMenu () {
+export function NavbarMenu() {
   const pathname = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -44,6 +44,24 @@ export function NavbarMenu () {
       // On another page - navigate to home with hash
       window.location.href = `/#${id}`;
     }
+  };
+
+  const handleNavItemClick = (
+    item: { id?: string; href?: string },
+    event: React.MouseEvent<HTMLAnchorElement>,
+  ) => {
+    if (item.href === "/widgets") {
+      event.preventDefault();
+      if (pathname === "/widgets") {
+        window.location.reload();
+      } else {
+        window.location.href = "/widgets";
+      }
+      setIsMobileMenuOpen(false);
+      return;
+    }
+
+    handleNavigation(item.id ?? "");
   };
 
   type NavLinkItem = { name: string; id?: string; href?: string };
@@ -84,17 +102,24 @@ export function NavbarMenu () {
           <div className="absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium lg:flex lg:space-x-2">
             {navItems.map((item) =>
               isDropdown(item) ? (
-                <NavServices key={item.name} label={item.name} items={item.items} />
+                <NavServices
+                  key={item.name}
+                  label={item.name}
+                  items={item.items}
+                />
               ) : (
                 <Link
                   key={item.name}
-                  href={item.id === "home" ? "/" : `${item.href ? item.href : `/#${item.id}`}`}
-                  onClick={() => handleNavigation(item.id ?? "")}
+                  href={
+                    item.id === "home"
+                      ? "/"
+                      : `${item.href ? item.href : `/#${item.id}`}`
+                  }
+                  onClick={(event) => handleNavItemClick(item, event)}
                   className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition cursor-pointer"
                 >
                   {item.name}
                 </Link>
-
               ),
             )}
           </div>
@@ -134,8 +159,12 @@ export function NavbarMenu () {
               ) : (
                 <Link
                   key={item.name}
-                  href={item.id === "home" ? "/" : `${item.href ? item.href : `/#${item.id}`}`}
-                  onClick={() => handleNavigation(item.id ?? "")}
+                  href={
+                    item.id === "home"
+                      ? "/"
+                      : `${item.href ? item.href : `/#${item.id}`}`
+                  }
+                  onClick={(event) => handleNavItemClick(item, event)}
                   className="w-full px-4 py-2 text-center text-neutral-900 dark:text-neutral-100 hover:bg-white/10 dark:hover:bg-neutral-900/10 rounded transition"
                 >
                   {item.name}
