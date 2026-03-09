@@ -14,8 +14,6 @@ import type {
   RecommendationConfigKey,
 } from "@/lib/gamblio-widget-configs";
 
-const MOCK_TOKEN = "demo_user_token_12345";
-
 export default function WidgetsPage() {
   const {
     recommendationVariant,
@@ -62,10 +60,7 @@ export default function WidgetsPage() {
               </Button>
             </div>
             <p className="text-xs text-muted-foreground">
-              Current status:{" "}
-              <span className="font-mono">
-                {userType === "logged" ? `Token: ${MOCK_TOKEN}` : "No token"}
-              </span>
+              Current status: {userType === "logged" ? "Logged User" : "Guest"}
             </p>
           </CardContent>
         </Card>

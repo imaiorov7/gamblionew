@@ -7,7 +7,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   DEFAULT_HOT_COLD_VARIANT,
   DEFAULT_RECOMMENDATION_VARIANT,
@@ -110,45 +109,53 @@ export function useGamblio() {
 }
 
 export function GamblioProvider({ children }: { children: React.ReactNode }) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const recommendationParam = searchParams.get(URL_PARAM_RECOMMENDATION);
-  const hotColdParam = searchParams.get(URL_PARAM_HOT_COLD);
-  const userParam = searchParams.get(URL_PARAM_USER);
-
-  const initialRecommendationVariant = isRecommendationConfigKey(
-    recommendationParam,
-  )
-    ? recommendationParam
-    : DEFAULT_RECOMMENDATION_VARIANT;
-
-  const initialHotColdVariant = isHotColdConfigKey(hotColdParam)
-    ? hotColdParam
-    : DEFAULT_HOT_COLD_VARIANT;
-
-  const initialUserType = isUserType(userParam) ? userParam : "guest";
-
   // Variant keys
   const [hotColdVariant, setHotColdVariantState] = useState<HotColdConfigKey>(
-    initialHotColdVariant,
+    DEFAULT_HOT_COLD_VARIANT,
   );
   const [recommendationVariant, setRecommendationVariantState] =
-    useState<RecommendationConfigKey>(initialRecommendationVariant);
+    useState<RecommendationConfigKey>(DEFAULT_RECOMMENDATION_VARIANT);
 
   // Configs with targetContainerId
   const [hotColdConfig, setHotColdConfig] = useState<HotColdConfig>({
-    ...hotColdConfigs[initialHotColdVariant].config,
+    ...hotColdConfigs[DEFAULT_HOT_COLD_VARIANT].config,
   });
 
   const [recommendationConfig, setRecommendationConfig] =
     useState<RecommendationConfig>({
-      ...recommendationConfigs[initialRecommendationVariant].config,
+      ...recommendationConfigs[DEFAULT_RECOMMENDATION_VARIANT].config,
     });
 
-  const [userType, setUserTypeState] = useState<"logged" | "guest">(
-    initialUserType,
-  );
+  const [userType, setUserTypeState] = useState<"logged" | "guest">("guest");
+
+  // Read widgets URL state on client after mount, so provider stays safe as a global wrapper.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!window.location.pathname.startsWith("/widgets")) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const recommendationParam = params.get(URL_PARAM_RECOMMENDATION);
+    const hotColdParam = params.get(URL_PARAM_HOT_COLD);
+    const userParam = params.get(URL_PARAM_USER);
+
+    if (isRecommendationConfigKey(recommendationParam)) {
+      setRecommendationVariantState(recommendationParam);
+      setRecommendationConfig({
+        ...recommendationConfigs[recommendationParam].config,
+      });
+    }
+
+    if (isHotColdConfigKey(hotColdParam)) {
+      setHotColdVariantState(hotColdParam);
+      setHotColdConfig({
+        ...hotColdConfigs[hotColdParam].config,
+      });
+    }
+
+    if (isUserType(userParam)) {
+      setUserTypeState(userParam);
+    }
+  }, []);
 
   const updateUrlState = useCallback(
     (next: {
@@ -161,7 +168,9 @@ export function GamblioProvider({ children }: { children: React.ReactNode }) {
         next.recommendationVariant ?? recommendationVariant;
       const nextUserType = next.userType ?? userType;
 
-      const params = new URLSearchParams(searchParams.toString());
+      if (typeof window === "undefined") return;
+
+      const params = new URLSearchParams(window.location.search);
 
       if (nextHotColdVariant === DEFAULT_HOT_COLD_VARIANT) {
         params.delete(URL_PARAM_HOT_COLD);
@@ -182,29 +191,16 @@ export function GamblioProvider({ children }: { children: React.ReactNode }) {
       }
 
       const query = params.toString();
-      const nextUrl = query ? `${pathname}?${query}` : pathname;
-
-      if (typeof window !== "undefined") {
-        const currentUrl = `${window.location.pathname}${window.location.search}`;
-        if (currentUrl !== nextUrl) {
-          // Replace keeps history clean while forcing a full re-init from URL state.
-          window.location.replace(nextUrl);
-          return;
-        }
+      const nextUrl = query
+        ? `${window.location.pathname}?${query}`
+        : window.location.pathname;
+      const currentUrl = `${window.location.pathname}${window.location.search}`;
+      if (currentUrl !== nextUrl) {
+        // Replace keeps history clean while forcing a full re-init from URL state.
+        window.location.replace(nextUrl);
       }
-
-      router.replace(nextUrl, {
-        scroll: false,
-      });
     },
-    [
-      hotColdVariant,
-      pathname,
-      recommendationVariant,
-      router,
-      searchParams,
-      userType,
-    ],
+    [hotColdVariant, recommendationVariant, userType],
   );
 
   // Set hot/cold variant - updates both key and config

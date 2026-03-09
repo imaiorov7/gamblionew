@@ -1,7 +1,6 @@
 "use client";
 
 import Script from "next/script";
-import { GamblioProvider } from "@/components/providers/gamblio-provider";
 import {
   DEFAULT_HOT_COLD_VARIANT,
   DEFAULT_RECOMMENDATION_VARIANT,
