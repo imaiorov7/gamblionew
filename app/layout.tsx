@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout ({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -146,6 +146,7 @@ export default function RootLayout ({
                   clientId: "0b7e7dee87b1c3b98e72131173dfbbbf",
                   language: "en",
                   envDev: false,
+                  demo: true,
                   chatConfig: {
                     backgroundPrimary: "#1a1a1a",
                     hoverColor: "#2d2d2d",

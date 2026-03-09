@@ -1,6 +1,5 @@
 "use client";
 
-import { Loader2 } from "lucide-react";
 import { useGamblio } from "@/components/providers/gamblio-provider";
 import { Button } from "@/components/ui/button";
 import {
@@ -27,7 +26,6 @@ export default function WidgetsPage() {
     hotColdConfig,
     userType,
     setUserType,
-    isReinitializing,
     recommendationConfigs,
     hotColdConfigs,
   } = useGamblio();
@@ -82,7 +80,7 @@ export default function WidgetsPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {/* <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2">
               {Object.entries(recommendationConfigs).map(([key, { label }]) => (
                 <Button
                   key={key}
@@ -97,30 +95,24 @@ export default function WidgetsPage() {
                   {label}
                 </Button>
               ))}
-            </div> */}
+            </div>
 
             {/* Current config display */}
-            {/* <details className="text-xs">
+            <details className="text-xs">
               <summary className="cursor-pointer text-muted-foreground hover:text-foreground">
                 View current configuration
               </summary>
               <pre className="mt-2 p-3 bg-muted rounded-lg overflow-auto">
                 {JSON.stringify(recommendationConfig, null, 2)}
               </pre>
-            </details> */}
+            </details>
 
             {/* Recommendation Widget Container */}
             <div
               id="recommendation-container"
               className="relative w-full min-h-[400px] rounded-lg border border-border overflow-hidden"
               style={{ height: "500px" }}
-            >
-              {isReinitializing && (
-                <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/80 rounded-lg">
-                  <Loader2 className="size-10 animate-spin text-primary" />
-                </div>
-              )}
-            </div>
+            />
           </CardContent>
         </Card>
 
@@ -134,7 +126,7 @@ export default function WidgetsPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {/* <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2">
               {Object.entries(hotColdConfigs).map(([key, { label }]) => (
                 <Button
                   key={key}
@@ -154,19 +146,13 @@ export default function WidgetsPage() {
               <pre className="mt-2 p-3 bg-muted rounded-lg overflow-auto">
                 {JSON.stringify(hotColdConfig, null, 2)}
               </pre>
-            </details> */}
+            </details>
 
             <div
               id="hot-cold-container"
               className="relative w-full min-h-[400px] rounded-lg border border-border overflow-hidden"
               style={{ height: "700px" }}
-            >
-              {isReinitializing && (
-                <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/80 rounded-lg">
-                  <Loader2 className="size-10 animate-spin text-primary" />
-                </div>
-              )}
-            </div>
+            />
           </CardContent>
         </Card>
 
@@ -219,9 +205,6 @@ export default function WidgetsPage() {
                 <li>
                   <strong>hotGradientColors/coldGradientColors:</strong>{" "}
                   separate gradients
-                </li>
-                <li>
-                  <strong>glow:</strong> true/false
                 </li>
                 <li>
                   <strong>Period:</strong> Daily, Weekly, Monthly (in widget)

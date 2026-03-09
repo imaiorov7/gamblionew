@@ -105,6 +105,16 @@ export const recommendationConfigs = {
 } as const;
 
 export const hotColdConfigs = {
+  imageDifferent: {
+    label: "Image (Hot/Cold Different)",
+    config: {
+      targetContainerId: "hot-cold-container",
+      backgroundType: "image",
+      hotImageIndex: 8,
+      coldImageIndex: 9,
+      imageExtension: "png",
+    },
+  },
   videoDifferent: {
     label: "Video (Hot/Cold Different)",
     config: {
@@ -112,7 +122,6 @@ export const hotColdConfigs = {
       backgroundType: "video",
       hotVideoIndex: 1,
       coldVideoIndex: 2,
-      glow: true,
     },
   },
   videoSame: {
@@ -121,20 +130,9 @@ export const hotColdConfigs = {
       targetContainerId: "hot-cold-container",
       backgroundType: "video",
       videoIndex: 3,
-      glow: false,
     },
   },
-  imageDifferent: {
-    label: "Image (Hot/Cold Different)",
-    config: {
-      targetContainerId: "hot-cold-container",
-      backgroundType: "image",
-      hotImageIndex: 1,
-      coldImageIndex: 2,
-      imageExtension: "png",
-      glow: true,
-    },
-  },
+
   imageSame: {
     label: "Image (Same)",
     config: {
@@ -142,7 +140,6 @@ export const hotColdConfigs = {
       backgroundType: "image",
       imageIndex: 3,
       imageExtension: "png",
-      glow: false,
     },
   },
   gradientDifferent: {
@@ -154,7 +151,6 @@ export const hotColdConfigs = {
       hotGradientDirection: "to right",
       coldGradientColors: ["rgba(37, 99, 235, 0.8)", "rgba(29, 78, 216, 0.8)"],
       coldGradientDirection: "to right",
-      glow: true,
     },
   },
   gradientSame: {
@@ -164,7 +160,6 @@ export const hotColdConfigs = {
       backgroundType: "gradient",
       gradientColors: ["rgba(131, 58, 180, 0.8)", "rgba(253, 29, 29, 0.8)"],
       gradientDirection: "135deg",
-      glow: false,
     },
   },
   transparent: {
@@ -172,17 +167,15 @@ export const hotColdConfigs = {
     config: {
       targetContainerId: "hot-cold-container",
       backgroundType: "transparent",
-      glow: false,
     },
   },
-  videoGlow: {
-    label: "Video + Glow",
+  videoAlt: {
+    label: "Video (Alt)",
     config: {
       targetContainerId: "hot-cold-container",
       backgroundType: "video",
       hotVideoIndex: 4,
       coldVideoIndex: 5,
-      glow: true,
     },
   },
 } as const;
@@ -192,4 +185,4 @@ export type HotColdConfigKey = keyof typeof hotColdConfigs;
 
 export const DEFAULT_RECOMMENDATION_VARIANT: RecommendationConfigKey =
   "transparentCarousel";
-export const DEFAULT_HOT_COLD_VARIANT: HotColdConfigKey = "videoDifferent";
+export const DEFAULT_HOT_COLD_VARIANT: HotColdConfigKey = "imageDifferent";

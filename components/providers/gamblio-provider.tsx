@@ -7,6 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   DEFAULT_HOT_COLD_VARIANT,
   DEFAULT_RECOMMENDATION_VARIANT,
@@ -16,12 +17,26 @@ import {
   recommendationConfigs,
 } from "@/lib/gamblio-widget-configs";
 
-const REC_CONTAINER_ID = "recommendation-container";
-const HOT_COLD_CONTAINER_ID = "hot-cold-container";
 const TOKEN_KEY = "playerToken";
-const CLIENT_ID = "0b7e7dee87b1c3b98e72131173dfbbbf";
+const URL_PARAM_RECOMMENDATION = "rec";
+const URL_PARAM_HOT_COLD = "hc";
+const URL_PARAM_USER = "user";
 const PLAYER_TOKEN =
-  "8b806dbc801ad0bf27eb9eb5c5d8575fc2913f35560092d6fb91bcaabe395039061785c1cd3ca2f3c22b39a107a3708b390a825940304bebf09eda65aa7e4fb3";
+  "3f24bbbd8e6613b94aab4f58981c50878cd0b347c555e143c7f13e8932ee8ae0cadeb0b4d05888e3bfa094d85f02c99aa67de64c72a6273da07db9ee5270000a";
+
+function isHotColdConfigKey(value: string | null): value is HotColdConfigKey {
+  return value !== null && value in hotColdConfigs;
+}
+
+function isRecommendationConfigKey(
+  value: string | null,
+): value is RecommendationConfigKey {
+  return value !== null && value in recommendationConfigs;
+}
+
+function isUserType(value: string | null): value is "logged" | "guest" {
+  return value === "logged" || value === "guest";
+}
 
 declare global {
   interface Window {
@@ -36,7 +51,6 @@ declare global {
 export type HotColdConfig = {
   targetContainerId: string;
   backgroundType: string;
-  glow?: boolean;
   videoIndex?: number;
   hotVideoIndex?: number;
   coldVideoIndex?: number;
@@ -80,8 +94,6 @@ type GamblioContextValue = {
   // User type
   userType: "logged" | "guest";
   setUserType: (type: "logged" | "guest") => void;
-  // Loading state
-  isReinitializing: boolean;
   // Config maps for UI
   hotColdConfigs: typeof hotColdConfigs;
   recommendationConfigs: typeof recommendationConfigs;
@@ -98,34 +110,115 @@ export function useGamblio() {
 }
 
 export function GamblioProvider({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const recommendationParam = searchParams.get(URL_PARAM_RECOMMENDATION);
+  const hotColdParam = searchParams.get(URL_PARAM_HOT_COLD);
+  const userParam = searchParams.get(URL_PARAM_USER);
+
+  const initialRecommendationVariant = isRecommendationConfigKey(
+    recommendationParam,
+  )
+    ? recommendationParam
+    : DEFAULT_RECOMMENDATION_VARIANT;
+
+  const initialHotColdVariant = isHotColdConfigKey(hotColdParam)
+    ? hotColdParam
+    : DEFAULT_HOT_COLD_VARIANT;
+
+  const initialUserType = isUserType(userParam) ? userParam : "guest";
+
   // Variant keys
   const [hotColdVariant, setHotColdVariantState] = useState<HotColdConfigKey>(
-    DEFAULT_HOT_COLD_VARIANT,
+    initialHotColdVariant,
   );
   const [recommendationVariant, setRecommendationVariantState] =
-    useState<RecommendationConfigKey>(DEFAULT_RECOMMENDATION_VARIANT);
+    useState<RecommendationConfigKey>(initialRecommendationVariant);
 
   // Configs with targetContainerId
   const [hotColdConfig, setHotColdConfig] = useState<HotColdConfig>({
-    ...hotColdConfigs[DEFAULT_HOT_COLD_VARIANT].config,
+    ...hotColdConfigs[initialHotColdVariant].config,
   });
 
   const [recommendationConfig, setRecommendationConfig] =
     useState<RecommendationConfig>({
-      ...recommendationConfigs[DEFAULT_RECOMMENDATION_VARIANT].config,
+      ...recommendationConfigs[initialRecommendationVariant].config,
     });
 
-  const [userType, setUserTypeState] = useState<"logged" | "guest">("guest");
-  const [isReinitializing, setIsReinitializing] = useState(false);
+  const [userType, setUserTypeState] = useState<"logged" | "guest">(
+    initialUserType,
+  );
+
+  const updateUrlState = useCallback(
+    (next: {
+      hotColdVariant?: HotColdConfigKey;
+      recommendationVariant?: RecommendationConfigKey;
+      userType?: "logged" | "guest";
+    }) => {
+      const nextHotColdVariant = next.hotColdVariant ?? hotColdVariant;
+      const nextRecommendationVariant =
+        next.recommendationVariant ?? recommendationVariant;
+      const nextUserType = next.userType ?? userType;
+
+      const params = new URLSearchParams(searchParams.toString());
+
+      if (nextHotColdVariant === DEFAULT_HOT_COLD_VARIANT) {
+        params.delete(URL_PARAM_HOT_COLD);
+      } else {
+        params.set(URL_PARAM_HOT_COLD, nextHotColdVariant);
+      }
+
+      if (nextRecommendationVariant === DEFAULT_RECOMMENDATION_VARIANT) {
+        params.delete(URL_PARAM_RECOMMENDATION);
+      } else {
+        params.set(URL_PARAM_RECOMMENDATION, nextRecommendationVariant);
+      }
+
+      if (nextUserType === "guest") {
+        params.delete(URL_PARAM_USER);
+      } else {
+        params.set(URL_PARAM_USER, nextUserType);
+      }
+
+      const query = params.toString();
+      const nextUrl = query ? `${pathname}?${query}` : pathname;
+
+      if (typeof window !== "undefined") {
+        const currentUrl = `${window.location.pathname}${window.location.search}`;
+        if (currentUrl !== nextUrl) {
+          // Replace keeps history clean while forcing a full re-init from URL state.
+          window.location.replace(nextUrl);
+          return;
+        }
+      }
+
+      router.replace(nextUrl, {
+        scroll: false,
+      });
+    },
+    [
+      hotColdVariant,
+      pathname,
+      recommendationVariant,
+      router,
+      searchParams,
+      userType,
+    ],
+  );
 
   // Set hot/cold variant - updates both key and config
-  const setHotColdVariant = useCallback((key: HotColdConfigKey) => {
-    console.log("[GamblioProvider] setHotColdVariant:", key);
-    setHotColdVariantState(key);
-    setHotColdConfig({
-      ...hotColdConfigs[key].config,
-    });
-  }, []);
+  const setHotColdVariant = useCallback(
+    (key: HotColdConfigKey) => {
+      console.log("[GamblioProvider] setHotColdVariant:", key);
+      setHotColdVariantState(key);
+      setHotColdConfig({
+        ...hotColdConfigs[key].config,
+      });
+      updateUrlState({ hotColdVariant: key });
+    },
+    [updateUrlState],
+  );
 
   // Set recommendation variant - updates both key and config
   const setRecommendationVariant = useCallback(
@@ -135,97 +228,31 @@ export function GamblioProvider({ children }: { children: React.ReactNode }) {
       setRecommendationConfig({
         ...recommendationConfigs[key].config,
       });
+      updateUrlState({ recommendationVariant: key });
     },
-    [],
+    [updateUrlState],
   );
 
-  // User type with localStorage
-  const setUserType = useCallback((type: "logged" | "guest") => {
-    if (typeof window !== "undefined") {
-      if (type === "logged") {
-        localStorage.setItem(TOKEN_KEY, PLAYER_TOKEN);
-      } else {
-        localStorage.removeItem(TOKEN_KEY);
-      }
-    }
-    setUserTypeState(type);
-  }, []);
+  // User type and URL sync
+  const setUserType = useCallback(
+    (type: "logged" | "guest") => {
+      setUserTypeState(type);
+      updateUrlState({ userType: type });
+    },
+    [updateUrlState],
+  );
 
-  // Reinitialize on every state change. If SDK is not ready, keep polling and apply latest state once it appears.
+  // Keep localStorage token in sync on first load and toggle.
   useEffect(() => {
-    console.log("[GamblioProvider] useEffect triggered", {
-      hotColdConfig,
-      recommendationConfig,
-      userType,
-    });
-
     if (typeof window === "undefined") return;
 
-    let initCompleted = false;
-
-    const runReinit = () => {
-      const sdk = window.Gamblio;
-      if (!sdk) {
-        return false;
-      }
-
-      console.log("[GamblioProvider] Reinitializing...");
-      setIsReinitializing(true);
-
-      // Clear containers
-      const recContainer = document.getElementById(REC_CONTAINER_ID);
-      const hcContainer = document.getElementById(HOT_COLD_CONTAINER_ID);
-      if (recContainer) recContainer.innerHTML = "";
-      if (hcContainer) hcContainer.innerHTML = "";
-
-      // Destroy existing
-      if (sdk.destroy) {
-        console.log("[GamblioProvider] Destroying existing widgets");
-        sdk.destroy();
-      }
-
-      const initConfig = {
-        tokenName: TOKEN_KEY,
-        clientId: CLIENT_ID,
-        language: "en",
-        envDev: false,
-        recommendationWidgetTargetContainerId: REC_CONTAINER_ID,
-        recommendationConfig,
-        gamesSwiperConfig: hotColdConfig,
-        chatConfig: {
-          backgroundPrimary: "#1a1a1a",
-          hoverColor: "#2d2d2d",
-          logoUrl: "/images/logo-dark.svg",
-        },
-      };
-
-      console.log("[GamblioProvider] Calling Gamblio.init with:", initConfig);
-      sdk.init(initConfig);
-      initCompleted = true;
-
-      setTimeout(() => setIsReinitializing(false), 50);
-      return true;
-    };
-
-    // Try immediately for fast path.
-    if (runReinit()) {
+    if (userType === "logged") {
+      localStorage.setItem(TOKEN_KEY, PLAYER_TOKEN);
       return;
     }
 
-    console.log("[GamblioProvider] Gamblio not ready yet, waiting...");
-    const interval = setInterval(() => {
-      if (runReinit()) {
-        clearInterval(interval);
-      }
-    }, 100);
-
-    return () => {
-      clearInterval(interval);
-      if (!initCompleted) {
-        setIsReinitializing(false);
-      }
-    };
-  }, [hotColdConfig, recommendationConfig, userType]);
+    localStorage.removeItem(TOKEN_KEY);
+  }, [userType]);
 
   const value: GamblioContextValue = {
     hotColdConfig,
@@ -236,7 +263,6 @@ export function GamblioProvider({ children }: { children: React.ReactNode }) {
     setRecommendationVariant,
     userType,
     setUserType,
-    isReinitializing,
     hotColdConfigs,
     recommendationConfigs,
   };
