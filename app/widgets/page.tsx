@@ -29,9 +29,9 @@ export default function WidgetsPage() {
   } = useGamblio();
 
   return (
-    <div className="min-h-screen bg-background p-6 md:p-10">
-      <div className="container mx-auto space-y-10 mt-20">
-        <h1 className="text-3xl font-bold text-center mb-8">
+    <div className="min-h-screen w-full bg-background p-4">
+      <div className="mt-16 container mx-auto flex w-full min-w-0 flex-col gap-8 sm:mt-20 sm:gap-10">
+        <h1 className="mb-6 text-center text-2xl font-bold sm:mb-8 sm:text-3xl">
           Widgets SDK Demo
         </h1>
 
@@ -45,15 +45,17 @@ export default function WidgetsPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex gap-2">
+            <div className="grid grid-cols-1 gap-2 sm:flex">
               <Button
                 variant={userType === "logged" ? "default" : "outline"}
+                className="w-full sm:w-auto"
                 onClick={() => setUserType("logged")}
               >
                 Logged User
               </Button>
               <Button
                 variant={userType === "guest" ? "default" : "outline"}
+                className="w-full sm:w-auto"
                 onClick={() => setUserType("guest")}
               >
                 Guest
@@ -75,7 +77,7 @@ export default function WidgetsPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
               {Object.entries(recommendationConfigs).map(([key, { label }]) => (
                 <Button
                   key={key}
@@ -83,6 +85,7 @@ export default function WidgetsPage() {
                     recommendationVariant === key ? "default" : "outline"
                   }
                   size="sm"
+                  className="w-full whitespace-normal text-left sm:w-auto sm:text-center"
                   onClick={() =>
                     setRecommendationVariant(key as RecommendationConfigKey)
                   }
@@ -97,7 +100,7 @@ export default function WidgetsPage() {
               <summary className="cursor-pointer text-muted-foreground hover:text-foreground">
                 View current configuration
               </summary>
-              <pre className="mt-2 p-3 bg-muted rounded-lg overflow-auto">
+              <pre className="mt-2 max-h-64 overflow-auto rounded-lg bg-muted p-3">
                 {JSON.stringify(recommendationConfig, null, 2)}
               </pre>
             </details>
@@ -105,8 +108,7 @@ export default function WidgetsPage() {
             {/* Recommendation Widget Container */}
             <div
               id="recommendation-container"
-              className="relative w-full min-h-[400px] rounded-lg border border-border overflow-hidden"
-              style={{ height: "500px" }}
+              className="relative h-[500px] w-full min-h-[360px] overflow-hidden rounded-lg border border-border sm:h-[500px]"
             />
           </CardContent>
         </Card>
@@ -121,12 +123,13 @@ export default function WidgetsPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
               {Object.entries(hotColdConfigs).map(([key, { label }]) => (
                 <Button
                   key={key}
                   variant={hotColdVariant === key ? "default" : "outline"}
                   size="sm"
+                  className="w-full whitespace-normal text-left sm:w-auto sm:text-center"
                   onClick={() => setHotColdVariant(key as HotColdConfigKey)}
                 >
                   {label}
@@ -138,27 +141,26 @@ export default function WidgetsPage() {
               <summary className="cursor-pointer text-muted-foreground hover:text-foreground">
                 View current configuration
               </summary>
-              <pre className="mt-2 p-3 bg-muted rounded-lg overflow-auto">
+              <pre className="mt-2 max-h-64 overflow-auto rounded-lg bg-muted p-3">
                 {JSON.stringify(hotColdConfig, null, 2)}
               </pre>
             </details>
 
             <div
               id="hot-cold-container"
-              className="relative w-full min-h-[400px] rounded-lg border border-border overflow-hidden"
-              style={{ height: "700px" }}
+              className="relative h-[700px] w-full min-h-[420px] overflow-hidden rounded-lg border border-border sm:h-[700px]"
             />
           </CardContent>
         </Card>
 
         {/* Documentation Reference */}
-        <div className="grid md:grid-cols-2 gap-6 pb-10">
+        <div className="grid gap-4 pb-10 sm:gap-6 md:grid-cols-2">
           <Card>
             <CardHeader>
               <CardTitle>Recommendation Widget</CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="text-sm text-muted-foreground space-y-1">
+              <ul className="space-y-1 text-xs text-muted-foreground sm:text-sm">
                 <li>
                   <strong>backgroundType:</strong> transparent, gradient, image,
                   video
@@ -186,7 +188,7 @@ export default function WidgetsPage() {
               <CardTitle>Hot & Cold Widget</CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="text-sm text-muted-foreground space-y-1">
+              <ul className="space-y-1 text-xs text-muted-foreground sm:text-sm">
                 <li>
                   <strong>backgroundType:</strong> video, image, gradient,
                   transparent
