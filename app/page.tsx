@@ -32,7 +32,7 @@ export const metadata: Metadata = createMetadata({
   ],
 });
 
-export default function Home() {
+export default function Home () {
   return (
     <div className="w-full border-b-0">
       <Hero {...HeroDetails} />

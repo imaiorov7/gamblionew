@@ -12,11 +12,10 @@ import {
   Navbar,
   NavbarButton,
   NavbarLogo,
-  NavItems,
   NavServices,
 } from "@/components/ui/resizable-navbar";
 
-export function NavbarMenu() {
+export function NavbarMenu () {
   const pathname = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -47,9 +46,11 @@ export function NavbarMenu() {
     }
   };
 
-  type NavLinkItem = { name: string; id: string };
+  type NavLinkItem = { name: string; id?: string; href?: string };
   type NavDropdownItem = {
     name: string;
+    id?: string;
+    href?: string;
     hasDropdown: true;
     items: { name: string; link: string }[];
   };
@@ -66,6 +67,7 @@ export function NavbarMenu() {
     { name: "Services", hasDropdown: true, items: serviceItems },
     { name: "Who we are", id: "who-we-are" },
     { name: "FAQ", id: "faq" },
+    { name: "Widgets", href: "/widgets" },
   ];
 
   const isDropdown = (
@@ -80,18 +82,19 @@ export function NavbarMenu() {
         <NavBody>
           <NavbarLogo />
           <div className="absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium lg:flex lg:space-x-2">
-            {navItems.map((item, idx) =>
+            {navItems.map((item) =>
               isDropdown(item) ? (
-                <NavServices key={idx} label={item.name} items={item.items} />
+                <NavServices key={item.name} label={item.name} items={item.items} />
               ) : (
                 <Link
-                  key={idx}
-                  href={item.id === "home" ? "/" : `/#${item.id}`}
-                  onClick={() => handleNavigation(item.id)}
+                  key={item.name}
+                  href={item.id === "home" ? "/" : `${item.href ? item.href : `/#${item.id}`}`}
+                  onClick={() => handleNavigation(item.id ?? "")}
                   className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition cursor-pointer"
                 >
                   {item.name}
                 </Link>
+
               ),
             )}
           </div>
@@ -120,19 +123,19 @@ export function NavbarMenu() {
             isOpen={isMobileMenuOpen}
             onClose={() => setIsMobileMenuOpen(false)}
           >
-            {navItems.map((item, idx) =>
+            {navItems.map((item) =>
               isDropdown(item) ? (
                 <MobileDropdown
-                  key={idx}
+                  key={item.name}
                   label={item.name}
                   items={item.items}
                   onItemClick={() => setIsMobileMenuOpen(false)}
                 />
               ) : (
                 <Link
-                  key={idx}
-                  href={item.id === "home" ? "/" : `/#${item.id}`}
-                  onClick={() => handleNavigation(item.id)}
+                  key={item.name}
+                  href={item.id === "home" ? "/" : `${item.href ? item.href : `/#${item.id}`}`}
+                  onClick={() => handleNavigation(item.id ?? "")}
                   className="w-full px-4 py-2 text-center text-neutral-900 dark:text-neutral-100 hover:bg-white/10 dark:hover:bg-neutral-900/10 rounded transition"
                 >
                   {item.name}
