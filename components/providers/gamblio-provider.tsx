@@ -191,10 +191,11 @@ export function GamblioProvider({ children }: { children: React.ReactNode }) {
       }
 
       const query = params.toString();
+      const hash = window.location.hash;
       const nextUrl = query
-        ? `${window.location.pathname}?${query}`
-        : window.location.pathname;
-      const currentUrl = `${window.location.pathname}${window.location.search}`;
+        ? `${window.location.pathname}?${query}${hash}`
+        : `${window.location.pathname}${hash}`;
+      const currentUrl = `${window.location.pathname}${window.location.search}${hash}`;
       if (currentUrl !== nextUrl) {
         // Replace keeps history clean while forcing a full re-init from URL state.
         window.location.replace(nextUrl);

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useGamblio } from "@/components/providers/gamblio-provider";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,15 +29,35 @@ export default function WidgetsPage() {
     hotColdConfigs,
   } = useGamblio();
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const hash = window.location.hash;
+    if (!hash) return;
+
+    const section = document.getElementById(hash.slice(1));
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
+
+  const setSectionHash = (sectionId: string) => {
+    if (typeof window === "undefined") return;
+    const basePath = `${window.location.pathname}${window.location.search}`;
+    window.history.replaceState(null, "", `${basePath}#${sectionId}`);
+  };
+
   return (
     <div className="min-h-screen w-full bg-background p-4">
-      <div className="mt-16 container mx-auto flex w-full min-w-0 flex-col gap-8 sm:mt-20 sm:gap-10">
+      <div
+        id="widgets-demo"
+        className="mt-16 container mx-auto flex w-full min-w-0 scroll-mt-24 flex-col gap-8 sm:mt-20 sm:gap-10"
+      >
         <h1 className="mb-6 text-center text-2xl font-bold sm:mb-8 sm:text-3xl">
           Widgets SDK Demo
         </h1>
 
         {/* Tab Set 1: User Type */}
-        <Card>
+        <Card id="recommendation-widget" className="scroll-mt-24">
           <CardHeader>
             <CardTitle>1. User Authentication</CardTitle>
             <CardDescription>
@@ -86,9 +107,10 @@ export default function WidgetsPage() {
                   }
                   size="sm"
                   className="w-full whitespace-normal text-left sm:w-auto sm:text-center"
-                  onClick={() =>
-                    setRecommendationVariant(key as RecommendationConfigKey)
-                  }
+                  onClick={() => {
+                    setSectionHash("recommendation-widget");
+                    setRecommendationVariant(key as RecommendationConfigKey);
+                  }}
                 >
                   {label}
                 </Button>
@@ -114,7 +136,7 @@ export default function WidgetsPage() {
         </Card>
 
         {/* Tab Set 3: Hot & Cold Widget Variants */}
-        <Card>
+        <Card id="hot-cold-widget" className="scroll-mt-24">
           <CardHeader>
             <CardTitle>3. Hot & Cold Games Widget</CardTitle>
             <CardDescription>
@@ -130,7 +152,10 @@ export default function WidgetsPage() {
                   variant={hotColdVariant === key ? "default" : "outline"}
                   size="sm"
                   className="w-full whitespace-normal text-left sm:w-auto sm:text-center"
-                  onClick={() => setHotColdVariant(key as HotColdConfigKey)}
+                  onClick={() => {
+                    setSectionHash("hot-cold-widget");
+                    setHotColdVariant(key as HotColdConfigKey);
+                  }}
                 >
                   {label}
                 </Button>

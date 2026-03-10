@@ -19,6 +19,7 @@ export function NavbarMenu() {
   const pathname = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const widgetsAnchorId = "widgets-demo";
 
   const isHomePage = pathname === "/" || pathname === "/#";
 
@@ -53,9 +54,13 @@ export function NavbarMenu() {
     if (item.href === "/widgets") {
       event.preventDefault();
       if (pathname === "/widgets") {
-        window.location.reload();
+        const section = document.getElementById(widgetsAnchorId);
+        if (section) {
+          window.history.pushState(null, "", `#${widgetsAnchorId}`);
+          section.scrollIntoView({ behavior: "smooth" });
+        }
       } else {
-        window.location.href = "/widgets";
+        router.push(`/widgets#${widgetsAnchorId}`);
       }
       setIsMobileMenuOpen(false);
       return;
