@@ -8,7 +8,8 @@ export function proxy(request: NextRequest) {
     pathname.startsWith("/_next") ||
     pathname.startsWith("/favicon") ||
     pathname.startsWith("/images") ||
-    pathname === "/under-construction"
+    pathname === "/under-construction" ||
+    /\.\w+$/.test(pathname)
   ) {
     return NextResponse.next();
   }
