@@ -1,19 +1,19 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
-import Image from "next/image";
-import { useCallback, useRef, useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
   Flame,
-  Snowflake,
-  Play,
-  Monitor,
-  Shuffle,
-  Layers,
   GalleryHorizontal,
+  Layers,
+  Monitor,
+  Play,
+  Shuffle,
+  Snowflake,
 } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
+import { useCallback, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -394,7 +394,7 @@ const tagConfig: Record<
 // A single game card inside the Recommendation carousel.
 // Shows a cover image with tag badge, title, and hover actions (Play / Demo).
 
-function RecommendationCard({
+function RecommendationCard ({
   title,
   tag,
   image,
@@ -419,7 +419,6 @@ function RecommendationCard({
       onFocus={() => setIsHovered(true)}
       onBlur={() => setIsHovered(false)}
       tabIndex={0}
-      role="group"
       aria-label={`${title} recommendation`}
     >
       {/* Card wrapper — lifts & scales on hover */}
@@ -602,7 +601,7 @@ function RecommendationCard({
 // ─── Stack View ──────────────────────────────────────────────────────────────
 // 3D coverflow card stack — shows prev / active / next with depth perspective.
 
-function RecommendationStackView({
+function RecommendationStackView ({
   items,
 }: {
   items: typeof recommendationItems;
@@ -611,10 +610,8 @@ function RecommendationStackView({
   const [isShuffling, setIsShuffling] = useState(false);
   const total = items.length;
 
-  const prev = () =>
-    setActiveIndex((i) => (i - 1 + total) % total);
-  const next = () =>
-    setActiveIndex((i) => (i + 1) % total);
+  const prev = () => setActiveIndex((i) => (i - 1 + total) % total);
+  const next = () => setActiveIndex((i) => (i + 1) % total);
 
   const shuffle = useCallback(() => {
     if (isShuffling || total < 3) return;
@@ -647,8 +644,14 @@ function RecommendationStackView({
 
   const getCardStyle = (
     index: number,
-  ): { zIndex: number; x: string; scale: number; opacity: number; rotateY: number } => {
-    const diff = ((index - activeIndex + total) % total);
+  ): {
+    zIndex: number;
+    x: string;
+    scale: number;
+    opacity: number;
+    rotateY: number;
+  } => {
+    const diff = (index - activeIndex + total) % total;
 
     if (diff === 0) {
       // Active card — front & center
@@ -765,6 +768,7 @@ function RecommendationStackView({
             }}
             onClick={() => !isShuffling && setActiveIndex(i)}
             aria-label={`Go to ${item.title}`}
+            type="button"
           />
         ))}
       </div>
@@ -775,7 +779,7 @@ function RecommendationStackView({
 // ─── Hot/Cold split-colour title ─────────────────────────────────────────────
 // Renders outline-only text split 50/50 between hot-orange and cold-blue.
 
-function HotColdWidgetTitle({ title }: { title: string }) {
+function HotColdWidgetTitle ({ title }: { title: string }) {
   return (
     <h2 className="relative mt-6 mb-6 px-4 text-2xl font-extrabold uppercase md:text-6xl leading-none select-none">
       {/* Left half — orange stroke */}
@@ -813,7 +817,7 @@ function HotColdWidgetTitle({ title }: { title: string }) {
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
-export default function WidgetsPage() {
+export default function WidgetsPage () {
   const [recommendationBg, setRecommendationBg] =
     useState<BackgroundType>("image");
   const [displayMode, setDisplayMode] = useState<DisplayMode>("carousel");
@@ -822,6 +826,7 @@ export default function WidgetsPage() {
   const [hotColdPeriod, setHotColdPeriod] = useState<
     "daily" | "weekly" | "monthly"
   >("daily");
+  const [copiedSection, setCopiedSection] = useState<"rec" | "hc" | null>(null);
   const recommendationScrollRef = useRef<HTMLDivElement>(null);
   const hotColdScrollRef = useRef<HTMLDivElement>(null);
 
@@ -842,6 +847,64 @@ export default function WidgetsPage() {
   };
 
   const recommendationBgStyle = getBackgroundStyle(recommendationBg);
+
+  // Full SDK-ready recommendationConfig for copy-paste
+  const recommendationConfig = {
+    backgroundType: recommendationBg,
+    ...(recommendationBg === "gradient" && {
+      gradientDirection: "135deg",
+      gradientColors: ["rgba(88,28,135,0.85)", "rgba(168,120,42,0.6)"],
+    }),
+    ...(recommendationBg === "image" && {
+      imageIndex: 1,
+      imageExtension: "png",
+    }),
+    ...(recommendationBg === "video" && {
+      videoIndex: 1,
+    }),
+    displayMode,
+    withHeadline: true,
+    shadowColor: "rgba(218, 165, 32, 0.2)",
+    navButtonColor: "#f6cf61",
+    navButtonHoverColor: "#ffffff",
+    ...(displayMode === "stack" && {
+      shuffleButtonBgColor: "rgba(0, 0, 0, 0.55)",
+      shuffleButtonIconColor: "#f6cf61",
+    }),
+  };
+
+  // Full SDK-ready gamesSwiperConfig for copy-paste
+  const gamesSwiperConfig = {
+    targetContainerId: "games-swiper-container",
+    glow: true,
+    backgroundType: hotColdBg,
+    ...(hotColdBg === "gradient" && {
+      hotGradientColors: ["rgba(160,20,5,0.8)", "rgba(220,80,10,0.6)"],
+      hotGradientDirection: "135deg",
+      coldGradientColors: ["rgba(10,40,120,0.8)", "rgba(30,150,200,0.55)"],
+      coldGradientDirection: "135deg",
+    }),
+    ...(hotColdBg === "image" && {
+      hotImageIndex: 1,
+      coldImageIndex: 2,
+      imageExtension: "jpg",
+    }),
+    ...(hotColdBg === "video" && {
+      hotVideoIndex: 1,
+      coldVideoIndex: 2,
+    }),
+  };
+
+  const copyConfig = useCallback(async (value: unknown, section: "rec" | "hc") => {
+    if (typeof window === "undefined" || !navigator.clipboard) return;
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(value, null, 2));
+      setCopiedSection(section);
+      setTimeout(() => setCopiedSection((s) => (s === section ? null : s)), 1200);
+    } catch {
+      // silent
+    }
+  }, []);
 
   return (
     <div className="min-h-screen w-full bg-background">
@@ -924,6 +987,38 @@ export default function WidgetsPage() {
               Stack
             </Button>
           </div>
+
+          <details className="text-xs">
+            <summary className="cursor-pointer text-muted-foreground hover:text-foreground">
+              View SDK configuration (copy-paste ready)
+            </summary>
+            <div className="mt-2 flex items-center justify-end gap-2">
+              {copiedSection === "rec" && (
+                <span className="text-[11px] text-emerald-500">Copied!</span>
+              )}
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  const initCode = `Gamblio.init({
+  recommendationConfig: ${JSON.stringify(recommendationConfig, null, 4).replace(/\n/g, '\n  ')},
+});`;
+                  navigator.clipboard.writeText(initCode);
+                  setCopiedSection("rec");
+                  setTimeout(() => setCopiedSection((s) => (s === "rec" ? null : s)), 1200);
+                }}
+              >
+                Copy code
+              </Button>
+            </div>
+            <pre className="mt-2 max-h-96 overflow-auto rounded-lg bg-muted p-3 text-[11px]">
+              {`Gamblio.init({
+  recommendationWidgetTargetContainerId: "recommendation-container",
+  recommendationConfig: ${JSON.stringify(recommendationConfig, null, 4).replace(/\n/g, '\n  ')},
+});`}
+            </pre>
+          </details>
 
           {/* Recommendation widget container */}
           <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-muted/20 p-4 sm:p-6">
@@ -1013,7 +1108,10 @@ export default function WidgetsPage() {
                           onClick={() => scrollRecommendation("right")}
                           aria-label="Scroll right"
                         >
-                          <ChevronRight className="h-5 w-5" strokeWidth={2.75} />
+                          <ChevronRight
+                            className="h-5 w-5"
+                            strokeWidth={2.75}
+                          />
                         </Button>
                       </div>
                     </div>
@@ -1027,14 +1125,15 @@ export default function WidgetsPage() {
                         msOverflowStyle: "none",
                         WebkitOverflowScrolling: "touch",
                       }}
-                      role="list"
+                      role="listbox"
                       aria-label="Game cards"
                     >
                       {recommendationItems.map((item, index) => (
                         <div
                           key={item.id}
                           className="snap-start"
-                          role="listitem"
+                          role="option"
+                          tabIndex={0}
                           data-game-id={item.id}
                         >
                           <RecommendationCard
@@ -1102,6 +1201,37 @@ export default function WidgetsPage() {
             ))}
           </div>
 
+          <details className="text-xs">
+            <summary className="cursor-pointer text-muted-foreground hover:text-foreground">
+              View SDK configuration (copy-paste ready)
+            </summary>
+            <div className="mt-2 flex items-center justify-end gap-2">
+              {copiedSection === "hc" && (
+                <span className="text-[11px] text-emerald-500">Copied!</span>
+              )}
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  const initCode = `Gamblio.init({
+  gamesSwiperConfig: ${JSON.stringify(gamesSwiperConfig, null, 4).replace(/\n/g, '\n  ')},
+});`;
+                  navigator.clipboard.writeText(initCode);
+                  setCopiedSection("hc");
+                  setTimeout(() => setCopiedSection((s) => (s === "hc" ? null : s)), 1200);
+                }}
+              >
+                Copy code
+              </Button>
+            </div>
+            <pre className="mt-2 max-h-96 overflow-auto rounded-lg bg-muted p-3 text-[11px]">
+              {`Gamblio.init({
+  gamesSwiperConfig: ${JSON.stringify(gamesSwiperConfig, null, 4).replace(/\n/g, '\n  ')},
+});`}
+            </pre>
+          </details>
+
           {/* Hot & Cold widget container */}
           <div className="relative min-h-[520px] overflow-hidden rounded-3xl border border-border/60 bg-muted/20 p-5 sm:p-7">
             {/* Background layer — crossfades between hot/cold + bg type */}
@@ -1157,15 +1287,15 @@ export default function WidgetsPage() {
                       style={
                         hotColdBg === "gradient"
                           ? {
-                              backgroundImage:
-                                hotColdMode === "hot"
-                                  ? "linear-gradient(135deg, rgba(160,20,5,0.8) 0%, rgba(220,80,10,0.6) 40%, rgba(180,40,0,0.7) 100%)"
-                                  : "linear-gradient(135deg, rgba(10,40,120,0.8) 0%, rgba(30,150,200,0.55) 50%, rgba(15,60,160,0.7) 100%)",
-                            }
+                            backgroundImage:
+                              hotColdMode === "hot"
+                                ? "linear-gradient(135deg, rgba(160,20,5,0.8) 0%, rgba(220,80,10,0.6) 40%, rgba(180,40,0,0.7) 100%)"
+                                : "linear-gradient(135deg, rgba(10,40,120,0.8) 0%, rgba(30,150,200,0.55) 50%, rgba(15,60,160,0.7) 100%)",
+                          }
                           : {
-                              backgroundColor:
-                                hotColdMode === "hot" ? "#1f0a0a" : "#0a0f1f",
-                            }
+                            backgroundColor:
+                              hotColdMode === "hot" ? "#1f0a0a" : "#0a0f1f",
+                          }
                       }
                     />
                   )}
@@ -1187,7 +1317,14 @@ export default function WidgetsPage() {
                   onClick={() =>
                     setHotColdMode((prev) => (prev === "hot" ? "cold" : "hot"))
                   }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setHotColdMode((prev) => (prev === "hot" ? "cold" : "hot"));
+                    }
+                  }}
                   role="switch"
+                  tabIndex={0}
                   aria-checked={hotColdMode === "hot"}
                   aria-label="Toggle hot or cold games"
                 >
@@ -1401,24 +1538,23 @@ export default function WidgetsPage() {
                   >
                     {hotColdItems[hotColdMode]
                       .slice(0, periodCardCount[hotColdPeriod])
-                      .map((item, index) => (
+                      .map((item) => (
                         <div
                           key={item.id}
                           className="shrink-0 snap-start bg-transparent pl-4 md:pl-10"
-                          role="listitem"
+                          role="option"
+                          tabIndex={0}
                         >
                           {/* Hot/Cold game card */}
                           <article
                             className="relative w-[250px] shrink-0 cursor-pointer select-none transition-transform duration-200 hover:scale-[1.02] sm:w-[260px] md:w-[280px]"
-                            role="group"
                             aria-label={`${item.title} - RTP ${item.rtp}`}
                           >
                             <div
-                              className={`rounded-2xl border ${
-                                hotColdMode === "hot"
-                                  ? "border-[#e8843c]"
-                                  : "border-[#4a9eff]"
-                              }`}
+                              className={`rounded-2xl border ${hotColdMode === "hot"
+                                ? "border-[#e8843c]"
+                                : "border-[#4a9eff]"
+                                }`}
                             >
                               <div className="relative overflow-hidden rounded-2xl bg-black/60 p-4">
                                 {/* Game thumbnail */}
@@ -1426,11 +1562,13 @@ export default function WidgetsPage() {
                                   className="relative mb-3 w-full overflow-hidden rounded-xl"
                                   style={{ aspectRatio: "16/12" }}
                                 >
-                                  <img
+                                  <Image
                                     src={item.image}
                                     alt={item.title}
-                                    className="h-full w-full object-cover"
-                                    loading={index < 2 ? "eager" : "lazy"}
+                                    fill
+                                    sizes="100vw"
+                                    priority
+                                    className="object-cover"
                                   />
                                 </div>
 
@@ -1439,11 +1577,10 @@ export default function WidgetsPage() {
                                   {item.title}
                                 </h3>
                                 <div
-                                  className={`mb-1 text-sm font-semibold ${
-                                    hotColdMode === "hot"
-                                      ? "text-emerald-400"
-                                      : "text-rose-400"
-                                  }`}
+                                  className={`mb-1 text-sm font-semibold ${hotColdMode === "hot"
+                                    ? "text-emerald-400"
+                                    : "text-rose-400"
+                                    }`}
                                 >
                                   {item.rtp} RTP{" "}
                                   {hotColdMode === "hot" ? "↑" : "↓"}
