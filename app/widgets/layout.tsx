@@ -14,7 +14,7 @@ import {
  * 2. GamblioProvider wraps children for state management
  * 3. Buttons update URL and trigger a silent refresh for fresh init
  */
-export default function WidgetsLayout({
+export default function WidgetsLayout ({
   children,
 }: {
   children: React.ReactNode;
@@ -33,7 +33,7 @@ export default function WidgetsLayout({
   return (
     <>
       {children}
-      <Script
+      {/* <Script
         id="gamblio-widgets-init"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
@@ -77,7 +77,7 @@ export default function WidgetsLayout({
             })();
           `,
         }}
-      />
+      /> */}
     </>
   );
 }

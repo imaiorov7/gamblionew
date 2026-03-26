@@ -14,9 +14,9 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
   // Prevent redirect loop once already on /widgets
-  if (pathname !== "/widgets") {
-    return NextResponse.redirect(new URL("/widgets#widgets-demo", request.url));
-  }
+  // if (pathname !== "/widgets") {
+  //   return NextResponse.redirect(new URL("/widgets#widgets-demo", request.url));
+  // }
 
   return NextResponse.next();
 

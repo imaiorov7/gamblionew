@@ -15,7 +15,7 @@ import {
   NavServices,
 } from "@/components/ui/resizable-navbar";
 
-export function NavbarMenu() {
+export function NavbarMenu () {
   const pathname = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -90,7 +90,6 @@ export function NavbarMenu() {
     { name: "Services", hasDropdown: true, items: serviceItems },
     { name: "Who we are", id: "who-we-are" },
     { name: "FAQ", id: "faq" },
-    { name: "Widgets", href: "/widgets" },
   ];
 
   const isDropdown = (

@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default function RootLayout ({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -140,7 +140,7 @@ export default function RootLayout({
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              if (typeof Gamblio !== 'undefined' && !window.location.pathname.startsWith('/widgets')) {
+              if (typeof Gamblio !== 'undefined') {
                 Gamblio.init({
                   tokenName: "token",
                   clientId: "0b7e7dee87b1c3b98e72131173dfbbbf",
