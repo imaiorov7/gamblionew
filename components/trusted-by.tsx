@@ -36,15 +36,15 @@ export default function TrustedBy() {
 }
 
 const PARTNERS = [
-  "https://admiralbet.me/assets/images/cms/LsQ5AJm.svg",
-  "https://www.infoplay.info/fotos/noticias/2024/12/NOVOMATIC-reafirma-su-compromiso-global-con-la-proteccion-del-jugador-mediante-una-certificacion-internacional-1.gif",
+  "/images/partners/admiral.svg",
+  "/images/partners/novomatic.svg",
   "/images/partners/Aristocrat2.png",
-  "https://www.infoplay.info/fotos/noticias/2024/12/NOVOMATIC-reafirma-su-compromiso-global-con-la-proteccion-del-jugador-mediante-una-certificacion-internacional-1.gif",
+  "/images/partners/grand-casino.png",
 
-  "https://www.playnirvana.com/assets/images/logo-white.png",
+  "/images/partners/playnirvana.png",
   "/images/partners/maxwin.svg",
 
-  "https://admiralbet.me/assets/images/cms/LsQ5AJm.svg",
+  "/images/partners/egt.svg",
 
   "/images/partners/appster.png",
 ];
