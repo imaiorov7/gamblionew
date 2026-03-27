@@ -2,7 +2,6 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import DashedBorder from "./shared/dashed-border";
 import { buttonVariants } from "./ui/button";
 import LightRays from "./ui/light-rays";
 
@@ -35,8 +34,8 @@ export default function Hero({
   buttons,
 }: HeroProps) {
   return (
-    <DashedBorder id="home" sides="x" className={className}>
-      {/* <div className="absolute inset-0 -z-10 h-[600px] md:h-[800px] w-full [background:radial-gradient(125%_125%_at_50%_10%,var(--background)_40%,var(--primary)_100%)]"></div> */}
+    // Replaced DashedBorder with a standard div
+    <div id="home" className={cn("relative w-full", className)}>
       <div className="absolute inset-0 -z-10 h-[600px] md:h-[800px] w-full overflow-hidden pointer-events-none">
         <LightRays
           raysOrigin="top-center"
@@ -53,7 +52,9 @@ export default function Hero({
           distortion={0}
         />
       </div>
-      <div className="flex flex-col h-[600px] max-md:h-[500px] pt-20 justify-center items-center gap-3 ">
+      
+      {/* Added relative and z-10 to ensure content stays above the LightRays */}
+      <div className="flex flex-col h-[600px] max-md:h-[500px] pt-20 justify-center items-center gap-3 relative z-10">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -91,6 +92,6 @@ export default function Hero({
           ))}
         </motion.div>
       </div>
-    </DashedBorder>
+    </div>
   );
 }

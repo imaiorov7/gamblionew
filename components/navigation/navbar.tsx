@@ -15,7 +15,7 @@ import {
   NavServices,
 } from "@/components/ui/resizable-navbar";
 
-export function NavbarMenu () {
+export function NavbarMenu() {
   const pathname = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -132,6 +132,7 @@ export function NavbarMenu () {
               as="a"
               href="https://app.gamblio.ai"
               variant="primary"
+              className="rounded-full px-6 py-2 font-semibold shadow-md shadow-primary/20 hover:shadow-primary/40 transition-all"
             >
               Login
             </NavbarButton>
@@ -181,7 +182,7 @@ export function NavbarMenu () {
                 href="https://app.gamblio.ai"
                 onClick={() => setIsMobileMenuOpen(false)}
                 variant="primary"
-                className="w-full"
+                className="w-full rounded-full py-3 font-semibold shadow-md shadow-primary/20"
               >
                 Login
               </NavbarButton>

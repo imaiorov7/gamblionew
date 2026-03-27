@@ -5,7 +5,6 @@ import Script from "next/script";
 import { Footer } from "@/components/navigation/footer";
 import { NavbarMenu } from "@/components/navigation/navbar";
 import { GamblioProvider } from "@/components/providers/gamblio-provider";
-import DashedBorder from "@/components/shared/dashed-border";
 import { Toaster } from "@/components/ui/sonner";
 
 const poppins = Poppins({
@@ -55,13 +54,11 @@ export default function RootLayout ({
       >
         <GamblioProvider>
           <NavbarMenu />
-          <DashedBorder
-            sides="x"
-            className="w-full p-0 divide-y divide-dashed mx-0  md:mx-0"
-          >
+          {/* Replaced DashedBorder wrapper with a simple div */}
+          <div className="w-full flex-1 flex flex-col p-0 mx-0 md:mx-0">
             {children}
             <Footer />
-          </DashedBorder>
+          </div>
           <Toaster />
         </GamblioProvider>
         {/* <iframe

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import React from "react";
+import { CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import DashedBorder from "../shared/dashed-border";
 import { buttonVariants } from "../ui/button";
 import { Description, Title } from "../ui/typography";
 import LineChart from "./analytics";
@@ -28,93 +28,95 @@ interface GridProps extends ComponentPropsWithoutRef<"div"> {
 
 export function ServicesSection({ className }: GridProps) {
   return (
-    <div id="services" className="scroll-mt-32">
-      <DashedBorder sides="all" className="flex flex-col items-center py-12 ">
-        <Title className="mb-4 font-medium text-center">Services</Title>
-        <Description className="text-center text-muted-foreground md:w-1/2">
+    <div id="services" className={cn("scroll-mt-32 w-full", className)}>
+      
+      {/* SECTION HEADER */}
+      <div className="flex flex-col items-center justify-center py-12 space-y-4">
+        <Title className="text-4xl md:text-5xl font-bold tracking-tight text-center">
+          Services
+        </Title>
+        <Description className="text-center text-lg md:text-xl text-muted-foreground max-w-2xl">
           Four tools. One platform. Convenient and impactful.
         </Description>
-      </DashedBorder>
-      <DashedBorder
-        sides="x"
-        className={cn(
-          "flex flex-col items-center pt-12 pb-0 px-0 gap-12",
-          className,
-        )}
-      >
-        {features.map((feature, index) => (
-          <React.Fragment key={feature.id}>
-            <Title className="text-3xl uppercase">{feature.title}</Title>
-            <DashedBorder
-              sides="all"
-              key={feature.id}
-              className={cn(
-                "flex flex-col-reverse items-stretch w-full h-full p-0 md:flex-row md:mx-0 border-x-0 min-h-[450px]",
-                index % 2 !== 0 && "md:flex-row-reverse",
-              )}
+      </div>
+
+      {/* SERVICES LIST */}
+      <div className="flex flex-col gap-24 md:gap-32 pb-16 pt-8">
+        {features.map((feature, index) => {
+          const isEven = index % 2 === 0;
+
+          return (
+            <div 
+              key={feature.id} 
+              // Using items-center instead of items-stretch so the columns can have their own natural heights
+              className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center"
             >
-              <DashedBorder
-                sides="none"
-                className="flex flex-col items-center justify-center w-full md:w-1/2 mx-0 md:!mx-0 px-0 md:p-4 gap-4"
-              >
-                <Title className="w-full pl-4 text-left lg:text-3xl md:pl-4">
-                  {feature.name}
-                </Title>
-                <Description className="px-4">
+              {/* TEXT CONTENT (Left side on even, Right side on odd) */}
+              <div className={cn("flex flex-col justify-center gap-6", !isEven && "lg:order-last")}>
+                
+                {/* Main Service Title */}
+                <div className="text-2xl md:text-3xl font-bold tracking-wide uppercase">
+                  {feature.title}
+                </div>
+
+                <Description className="text-base md:text-lg text-muted-foreground leading-relaxed">
                   {feature.description}
                 </Description>
-                <DashedBorder
-                  sides="all"
-                  className="w-full  bg-[#0e0e10] text-left p-0"
-                >
-                  <p className="w-full p-4 text-white">Key benefits:</p>
-                  <div
-                    className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6`}
-                  >
-                    {feature.benefits.map((benefit, index) => {
-                      const isLastTwoInFive =
-                        feature.benefits.length === 5 && index >= 3;
-                      return (
-                        <DashedBorder
-                          sides="all"
-                          key={benefit}
-                          className={cn(
-                            "w-full text-left mx-0 md:mx-0",
-                            isLastTwoInFive ? "lg:col-span-3" : "lg:col-span-2",
-                          )}
-                        >
-                          <p className="w-full text-white ">{benefit}</p>
-                        </DashedBorder>
-                      );
-                    })}
-                  </div>
-                </DashedBorder>
+
+                {/* Key Benefits */}
+                <div className="mt-2 p-6 rounded-2xl bg-muted/10 border border-border/50">
+                  <p className="font-semibold text-foreground mb-4 text-base">Key benefits:</p>
+                  <ul className="space-y-3">
+                    {feature.benefits.map((benefit) => (
+                      <li key={benefit} className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground text-sm md:text-base">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
                 <Link
                   href={feature.href}
-                  className={`${buttonVariants({
-                    variant: "default",
-                  })} w-fit text-white cursor-pointer`}
+                  className={cn(
+                    buttonVariants({ variant: "default" }),
+                    "w-fit mt-2 px-8 py-6 rounded-full text-lg font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all text-white"
+                  )}
                 >
                   {feature.cta}
                 </Link>
-              </DashedBorder>
-              {feature.img && (
-                <DashedBorder
-                  sides={`even:left odd:right` as "left" | "right"}
-                  // sidesMd={`even:left odd:right` as "left" | "right"}
-                  className="w-full md:w-1/2 md:!mx-0 overflow-hidden  flex items-center justify-center"
-                >
-                  {feature.img}
-                </DashedBorder>
-              )}
-            </DashedBorder>
-          </React.Fragment>
-        ))}
-      </DashedBorder>
+              </div>
+
+              {/* IMAGE/ANIMATION CONTAINER (Right side on even, Left side on odd) */}
+              <div className={cn("flex flex-col gap-6", !isEven && "lg:order-first")}>
+                
+                {/* Subheading moved directly above the animation container */}
+                <Title className="text-3xl md:text-4xl leading-tight">
+                  {feature.name}
+                </Title>
+
+                {/* Fixed, equal-sized animation card using aspect-video */}
+                {feature.img && (
+                  <div className="relative w-full aspect-square md:aspect-video rounded-[2rem] overflow-hidden flex items-center justify-center p-8 bg-gradient-to-br from-custom-dark to-background border border-border/40 shadow-xl">
+                    <div className="absolute inset-0 bg-primary/5 blur-[100px] pointer-events-none rounded-full" />
+                    
+                    {/* Inner wrapper ensures the animation stays centered and constrained within the card */}
+                    <div className="relative z-10 w-full h-full flex items-center justify-center [&>*]:max-w-full [&>*]:max-h-full">
+                      {feature.img}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
 
+// Data remains completely unchanged below
 const features: Feature[] = [
   {
     id: 1,
@@ -140,7 +142,7 @@ const features: Feature[] = [
         profitability, control risk, and scale operations with confidence.
         <br />
         <br />
-        <span className="border-l-6 pl-2 border-primary text-primary">
+        <span className="border-l-4 pl-4 border-primary text-foreground font-medium block mt-2">
           Every insight drives measurable business growth.
         </span>
       </>
@@ -151,7 +153,6 @@ const features: Feature[] = [
       "Actionable insights that turn data into smarter decisions",
     ],
     href: "/analytics",
-    className: " border-b border-r",
     cta: "See Analytics",
     img: <LineChart />,
   },
@@ -179,7 +180,7 @@ const features: Feature[] = [
         play — before risks or missed opportunities arise.
         <br />
         <br />
-        <span className="border-l-6 pl-2 border-primary text-primary">
+        <span className="border-l-4 pl-4 border-primary text-foreground font-medium block mt-2">
           Act before risks or missed opportunities arise.
         </span>
       </>
@@ -190,7 +191,6 @@ const features: Feature[] = [
       "Predict churn and automate retention",
     ],
     href: "/predict",
-    className: " border-b ",
     cta: "Meet Gamblio Predict",
     img: <Predict />,
   },
@@ -219,7 +219,7 @@ const features: Feature[] = [
         discovery, just like Netflix does with shows. But way cooler.
         <br />
         <br />
-        <span className="border-l-6 pl-2 border-primary text-primary">
+        <span className="border-l-4 pl-4 border-primary text-foreground font-medium block mt-2">
           Turn player data into personalized game discovery.
         </span>
       </>
@@ -230,7 +230,6 @@ const features: Feature[] = [
       "Enables weekly bundles",
     ],
     href: "/uChoose",
-    className: "border-r md:col-span-2",
     cta: "Discover uChoose",
     img: <Recommendation />,
   },
@@ -259,7 +258,7 @@ const features: Feature[] = [
         higher retention and revenue in return.
         <br />
         <br />
-        <span className="border-l-6 pl-2 border-primary text-primary">
+        <span className="border-l-4 pl-4 border-primary text-foreground font-medium block mt-2">
           Provide AI-powered customer support with full player context.
         </span>
       </>
@@ -270,7 +269,6 @@ const features: Feature[] = [
       "Player satisfaction through a higher FTR rate",
     ],
     href: "/care",
-    className: " border-b ",
     cta: "See Gamblio Care",
     img: <Chat />,
   },

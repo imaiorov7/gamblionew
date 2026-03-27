@@ -7,37 +7,37 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { buttonVariants } from "./ui/button";
-import { Description, H1, Title } from "./ui/typography";
-import DashedBorder from "./shared/dashed-border";
+import { Description, Title } from "./ui/typography";
+import { cn } from "@/lib/utils";
 
 export function FAQSection() {
   return (
-    <>
-      <DashedBorder
-        id="faq"
-        sides="all"
-        className="w-full gap-4 py-12 scroll-mt-12"
-      >
-        <Title className="font-medium text-center ">
+    <div id="faq" className="flex flex-col items-center w-full scroll-mt-32 gap-12">
+      
+      {/* Header Area */}
+      <div className="flex flex-col items-center gap-6 text-center max-w-3xl mx-auto">
+        <Title className="text-4xl md:text-5xl font-bold tracking-tight">
           Frequently Asked Questions
         </Title>
-        <Description>
+        <Description className="text-lg md:text-xl text-muted-foreground">
           Find answers to the most common questions about Gamblio and its
           features. If you don’t see your question here, our team will be happy
           to assist—just get in touch with us anytime.
         </Description>
-      </DashedBorder>
-      <DashedBorder sides="all">
+      </div>
+
+      {/* FAQ Card */}
+      <div className="w-full max-w-6xl mx-auto bg-card rounded-[2rem] p-8 md:p-12 border border-border/60 shadow-lg">
         <Accordion
           type="single"
           collapsible
-          className="w-full p-8 mx-auto space-y-3 max-w-7xl"
+          className="w-full space-y-2"
         >
-          <AccordionItem value="item-1">
-            <AccordionTrigger>
+          <AccordionItem value="item-1" className="border-b border-border/50 pb-2">
+            <AccordionTrigger className="text-left text-lg md:text-xl font-semibold hover:text-primary transition-colors py-4">
               What business problems does Gamblio solve?
             </AccordionTrigger>
-            <AccordionContent className="flex flex-col gap-4 text-balance">
+            <AccordionContent className="text-base md:text-lg text-muted-foreground leading-relaxed pt-2 pb-6">
               <p>
                 Gamblio turns fragmented gambling data into real-time,
                 operational intelligence: it helps you raise player LTV,
@@ -47,11 +47,12 @@ export function FAQSection() {
               </p>
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger>
+          
+          <AccordionItem value="item-2" className="border-b border-border/50 pb-2">
+            <AccordionTrigger className="text-left text-lg md:text-xl font-semibold hover:text-primary transition-colors py-4">
               How quickly can we see impact after integration?
             </AccordionTrigger>
-            <AccordionContent className="flex flex-col gap-4 text-balance">
+            <AccordionContent className="text-base md:text-lg text-muted-foreground leading-relaxed pt-2 pb-6">
               <p>
                 You’ll see operational value within days with business analytics
                 and recommendations; measurable KPIs (reduced ticket volume,
@@ -61,14 +62,16 @@ export function FAQSection() {
               </p>
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="item-3">
-            <AccordionTrigger>
+          
+          <AccordionItem value="item-3" className="border-none pb-0">
+            <AccordionTrigger className="text-left text-lg md:text-xl font-semibold hover:text-primary transition-colors py-4">
               What integration options do you support?
             </AccordionTrigger>
-            <AccordionContent className="flex flex-col gap-4 text-balance">
+            {/* Reduced bottom padding here to pull the button up */}
+            <AccordionContent className="text-base md:text-lg text-muted-foreground leading-relaxed pt-2 pb-0">
               <p>
                 We use industry-standard{" "}
-                <span className="font-bold">
+                <span className="font-semibold text-foreground">
                   Pub-Sub streaming services (Kafka/RabbitMQ)
                 </span>{" "}
                 for real-time ingestion. Optionally we also support secure REST
@@ -78,14 +81,24 @@ export function FAQSection() {
               </p>
             </AccordionContent>
           </AccordionItem>
+        </Accordion>
+        
+        {/* Read More Link */}
+        {/* Completely removed mt-6 pt-4 and replaced with mt-2 */}
+        <div className="flex justify-center md:justify-end mt-2">
           <Link
             href="/faq"
-            className={`${buttonVariants({ variant: "ghost" })} align-self-end`}
+            className={cn(
+              buttonVariants({ variant: "ghost" }),
+              // Changed py-6 to py-3 to reduce the tallness of the button
+              "group flex items-center gap-2 text-primary font-medium hover:bg-primary/10 rounded-full px-5 py-3 text-base md:text-lg"
+            )}
           >
-            Read more <ArrowRight />
+            Read more 
+            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1.5" />
           </Link>
-        </Accordion>
-      </DashedBorder>
-    </>
+        </div>
+      </div>
+    </div>
   );
 }

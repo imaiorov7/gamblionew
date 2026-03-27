@@ -21,9 +21,10 @@ type AnimationStyle =
 interface HeroVideoProps {
   animationStyle?: AnimationStyle;
   videoSrc: string;
-  thumbnailSrc: string;
-  thumbnailAlt?: string;
+  thumbnailSrc?: string; // Made optional
+  thumbnailAlt?: string; // Made optional
   className?: string;
+  trigger?: React.ReactNode; // Added to support custom button triggers
 }
 
 const animationVariants = {
@@ -75,41 +76,60 @@ export function HeroVideoDialog({
   thumbnailSrc,
   thumbnailAlt = "Video thumbnail",
   className,
+  trigger,
 }: HeroVideoProps) {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const selectedAnimation = animationVariants[animationStyle];
 
   return (
-    <div className={cn("relative flex flex-col", className)}>
-      <Button
-        type="button"
-        aria-label="Play video"
-        className="group relative h-full flex-1 cursor-pointer border-0 bg-transparent p-0"
-        onClick={() => setIsVideoOpen(true)}
-      >
-        <img
-          src={thumbnailSrc}
-          alt={thumbnailAlt}
-          width={1920}
-          height={1080}
-          className="w-full rounded-md border shadow-lg transition-all duration-200 ease-out group-hover:brightness-[0.8]"
-        />
-        <div className="absolute inset-0 flex scale-[0.9] items-center justify-center rounded-2xl transition-all duration-200 ease-out group-hover:scale-100">
-          <div className="flex size-28 items-center justify-center rounded-full bg-primary/10 backdrop-blur-md">
-            <div
-              className={`relative flex size-20 scale-100 items-center justify-center rounded-full bg-gradient-to-b from-primary/30 to-primary shadow-md transition-all duration-200 ease-out group-hover:scale-[1.2]`}
-            >
-              <Play
-                className="size-8 scale-100 fill-white text-white transition-transform duration-200 ease-out group-hover:scale-105"
-                style={{
-                  filter:
-                    "drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06))",
-                }}
-              />
+    <div className={cn("relative flex flex-col items-center justify-center", className)}>
+      {trigger ? (
+        // Render custom trigger (like our Watch Preview button) if provided
+        <div 
+          onClick={() => setIsVideoOpen(true)}
+          className="cursor-pointer inline-flex"
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") setIsVideoOpen(true);
+          }}
+        >
+          {trigger}
+        </div>
+      ) : (
+        // Fallback to the original thumbnail layout if no trigger is provided
+        <Button
+          type="button"
+          aria-label="Play video"
+          className="group relative h-full flex-1 cursor-pointer border-0 bg-transparent p-0"
+          onClick={() => setIsVideoOpen(true)}
+        >
+          {thumbnailSrc && (
+            <img
+              src={thumbnailSrc}
+              alt={thumbnailAlt}
+              width={1920}
+              height={1080}
+              className="w-full rounded-md border shadow-lg transition-all duration-200 ease-out group-hover:brightness-[0.8]"
+            />
+          )}
+          <div className="absolute inset-0 flex scale-[0.9] items-center justify-center rounded-2xl transition-all duration-200 ease-out group-hover:scale-100">
+            <div className="flex size-28 items-center justify-center rounded-full bg-primary/10 backdrop-blur-md">
+              <div
+                className={`relative flex size-20 scale-100 items-center justify-center rounded-full bg-gradient-to-b from-primary/30 to-primary shadow-md transition-all duration-200 ease-out group-hover:scale-[1.2]`}
+              >
+                <Play
+                  className="size-8 scale-100 fill-white text-white transition-transform duration-200 ease-out group-hover:scale-105"
+                  style={{
+                    filter:
+                      "drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06))",
+                  }}
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </Button>
+        </Button>
+      )}
       <AnimatePresence>
         {isVideoOpen && (
           <motion.div
@@ -124,21 +144,21 @@ export function HeroVideoDialog({
             }}
             onClick={() => setIsVideoOpen(false)}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-md"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm"
           >
             <motion.div
               {...selectedAnimation}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="relative mx-4 aspect-video w-full max-w-4xl md:mx-0"
+              className="relative mx-4 aspect-video w-full max-w-5xl md:mx-0"
             >
-              <motion.button className="absolute -top-16 right-0 rounded-full bg-neutral-900/50 p-2 text-xl text-white ring-0 backdrop-blur-md dark:bg-neutral-100/50 dark:text-black">
-                <XIcon className="size-5" />
+              <motion.button className="absolute -top-16 right-0 rounded-full bg-neutral-900/50 p-2 text-xl text-white ring-0 backdrop-blur-md hover:bg-neutral-800 transition-colors">
+                <XIcon className="size-6" />
               </motion.button>
-              <div className="relative isolate z-[1] size-full overflow-hidden rounded-2xl border-0 border-white">
+              <div className="relative isolate z-[1] size-full overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
                 <iframe
                   src={videoSrc}
                   title="Hero Video player"
-                  className="size-full rounded-2xl"
+                  className="size-full rounded-2xl bg-black"
                   allowFullScreen
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 ></iframe>

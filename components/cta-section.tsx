@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type React from "react";
-import DashedBorder from "./shared/dashed-border";
-import { Button, buttonVariants } from "./ui/button";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "./ui/button";
 
 interface CTASectionProps {
   title?: string | React.ReactNode;
@@ -18,43 +18,46 @@ export default function CTASection({
   buttonLink,
 }: CTASectionProps) {
   return (
-    <DashedBorder
-      sides="top"
-      className=" relative p-5 overflow-hidden bg-primary md:p-20 md:flex-row md:gap-12  md:items-center md:justify-start"
-    >
-      <div className="space-y-1 max-md:text-center">
-        <h1 className="text-3xl font-medium md:text-4xl max-md:text-center">
-          {title}
-        </h1>
-        <div className="my-2 md:w-1/2"></div>
+    // Reduced vertical padding (py), maintained strong horizontal padding (px)
+    <div className="relative w-full rounded-[2.5rem] overflow-hidden shadow-2xl py-12 px-8 md:py-16 md:px-16 lg:px-20 flex flex-col md:flex-row items-center justify-between gap-12 bg-primary">
+      
+      {/* Background Gradient/Glow */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary/60 opacity-90" />
 
-        <p className="mt-2 max-sm:text-sm text-foreground/70 max-md:text-center md:w-1/2">
+      {/* Content */}
+      <div className="relative z-10 flex flex-col gap-6 w-full max-w-3xl max-md:items-center max-md:text-center text-white">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">
+          {title}
+        </h2>
+        
+        {/* Widened the text area so it doesn't wrap as aggressively */}
+        <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-2xl">
           {description}
         </p>
+        
         {buttonLink && (
           <Link
             href={buttonLink}
-            className={`${buttonVariants({
-              variant: "secondary",
-            })} mt-3 bg-white rounded-full cursor-pointer hover:bg-white !text-black`}
+            className={cn(
+              buttonVariants({ variant: "secondary" }),
+              "mt-4 w-fit bg-background text-foreground hover:bg-background/90 rounded-full px-10 py-7 text-lg font-semibold shadow-xl transition-all"
+            )}
           >
             {buttonText}
           </Link>
         )}
       </div>
 
-      {/* <img
-        src="/images/cta-3d.png"
-        alt=""
-        className="absolute hidden md:block opacity-45 left-1/3 md:scale-75 rotate-12 translate-3d "
-      /> */}
-      <Image
-        width={1300}
-        height={1300}
-        src="/images/cta-3d.png"
-        alt=""
-        className="absolute hidden md:block opacity-45 left-1/3 md:scale-75 rotate-12 translate-3d "
-      />
-    </DashedBorder>
+      {/* 3D Image - Translated slightly right so it frames perfectly without expanding height */}
+      <div className="absolute hidden md:block right-0 top-1/2 -translate-y-1/2 translate-x-[15%] lg:translate-x-[20%] opacity-30 mix-blend-overlay pointer-events-none">
+        <Image
+          width={700}
+          height={700}
+          src="/images/cta-3d.png"
+          alt="Decorative 3D Graphic"
+          className="object-contain"
+        />
+      </div>
+    </div>
   );
 }
