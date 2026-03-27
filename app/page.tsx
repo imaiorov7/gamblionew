@@ -36,21 +36,21 @@ export default function Home() {
   return (
     <div className="w-full flex flex-col">
       
-      {/* 1. HERO SECTION */}
-      <Hero {...HeroDetails} />
-      
-      {/* VIDEO BUTTON TRIGGER */}
-      <div className="w-full flex justify-center pb-30 pt-4 px-4 border-b border-border/40 relative z-10">
+      {/* 1. FULL SCREEN HERO SECTION */}
+      <div className="w-full border-b border-border/40">
+        <Hero {...HeroDetails}>
+          {/* Passed as a child directly into the Hero component. No ScrollReveal! */}
           <HeroVideoDialog
             animationStyle="from-center"
             videoSrc="https://www.youtube.com/embed/qh3NGpYRG3I?si=4rb-zSdDkVK9qxxb"
             trigger={
-              <button className="flex items-center gap-3 px-8 py-4 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all border border-border/50 shadow-sm hover:shadow-md font-semibold text-lg md:text-xl">
-                <PlayCircle className="w-6 h-6 text-primary" />
+              <button className="flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all border border-border/50 shadow-sm hover:shadow-md font-semibold text-base">
+                <PlayCircle className="w-5 h-5 text-primary shrink-0" />
                 Watch Preview
               </button>
             }
           />
+        </Hero>
       </div>
 
       {/* 2. SOCIAL PROOF */}
@@ -61,7 +61,7 @@ export default function Home() {
       </section>
 
       {/* 3. CORE FEATURES SECTION */}
-      <section className="w-full py-24 bg-muted/5 border-b border-border/40 backdrop-blur-[2px]">
+      <section className="w-full py-16 md:py-24 bg-muted/5 border-b border-border/40 backdrop-blur-[2px]">
         <ScrollReveal className="container mx-auto px-4">
           <CoreFeaturesSection
             title={
@@ -87,28 +87,28 @@ export default function Home() {
       </section>
 
       {/* 4. SERVICES SECTION */}
-      <section className="w-full py-24 border-b border-border/40 relative">
+      <section className="w-full py-16 md:py-24 border-b border-border/40 relative">
         <ScrollReveal className="container mx-auto px-4 relative z-10">
           <ServicesSection />
         </ScrollReveal>
       </section>
 
       {/* 5. WHO WE ARE SECTION */}
-      <section className="w-full py-32 bg-muted/5 border-b border-border/40 scroll-mt-32 backdrop-blur-[2px]" id="who-we-are">
+      <section className="w-full py-20 md:py-32 bg-muted/5 border-b border-border/40 scroll-mt-32 backdrop-blur-[2px]" id="who-we-are">
         <ScrollReveal className="container mx-auto px-4">
-          <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8">
-            <div className="space-y-4">
-              <Title className="text-4xl md:text-5xl font-bold tracking-tight">Who we are</Title>
-              <Description className="text-xl md:text-2xl font-medium text-foreground">
+          <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-6 md:space-y-8">
+            <div className="space-y-3 md:space-y-4">
+              <Title className="text-3xl md:text-5xl font-bold tracking-tight">Who we are</Title>
+              <Description className="text-lg md:text-2xl font-medium text-foreground">
                 Gambling Meets <span className="text-primary">Expertise.</span>
               </Description>
             </div>
             
-            <div className="relative p-10 md:p-14 mt-8 rounded-[2rem] bg-gradient-to-br from-custom-dark to-background border border-border/40 shadow-2xl overflow-hidden">
+            <div className="relative p-6 md:p-14 mt-6 md:mt-8 rounded-3xl md:rounded-[2rem] bg-gradient-to-br from-custom-dark to-background border border-border/40 shadow-2xl overflow-hidden">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-1.5 bg-primary rounded-b-full opacity-80" />
               <div className="absolute inset-0 bg-primary/5 blur-[100px] pointer-events-none rounded-full" />
               
-              <Description className="relative z-10 text-lg md:text-xl leading-relaxed text-muted-foreground">
+              <Description className="relative z-10 text-base md:text-xl leading-relaxed text-muted-foreground">
                 Gamblio was built by industry professionals who understand both sides
                 of the table, operational realities and advanced AI capabilities. Our
                 team brings together experts in gaming operations, data science,
@@ -121,7 +121,7 @@ export default function Home() {
       </section>
 
       {/* 6. CERTIFICATIONS SECTION */}
-      <section className="w-full py-24 border-b border-border/40">
+      <section className="w-full py-16 md:py-24 border-b border-border/40">
         <ScrollReveal className="container mx-auto px-4">
           <CoreFeaturesSection
             title={
@@ -136,8 +136,8 @@ export default function Home() {
       </section>
 
       {/* 7. FAQ & CTA SECTION */}
-      <section className="w-full py-24 bg-muted/5 backdrop-blur-[2px]">
-        <div className="container mx-auto px-4 space-y-32">
+      <section className="w-full py-16 md:py-24 bg-muted/5 backdrop-blur-[2px]">
+        <div className="container mx-auto px-4 space-y-20 md:space-y-32">
           <ScrollReveal>
             <FAQSection />
           </ScrollReveal>
@@ -173,24 +173,26 @@ const HeroDetails = {
       AI-driven platform built exclusively for gambling operators: designed to
       reduce churn, improve retention rate, increase player value, and cut
       operational costs.
-      <br />
-      <br />
-      <span className="font-semibold text-foreground">Everything you need to skyrocket your operation in one place.</span>
+      <br className="hidden md:block" />
+      <br className="hidden md:block" />
+      <span className="font-semibold text-foreground mt-4 block md:inline">Everything you need to skyrocket your operation in one place.</span>
     </>
   ),
-  descriptionClassName: "text-center md:w-2/3 mx-auto text-lg md:text-xl text-muted-foreground",
+  descriptionClassName: "text-center w-full md:w-2/3 mx-auto text-base md:text-xl text-muted-foreground",
   buttons: [
     {
       label: "Contact Us",
       href: "/contact-us",
       variant: "default" as const,
-      className: "text-white px-8 py-6 rounded-full font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all text-xl",
+      // Perfectly proportioned SaaS sizing
+      className: "text-white px-8 py-3 rounded-full font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all text-base",
     },
     {
       label: "Learn More",
       href: "#services",
       variant: "outline" as const,
-      className: "text-foreground px-8 py-6 rounded-full font-semibold transition-all text-xl",
+      // Perfectly proportioned SaaS sizing
+      className: "text-foreground px-8 py-3 rounded-full font-semibold transition-all text-base",
     },
   ],
 };

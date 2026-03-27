@@ -31,46 +31,76 @@ export function ServicesSection({ className }: GridProps) {
     <div id="services" className={cn("scroll-mt-32 w-full", className)}>
       
       {/* SECTION HEADER */}
-      <div className="flex flex-col items-center justify-center py-12 space-y-4">
-        <Title className="text-4xl md:text-5xl font-bold tracking-tight text-center">
+      <div className="flex flex-col items-center justify-center pb-12 md:pb-16 space-y-3 md:space-y-4">
+        <Title className="text-3xl md:text-5xl font-bold tracking-tight text-center">
           Services
         </Title>
-        <Description className="text-center text-lg md:text-xl text-muted-foreground max-w-2xl">
+        <Description className="text-center text-base md:text-xl text-muted-foreground max-w-2xl">
           Four tools. One platform. Convenient and impactful.
         </Description>
       </div>
 
       {/* SERVICES LIST */}
-      <div className="flex flex-col gap-24 md:gap-32 pb-16 pt-8">
+      <div className="flex flex-col gap-24 md:gap-32 pb-8 md:pb-16 pt-4 md:pt-8">
         {features.map((feature, index) => {
           const isEven = index % 2 === 0;
 
           return (
             <div 
               key={feature.id} 
-              // Using items-center instead of items-stretch so the columns can have their own natural heights
-              className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center"
+              className="flex flex-col lg:grid lg:grid-cols-2 gap-5 lg:gap-16 items-center"
             >
-              {/* TEXT CONTENT (Left side on even, Right side on odd) */}
-              <div className={cn("flex flex-col justify-center gap-6", !isEven && "lg:order-last")}>
+              
+              {/* === MOBILE ONLY HEADER === */}
+              <div className="flex flex-col lg:hidden w-full gap-1 text-center mb-1">
+                {/* Fixed Typography Hierarchy: Title is now massive, Name is the subheading */}
+                <div className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground uppercase">
+                  {feature.title}
+                </div>
+                <div className="text-base sm:text-lg font-medium text-muted-foreground leading-tight mt-1">
+                  {feature.name}
+                </div>
+              </div>
+
+              {/* === IMAGE/ANIMATION CONTAINER === */}
+              <div className={cn("flex flex-col gap-4 md:gap-6 w-full", isEven ? "lg:order-last" : "lg:order-first")}>
                 
-                {/* Main Service Title */}
-                <div className="text-2xl md:text-3xl font-bold tracking-wide uppercase">
+                {/* DESKTOP ONLY: Catchphrase Subheading (Desktop title is in the other column) */}
+                <div className="hidden lg:block text-2xl xl:text-3xl font-medium text-muted-foreground leading-tight">
+                  {feature.name}
+                </div>
+
+                {feature.img && (
+                  // Compressed height on mobile to ensure it all fits on one screen
+                  <div className="relative w-full h-[180px] sm:h-[220px] md:h-auto md:aspect-video rounded-3xl md:rounded-[2rem] overflow-hidden flex items-center justify-center p-4 bg-gradient-to-br from-custom-dark to-background border border-border/40 shadow-xl">
+                    <div className="absolute inset-0 bg-primary/5 blur-[100px] pointer-events-none rounded-full" />
+                    <div className="relative z-10 w-full h-full flex items-center justify-center [&>*]:max-w-full [&>*]:max-h-full">
+                      {feature.img}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* === TEXT CONTENT === */}
+              <div className={cn("flex flex-col justify-center gap-4 md:gap-6 w-full", isEven ? "lg:order-first" : "lg:order-last")}>
+                
+                {/* DESKTOP ONLY: Title */}
+                <div className="hidden lg:block text-4xl xl:text-5xl font-bold tracking-tight uppercase">
                   {feature.title}
                 </div>
 
-                <Description className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                <Description className="text-sm md:text-lg text-muted-foreground leading-relaxed text-center lg:text-left">
                   {feature.description}
                 </Description>
 
                 {/* Key Benefits */}
-                <div className="mt-2 p-6 rounded-2xl bg-muted/10 border border-border/50">
-                  <p className="font-semibold text-foreground mb-4 text-base">Key benefits:</p>
-                  <ul className="space-y-3">
+                <div className="p-4 md:p-6 rounded-2xl md:rounded-3xl bg-muted/10 border border-border/50">
+                  <p className="font-semibold text-foreground mb-3 text-sm md:text-base">Key benefits:</p>
+                  <ul className="space-y-2 md:space-y-3">
                     {feature.benefits.map((benefit) => (
-                      <li key={benefit} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground text-sm md:text-base">{benefit}</span>
+                      <li key={benefit} className="flex items-start gap-2 md:gap-3">
+                        <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground text-xs sm:text-sm md:text-base">{benefit}</span>
                       </li>
                     ))}
                   </ul>
@@ -80,32 +110,11 @@ export function ServicesSection({ className }: GridProps) {
                   href={feature.href}
                   className={cn(
                     buttonVariants({ variant: "default" }),
-                    "w-fit mt-2 px-8 py-6 rounded-full text-lg font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all text-white"
+                    "w-full sm:w-fit mt-1 md:mt-2 px-8 py-4 md:py-6 rounded-full text-sm md:text-lg font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all text-white text-center"
                   )}
                 >
                   {feature.cta}
                 </Link>
-              </div>
-
-              {/* IMAGE/ANIMATION CONTAINER (Right side on even, Left side on odd) */}
-              <div className={cn("flex flex-col gap-6", !isEven && "lg:order-first")}>
-                
-                {/* Subheading moved directly above the animation container */}
-                <Title className="text-3xl md:text-4xl leading-tight">
-                  {feature.name}
-                </Title>
-
-                {/* Fixed, equal-sized animation card using aspect-video */}
-                {feature.img && (
-                  <div className="relative w-full aspect-square md:aspect-video rounded-[2rem] overflow-hidden flex items-center justify-center p-8 bg-gradient-to-br from-custom-dark to-background border border-border/40 shadow-xl">
-                    <div className="absolute inset-0 bg-primary/5 blur-[100px] pointer-events-none rounded-full" />
-                    
-                    {/* Inner wrapper ensures the animation stays centered and constrained within the card */}
-                    <div className="relative z-10 w-full h-full flex items-center justify-center [&>*]:max-w-full [&>*]:max-h-full">
-                      {feature.img}
-                    </div>
-                  </div>
-                )}
               </div>
 
             </div>
@@ -116,7 +125,7 @@ export function ServicesSection({ className }: GridProps) {
   );
 }
 
-// Data remains completely unchanged below
+// Data array omitted for brevity, it remains identical to previous versions.
 const features: Feature[] = [
   {
     id: 1,
@@ -142,7 +151,7 @@ const features: Feature[] = [
         profitability, control risk, and scale operations with confidence.
         <br />
         <br />
-        <span className="border-l-4 pl-4 border-primary text-foreground font-medium block mt-2">
+        <span className="border-l-4 pl-3 md:pl-4 border-primary text-foreground font-medium block mt-1 md:mt-2 text-left">
           Every insight drives measurable business growth.
         </span>
       </>
@@ -180,7 +189,7 @@ const features: Feature[] = [
         play — before risks or missed opportunities arise.
         <br />
         <br />
-        <span className="border-l-4 pl-4 border-primary text-foreground font-medium block mt-2">
+        <span className="border-l-4 pl-3 md:pl-4 border-primary text-foreground font-medium block mt-1 md:mt-2 text-left">
           Act before risks or missed opportunities arise.
         </span>
       </>
@@ -219,7 +228,7 @@ const features: Feature[] = [
         discovery, just like Netflix does with shows. But way cooler.
         <br />
         <br />
-        <span className="border-l-4 pl-4 border-primary text-foreground font-medium block mt-2">
+        <span className="border-l-4 pl-3 md:pl-4 border-primary text-foreground font-medium block mt-1 md:mt-2 text-left">
           Turn player data into personalized game discovery.
         </span>
       </>
@@ -258,7 +267,7 @@ const features: Feature[] = [
         higher retention and revenue in return.
         <br />
         <br />
-        <span className="border-l-4 pl-4 border-primary text-foreground font-medium block mt-2">
+        <span className="border-l-4 pl-3 md:pl-4 border-primary text-foreground font-medium block mt-1 md:mt-2 text-left">
           Provide AI-powered customer support with full player context.
         </span>
       </>

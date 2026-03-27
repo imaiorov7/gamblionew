@@ -4,11 +4,12 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/button";
 import LightRays from "./ui/light-rays";
+import { ReactNode } from "react";
 
 interface HeroProps {
-  title?: string | React.ReactNode;
+  title?: string | ReactNode;
   tittleClassName?: string;
-  description?: string | React.ReactNode;
+  description?: string | ReactNode;
   descriptionClassName?: string;
   className?: string;
   buttons?: Array<{
@@ -23,6 +24,7 @@ interface HeroProps {
       | "destructive"
       | "secondary";
   }>;
+  children?: ReactNode;
 }
 
 export default function Hero({
@@ -32,19 +34,21 @@ export default function Hero({
   descriptionClassName,
   className,
   buttons,
+  children,
 }: HeroProps) {
   return (
-    // Replaced DashedBorder with a standard div
-    <div id="home" className={cn("relative w-full", className)}>
-      <div className="absolute inset-0 -z-10 h-[600px] md:h-[800px] w-full overflow-hidden pointer-events-none">
+    <div id="home" className={cn("relative w-full flex flex-col min-h-[100svh] pt-24 pb-12", className)}>
+      
+      {/* LightRays now cover this entire min-h-[100svh] container edge-to-edge */}
+      <div className="absolute inset-0 -z-10 h-full w-full overflow-hidden pointer-events-none">
         <LightRays
           raysOrigin="top-center"
           raysColor="#0392a0"
           raysSpeed={0.5}
-          lightSpread={2}
-          rayLength={3}
+          lightSpread={2.5}
+          rayLength={4}
           pulsating={true}
-          fadeDistance={1.5}
+          fadeDistance={3.5} // Increased so the light falls much lower
           saturation={1.0}
           followMouse={false}
           mouseInfluence={0}
@@ -53,8 +57,8 @@ export default function Hero({
         />
       </div>
       
-      {/* Added relative and z-10 to ensure content stays above the LightRays */}
-      <div className="flex flex-col h-[600px] max-md:h-[500px] pt-20 justify-center items-center gap-3 relative z-10">
+      {/* Centered Content */}
+      <div className="flex-1 flex flex-col justify-center items-center gap-6 relative z-10 w-full max-w-5xl mx-auto px-4 mt-[-40px] md:mt-[-60px]">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -75,7 +79,7 @@ export default function Hero({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut", delay: 0.4 }}
-          className="flex items-center justify-center gap-3"
+          className="flex flex-row flex-wrap items-center justify-center gap-4 mt-2"
         >
           {buttons?.map((button) => (
             <Link
@@ -83,7 +87,7 @@ export default function Hero({
               href={button.href}
               className={cn(
                 buttonVariants({ variant: button.variant || "default" }),
-                "cursor-pointer",
+                "cursor-pointer text-center",
                 button.className,
               )}
             >
@@ -92,6 +96,13 @@ export default function Hero({
           ))}
         </motion.div>
       </div>
+
+      {/* Watch Preview Button Container (Anchored to bottom) */}
+      {children && (
+        <div className="relative z-10 w-full flex justify-center px-4 mt-auto">
+          {children}
+        </div>
+      )}
     </div>
   );
 }

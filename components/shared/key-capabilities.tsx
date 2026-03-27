@@ -1,7 +1,6 @@
 import type React from "react";
 import { Button } from "../ui/button";
 import { Description, Title } from "../ui/typography";
-import DashedBorder from "./dashed-border";
 
 interface KeyCapabilitiesProps {
   title?: string | React.ReactNode;
@@ -19,56 +18,56 @@ const KeyCapabilities = ({
   buttonTitle,
 }: KeyCapabilitiesProps) => {
   return (
-    <DashedBorder
-      sides="all"
-      className="flex flex-col items-center gap-4 py-12"
-    >
-      <Title className="text-3xl font-medium text-center">{title}</Title>
+    <div className="flex flex-col items-center gap-4 md:gap-5 py-6 md:py-6 w-full px-4">
+      
+      <div className="flex flex-col items-center gap-2 md:gap-3 text-center max-w-4xl">
+        <Title className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-balance">
+          {title}
+        </Title>
+        <Description className="text-sm md:text-base lg:text-lg text-muted-foreground leading-tight">
+          {description}
+        </Description>
+      </div>
 
-      <Description className="max-w-3xl text-center md:w-2/3">
-        {description}
-      </Description>
+      <div className="w-full max-w-5xl mt-1 md:mt-2">
+        <div className="relative p-4 md:p-5 rounded-[2rem] bg-custom-dark border border-border/50 shadow-2xl overflow-hidden">
+          
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-primary/10 blur-[100px] pointer-events-none" />
 
-      <div className="w-full h-fit md:max-w-[80%] px-2 md:px-4">
-        <div className="p-2 md:p-4 border rounded-lg bg-background border-border">
-          <DashedBorder
-            sides="all"
-            className="flex flex-col mx-0 md:mx-0 bg-custom-dark"
-          >
-            <DashedBorder
-              sides="all"
-              className="flex-wrap justify-end w-full px-0 mx-0 text-left md:mx-0 text-muted-foreground text-lg md:text-xl"
-            >
-              {subTitle}
-            </DashedBorder>
+          {subTitle && (
+            // Changed from justify-center/end to justify-start to align left
+            <div className="relative z-10 flex justify-start w-full mb-3 md:mb-4 border-b border-border/30 pb-2 pl-2">
+              <h3 className="text-base md:text-lg font-medium text-foreground">
+                {subTitle}
+              </h3>
+            </div>
+          )}
+
+          <div className="relative z-10 flex flex-col gap-2.5 md:gap-3">
             {list?.map((capability, index) => (
-              <DashedBorder
+              <div
                 key={capability}
-                sides="all"
-                className="flex flex-col md:flex-row items-center w-full h-full gap-0 md:gap-4 p-0 mx-0 md:mx-0"
+                className="flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-4 p-2.5 md:p-3 rounded-2xl bg-background/5 border border-border/20 hover:bg-background/10 hover:border-primary/30 transition-all duration-300"
               >
-                <DashedBorder
-                  sides="bottom"
-                  sidesMd="x"
-                  className="text-muted-foreground font-bold px-4 md:px-8 py-3 md:py-6 text-base md:text-lg w-full md:w-[2rem] mx-0 md:mx-0 text-center md:text-left"
-                >
-                  {index + 1}.
-                </DashedBorder>
-                <Description className="flex-1 px-4 py-4 md:px-0 md:py-3 text-muted-foreground h-fit text-center md:text-left text-sm md:text-base">
+                <div className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary/10 text-primary border border-primary/20 shadow-[0_0_15px_rgba(3,146,160,0.2)] shrink-0">
+                  <span className="text-sm md:text-base font-bold">{index + 1}</span>
+                </div>
+                
+                <Description className="flex-1 text-sm md:text-base text-foreground/90 font-medium leading-tight">
                   {capability}
                 </Description>
-              </DashedBorder>
+              </div>
             ))}
-          </DashedBorder>
+          </div>
         </div>
       </div>
 
-      {/* {buttonTitle && (
-        <Button className="mt-4 text-white cursor-pointer">
-          Explore Report Types
+      {buttonTitle && (
+        <Button className="mt-2 md:mt-3 px-8 py-4 md:py-5 rounded-full text-sm md:text-base font-semibold shadow-lg shadow-primary/20 text-white">
+          {buttonTitle}
         </Button>
-      )} */}
-    </DashedBorder>
+      )}
+    </div>
   );
 };
 

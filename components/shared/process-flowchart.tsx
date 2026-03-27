@@ -1,6 +1,6 @@
-import DashedBorder from "@/components/shared/dashed-border";
+import React from "react";
 import { cn } from "@/lib/utils";
-import BorderedCard from "./bordered-card";
+import { ArrowDown, ArrowRight } from "lucide-react";
 
 interface FlowStep {
   number: number;
@@ -21,119 +21,118 @@ function ProcessFlowchart({
   labels?: Label[];
 }) {
   return (
-    <div className="flex flex-col items-center w-full py-12">
-      {/* Desktop horizontal flow */}
-      <div className="hidden w-full px-4 md:block">
-        <div className="relative h-[280px]">
-          {/* Horizontal base line */}
-          <div className="absolute top-1/2 left-0 right-0 h-0.5 border-t-2 border-dashed border-border -translate-y-1/2 before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-0.5 before:h-10 before:border-l-2 before:border before:border-muted after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:w-0.5 after:h-10 after:border-l-2 after:border after:border-muted"></div>
+    // Compressed py-16 down to py-4
+    <div className="flex flex-col items-center w-full py-4 md:py-4 overflow-hidden">
+      
+      {/* === DESKTOP LAYOUT (Horizontal Grid) === */}
+      <div className="hidden md:block w-full max-w-6xl px-4">
+        <div 
+          className="grid gap-y-4 gap-x-3 w-full"
+          style={{ 
+            gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))`,
+            gridTemplateRows: 'auto 1fr auto'
+          }}
+        >
+          
+          {/* TOP LABELS (Row 1) */}
+          {labels.filter(l => l.position === "top").map((label) => (
+            <div 
+              key={label.title} 
+              className="flex flex-col w-full px-2"
+              style={{ gridRow: 1, gridColumn: `${label.index + 1} / span 2` }}
+            >
+              <span className="text-center text-[10px] font-bold uppercase tracking-widest text-primary mb-1">
+                {label.title}
+              </span>
+              <div className="w-full h-3 border-t-2 border-l-2 border-r-2 border-dashed border-primary/40 rounded-t-lg" />
+            </div>
+          ))}
 
-          {/* Grid layout for steps */}
-          <div
-            className="absolute inset-0 grid gap-4"
-            style={{
-              gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))`,
-            }}
-          >
-            {steps.map((step, index) => {
-              const isEven = index % 2 === 0;
-
-              return (
-                <div
-                  key={step.number}
-                  className="relative flex flex-col items-center justify-center"
-                >
-                  {/* Step box - positioned above or below the line */}
-
-                  <BorderedCard
-                    step={step.label}
-                    className={isEven ? "absolute top-0" : "absolute bottom-0"}
-                  />
-
-                  {/* Numbered circle - centered on the horizontal line */}
-                  <div className="absolute z-10 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                    <div className="flex items-center justify-center w-12 h-12 border-2 rounded-md border-border bg-background">
-                      <span className="text-lg font-bold">{step.number}</span>
-                    </div>
-                  </div>
-
-                  {/* Vertical connector line from circle to box */}
-                  <div
-                    className={cn(
-                      "absolute left-1/2 -translate-x-1/2 w-0.5 border-l-2 border-dashed border-border z-0 before:absolute before:left-1/2 before:-translate-x-1/2 before:h10 before:border-l-2 before:border-dashed before:border-border",
-                      isEven
-                        ? "top-0 h-[calc(50%-24px)]"
-                        : "bottom-0 h-[calc(50%-24px)]",
-                    )}
-                  ></div>
-
-                  {/* Dynamic labels - positioned relative to current step */}
-                  {labels
-                    .filter((label) => Math.floor(label.index) === index)
-                    .map((label, labelIdx) => {
-                      const fraction = label.index - Math.floor(label.index);
-                      const offset = fraction * 100;
-
-                      return (
-                        <div
-                          key={labelIdx}
-                          className={cn(
-                            "absolute ml-4 w-40  hidden lg:flex gap-2 z-20",
-                            label.position === "top"
-                              ? "top-[32%] items-start"
-                              : "items-end",
-                          )}
-                          style={{
-                            left: `${65 + offset}%`,
-                            ...(label.position === "bottom" && {
-                              bottom: `${fraction ? 30 : 33}%`,
-                            }),
-                          }}
-                        >
-                          <div className="w-0.5 h-10 border-l-2 border-dashed border-border" />
-                          <p
-                            className={cn(
-                              "text-sm w-full text-center text-muted-foreground whitespace-nowrap border-dashed",
-                              label.position === "top"
-                                ? "border-b-2 border-b-border "
-                                : "border-t-2 border-t-border ",
-                            )}
-                          >
-                            {label.title}
-                          </p>
-                          <div className="w-0.5 h-10 border-l-2 border-dashed border-border" />
-                        </div>
-                      );
-                    })}
+          {/* PROCESS STEPS (Row 2) */}
+          {steps.map((step, index) => (
+            <div 
+              key={step.number} 
+              className="relative flex items-center w-full"
+              style={{ gridRow: 2, gridColumn: index + 1 }}
+            >
+              <div className="group flex flex-col xl:flex-row items-center justify-center xl:justify-start gap-3 p-3 rounded-[1.25rem] bg-card border border-border/50 shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-300 w-full z-10 h-full min-h-[70px]">
+                <div className="w-8 h-8 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0 border border-primary/20 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300 text-sm">
+                  {step.number}
                 </div>
-              );
-            })}
-          </div>
+                <span className="text-xs lg:text-sm font-semibold text-center xl:text-left text-foreground leading-tight">
+                  {step.label}
+                </span>
+              </div>
+
+              {index < steps.length - 1 && (
+                <div className="absolute top-1/2 -right-1.5 translate-x-1/2 -translate-y-1/2 z-20 text-muted-foreground/40">
+                  <ArrowRight className="w-4 h-4" />
+                </div>
+              )}
+            </div>
+          ))}
+
+          {/* BOTTOM LABELS (Row 3) */}
+          {labels.filter(l => l.position === "bottom").map((label) => (
+            <div 
+              key={label.title} 
+              className="flex flex-col w-full px-2"
+              style={{ gridRow: 3, gridColumn: `${label.index + 1} / span 2` }}
+            >
+              <div className="w-full h-3 border-b-2 border-l-2 border-r-2 border-dashed border-muted-foreground/40 rounded-b-lg" />
+              <span className="text-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground mt-1">
+                {label.title}
+              </span>
+            </div>
+          ))}
+
         </div>
       </div>
 
-      {/* Mobile vertical flow */}
-      <div className="flex flex-col items-center w-full gap-6 px-4 md:hidden">
-        {steps.map((step, index) => (
-          <div key={step.number} className="flex flex-col items-center gap-4 ">
-            {/* Numbered circle */}
-            <div className="flex items-center justify-center w-12 h-12 border-2 rounded-md border-border bg-background">
-              <span className="text-lg font-bold">{step.number}</span>
-            </div>
+      {/* === MOBILE LAYOUT (Vertical Stack) === */}
+      <div className="flex md:hidden flex-col items-center w-full gap-2 px-4 max-w-md mx-auto">
+        {steps.map((step, index) => {
+          const activeLabel = labels.find(l => index === l.index || index === l.index + 1);
+          const isPrimaryLabel = activeLabel?.position === "top";
 
-            {/* Connector line between number and box */}
-            <div className="w-0.5 h-6 border-l-2 border-dashed border-border"></div>
+          return (
+            <React.Fragment key={step.number}>
+              <div className="relative flex flex-col items-start gap-3 w-full p-4 rounded-2xl bg-card border border-border/50 shadow-sm overflow-hidden">
+                <div className={cn(
+                  "absolute -top-10 -right-10 w-20 h-20 blur-xl rounded-full opacity-20 pointer-events-none",
+                  isPrimaryLabel ? "bg-primary" : "bg-muted-foreground"
+                )} />
 
-            {/* Step box */}
-            <BorderedCard step={step.label} />
+                <div className="flex items-center justify-between w-full">
+                  <div className="w-8 h-8 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0 border border-primary/20 text-sm">
+                    {step.number}
+                  </div>
 
-            {/* Vertical line down (except last) */}
-            {index < steps.length - 1 && (
-              <div className="w-0.5 h-8 border-l-2 border-dashed border-border"></div>
-            )}
-          </div>
-        ))}
+                  {activeLabel && (
+                    <span className={cn(
+                      "text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-md",
+                      isPrimaryLabel ? "text-primary bg-primary/10" : "text-muted-foreground bg-muted/20"
+                    )}>
+                      {activeLabel.title}
+                    </span>
+                  )}
+                </div>
+
+                <span className="text-sm font-semibold text-foreground relative z-10">
+                  {step.label}
+                </span>
+              </div>
+
+              {index < steps.length - 1 && (
+                <div className="flex justify-center w-full py-0.5 text-muted-foreground/40">
+                  <ArrowDown className="w-5 h-5" />
+                </div>
+              )}
+            </React.Fragment>
+          );
+        })}
       </div>
+
     </div>
   );
 }

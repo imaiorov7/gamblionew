@@ -1,31 +1,14 @@
-import DashedBorder from "@/components/shared/dashed-border";
 import { Description, Title } from "@/components/ui/typography";
-import { cn } from "@/lib/utils";
-import BorderedCard from "./bordered-card";
+import { ArrowDown, ArrowRight } from "lucide-react";
+import React from "react";
 
 interface ObjectiveDeliverablesProps {
   title?: string | React.ReactNode;
   description?: string | React.ReactNode;
   leftColumn?: Array<string>;
   rightColumn?: Array<string>;
-  leftLabels?:
-    | {
-        index: number;
-        title: string;
-      }
-    | Array<{
-        index: number;
-        title: string;
-      }>;
-  rightLabels?:
-    | {
-        index: number;
-        title: string;
-      }
-    | Array<{
-        index: number;
-        title: string;
-      }>;
+  leftLabels?: any;
+  rightLabels?: any;
 }
 
 function ObjectiveDeliverables({
@@ -33,132 +16,131 @@ function ObjectiveDeliverables({
   description,
   leftColumn,
   rightColumn,
-  leftLabels,
-  rightLabels,
 }: ObjectiveDeliverablesProps) {
-  // Normalize labels to arrays
-  const normalizedLeftLabels = leftLabels
-    ? Array.isArray(leftLabels)
-      ? leftLabels
-      : [leftLabels]
-    : undefined;
-  const normalizedRightLabels = rightLabels
-    ? Array.isArray(rightLabels)
-      ? rightLabels
-      : [rightLabels]
-    : undefined;
-
   return (
-    <DashedBorder
-      sides="all"
-      className="flex flex-col items-center gap-4 pt-12 pb-0"
-    >
-      <Title className="font-medium text-center ">{title}</Title>
+    // Compressed py-20 down to py-8 and gap-16 down to gap-8
+    <div className="flex flex-col items-center gap-6 md:gap-8 py-8 md:py-8 w-full px-4 overflow-hidden">
+      
+      {/* Header Area */}
+      <div className="flex flex-col items-center gap-3 md:gap-4 text-center max-w-4xl">
+        <Title className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-balance">
+          {title}
+        </Title>
+        <Description className="text-base md:text-lg text-muted-foreground">
+          {description}
+        </Description>
+      </div>
 
-      <Description className="max-w-3xl text-center md:w-2/3">
-        {description}
-      </Description>
+      <div className="w-full max-w-6xl flex flex-col mt-2 md:mt-4">
 
-      <div className="w-full px-4 mt-8 max-w-4/5">
-        <div className="relative grid grid-cols-1 md:grid-cols-2">
-          {/* Border on top with vertical lines on sides */}
-          <div className="absolute top-0 left-0 right-0 h-0 border-t-2 border border-border -translate-y-1/2 before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-0.5 before:h-10 before:border-l-2 before:border before:border-muted after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:w-0.5 after:h-10 after:border-l-2 after:border after:border-muted"></div>
+        {/* Desktop-only Column Headers */}
+        <div className="hidden lg:grid grid-cols-[60px_minmax(0,1fr)_60px] gap-4 w-full px-2 mb-2">
+          <div /> 
+          <div className="flex w-full justify-between px-6 text-sm font-bold uppercase tracking-widest text-muted-foreground">
+            <div className="flex-1">Objective</div>
+            <div className="w-12"></div> 
+            <div className="flex-1 text-primary">Gamblio Delivers</div>
+          </div>
+          <div /> 
+        </div>
 
-          {/* Left Column - Objective */}
-          <div className="relative flex flex-col gap-4  md:border-r-2  border-dashed  rounded-br-[12%] pb-24">
-            <h3 className="absolute text-sm font-semibold text-center left-4 -top-7 text-muted-foreground md:text-left">
-              Objective
-            </h3>
+        {/* Compressed gap-y-8 down to gap-y-4 */}
+        <div className="flex flex-col lg:grid lg:grid-cols-[60px_minmax(0,1fr)_60px] lg:gap-x-4 gap-y-4 md:gap-y-4 w-full">
 
-            {leftColumn?.map((objective, index) => (
+          {/* === STATIC LEFT LABEL === */}
+          <div className="hidden lg:flex flex-col items-center justify-center row-start-1 row-span-2 col-start-1 opacity-80 py-2">
+            <div className="w-6 border-t-[2px] border-dashed border-border/60" />
+            <div className="flex-1 border-l-[2px] border-dashed border-border/60" />
+            <span 
+              className="py-3 text-[10px] font-bold tracking-widest uppercase text-muted-foreground whitespace-nowrap"
+              style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+            >
+              Analytics
+            </span>
+            <div className="flex-1 border-l-[2px] border-dashed border-border/60" />
+            <div className="w-6 border-t-[2px] border-dashed border-border/60" />
+          </div>
+
+          {/* === STATIC RIGHT LABEL === */}
+          <div className="hidden lg:flex flex-col items-center justify-center row-start-4 row-span-2 col-start-3 opacity-90 py-2">
+            <div className="w-6 border-t-[2px] border-dashed border-primary/50" />
+            <div className="flex-1 border-l-[2px] border-dashed border-primary/50" />
+            <span 
+              className="py-3 text-[10px] font-bold tracking-widest uppercase text-primary whitespace-nowrap"
+              style={{ writingMode: "vertical-rl" }}
+            >
+              Gamblio AI
+            </span>
+            <div className="flex-1 border-l-[2px] border-dashed border-primary/50" />
+            <div className="w-6 border-t-[2px] border-dashed border-primary/50" />
+          </div>
+
+          {/* === CARDS === */}
+          {leftColumn?.map((objective, index) => {
+            let mobileBadge = null;
+            if (index === 0 || index === 1) mobileBadge = { title: "Analytics", type: "muted" };
+            if (index === 3 || index === 4) mobileBadge = { title: "Gamblio AI", type: "primary" };
+
+            return (
               <div
-                key={objective}
-                className="relative flex items-center gap-0 h-[88px] mt-12"
+                key={index}
+                className="col-span-full lg:col-start-2 lg:col-span-1"
+                style={{ gridRowStart: index + 1 }} 
               >
-                <BorderedCard step={objective} />
-                {/* Connecting line between text and number */}
-                <div className="hidden w-4 h-px border-t-2 border-solid md:block border-border" />
-                <div className="items-center justify-center hidden w-12 h-12 border-2 rounded-md md:flex border-border bg-background shrink-0">
-                  <span className="text-lg font-bold ">{index + 1}</span>
+                {/* Compressed padding inside the cards: p-6 down to p-4 */}
+                <div className="group relative flex flex-col md:flex-row items-stretch md:items-center p-1.5 rounded-[1.5rem] bg-card border border-border/50 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden z-10 w-full h-full">
+
+                  {/* LEFT SIDE */}
+                  <div className="flex-1 flex flex-col justify-center bg-muted/10 p-4 md:p-5 rounded-xl md:rounded-[1.25rem] border border-border/30 h-full">
+                    {mobileBadge && mobileBadge.type === "muted" && (
+                      <span className="lg:hidden text-[9px] font-bold uppercase tracking-widest text-muted-foreground bg-muted/20 px-2 py-0.5 rounded-md w-fit mb-2">
+                        {mobileBadge.title}
+                      </span>
+                    )}
+                    <span className="md:hidden text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1 block opacity-70">
+                      Objective
+                    </span>
+                    <p className="text-sm md:text-base text-muted-foreground font-medium leading-tight">
+                      {objective}
+                    </p>
+                  </div>
+
+                  {/* MIDDLE */}
+                  <div className="flex flex-col md:flex-row items-center justify-center shrink-0 py-2 md:py-0 md:px-3 relative z-10">
+                    <div className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-background border border-border shadow-sm text-foreground font-bold text-sm md:text-base group-hover:scale-110 group-hover:border-primary/50 group-hover:text-primary transition-all duration-300 relative">
+                      {index + 1}
+                      <div className="absolute top-full mt-1 md:top-auto md:left-full md:mt-0 md:ml-2 text-muted-foreground/50 group-hover:text-primary transition-colors duration-300">
+                        <ArrowDown className="w-4 h-4 block md:hidden" />
+                        <ArrowRight className="w-4 h-4 hidden md:block" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* RIGHT SIDE */}
+                  <div className="flex-1 flex flex-col justify-center bg-gradient-to-br from-primary/10 to-transparent p-4 md:p-5 rounded-xl md:rounded-[1.25rem] border border-primary/20 h-full relative overflow-hidden">
+                    <div className="absolute -top-10 -right-10 w-24 h-24 bg-primary/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                    {mobileBadge && mobileBadge.type === "primary" && (
+                      <span className="lg:hidden text-[9px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5 rounded-md w-fit mb-2 relative z-10">
+                        {mobileBadge.title}
+                      </span>
+                    )}
+                    <span className="md:hidden text-[10px] font-bold uppercase tracking-wider text-primary mb-1 block relative z-10 opacity-80">
+                      Gamblio Delivers
+                    </span>
+                    <p className="text-sm md:text-base text-foreground font-semibold relative z-10 leading-tight">
+                      {rightColumn?.[index]}
+                    </p>
+                  </div>
+
                 </div>
-                {/* Connecting line between number and middle */}
-                <div className="hidden w-12 h-px border-t-2 border-solid md:block border-border" />
-                {/* Dynamic labels - positioned relative to current step */}
-                {normalizedLeftLabels
-                  ?.filter((label) => Math.floor(label.index) === index)
-                  .map((label, labelIdx) => {
-                    const fraction = label.index - Math.floor(label.index);
-                    const offset = fraction * 100;
-
-                    return (
-                      <div
-                        key={labelIdx}
-                        className={cn(
-                          "absolute  w-60 -rotate-90 hidden lg:flex gap-2 z-20 top-[120%] -left-[150px] items-start",
-                        )}
-                      >
-                        <div className="w-0.5 h-10 border-l-2 border-dashed border-border"></div>
-                        <p
-                          className={cn(
-                            "text-sm w-full text-center text-muted-foreground whitespace-nowrap border-dashed border-b-2 border-b-border pb-1",
-                          )}
-                        >
-                          {label.title}
-                        </p>
-                        <div className="w-0.5 h-10 border-l-2 border-dashed border-border"></div>
-                      </div>
-                    );
-                  })}
               </div>
-            ))}
-          </div>
-
-          {/* Right Column - Gamblio delivers */}
-          <div className="relative flex flex-col gap-4  md:border-l-2  border-dashed  rounded-bl-[12%] pb-24">
-            <div className="block md:hidden absolute top-0 left-0 right-0 h-0 border-t-2 border border-border -translate-y-1/2 before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-0.5 before:h-10 before:border-l-2 before:border before:border-muted after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:w-0.5 after:h-10 after:border-l-2 after:border after:border-muted"></div>
-            <h3 className="absolute text-sm font-semibold text-center right-4 -top-7 text-muted-foreground md:text-right">
-              Gamblio delivers
-            </h3>
-
-            {rightColumn?.map((delivery, index) => (
-              <div
-                key={delivery}
-                className="relative flex items-center gap-0 h-[88px] mt-12"
-              >
-                {/* Connecting line from middle */}
-                <div className="hidden w-12 h-px border-t-2 border-solid md:block border-border" />
-                <BorderedCard step={delivery} />
-
-                {normalizedRightLabels
-                  ?.filter((label) => Math.floor(label.index) === index)
-                  .map((label, labelIdx) => {
-                    const fraction = label.index - Math.floor(label.index);
-
-                    return (
-                      <div
-                        key={labelIdx}
-                        className={cn(
-                          `absolute  w-60 rotate-90 hidden lg:flex gap-2 z-20 top-[120%] items-start -right-[150px]`,
-                        )}
-                      >
-                        <div className="w-0.5 h-10 border-l-2 border-dashed border-border "></div>
-                        <p
-                          className={cn(
-                            "text-sm w-full text-center text-muted-foreground whitespace-nowrap border-dashed border-b-2 border-b-border pb-1",
-                          )}
-                        >
-                          {label.title}
-                        </p>
-                        <div className="w-0.5 h-10 border-l-2 border-dashed border-border"></div>
-                      </div>
-                    );
-                  })}
-              </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
-    </DashedBorder>
+    </div>
   );
 }
+
 export default ObjectiveDeliverables;
