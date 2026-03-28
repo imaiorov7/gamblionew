@@ -3,7 +3,6 @@ import { WorldMap } from "../ui/world-map";
 
 function GlobalReach() {
   return (
-    // Re-expanded gaps and padding for mobile so it fills the 100vh space better
     <div className="flex flex-col items-center gap-10 md:gap-6 py-10 md:py-4 w-full">
       
       <div className="flex flex-col items-center gap-3 text-center max-w-3xl px-4">
@@ -21,9 +20,7 @@ function GlobalReach() {
         </Description>
       </div>
 
-      {/* Added py-8 on mobile to let the map take up more vertical space */}
       <div className="relative w-full max-w-5xl px-0 sm:px-4 py-8 md:py-0 [perspective:1000px] overflow-hidden flex justify-center">
-        {/* Restored the scale to 105 on mobile so it feels grander */}
         <div className="[transform:rotateX(35deg)] scale-[1.05] md:scale-100 w-full max-w-[100vw]">
           <WorldMap
             dots={[
@@ -49,7 +46,6 @@ function GlobalReach() {
         </div>
       </div>
 
-      {/* Pushed the quote block down slightly on mobile so it fills the bottom void */}
       <div className="flex flex-col items-center gap-1 mt-4 md:mt-1 bg-muted/10 px-5 py-4 md:px-6 md:py-3 rounded-2xl border border-border/50 mx-4">
         <p className="italic text-center text-muted-foreground text-xs md:text-sm">
           "With Gamblio Analytics, no insight stays buried — performance is always visible."

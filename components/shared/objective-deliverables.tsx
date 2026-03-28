@@ -18,7 +18,6 @@ function ObjectiveDeliverables({
   rightColumn,
 }: ObjectiveDeliverablesProps) {
   return (
-    // Compressed py-20 down to py-8 and gap-16 down to gap-8
     <div className="flex flex-col items-center gap-6 md:gap-8 py-8 md:py-8 w-full px-4 overflow-hidden">
       
       {/* Header Area */}
@@ -44,7 +43,6 @@ function ObjectiveDeliverables({
           <div /> 
         </div>
 
-        {/* Compressed gap-y-8 down to gap-y-4 */}
         <div className="flex flex-col lg:grid lg:grid-cols-[60px_minmax(0,1fr)_60px] lg:gap-x-4 gap-y-4 md:gap-y-4 w-full">
 
           {/* === STATIC LEFT LABEL === */}
@@ -87,7 +85,6 @@ function ObjectiveDeliverables({
                 className="col-span-full lg:col-start-2 lg:col-span-1"
                 style={{ gridRowStart: index + 1 }} 
               >
-                {/* Compressed padding inside the cards: p-6 down to p-4 */}
                 <div className="group relative flex flex-col md:flex-row items-stretch md:items-center p-1.5 rounded-[1.5rem] bg-card border border-border/50 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden z-10 w-full h-full">
 
                   {/* LEFT SIDE */}

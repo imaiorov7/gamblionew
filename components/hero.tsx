@@ -39,7 +39,6 @@ export default function Hero({
   return (
     <div id="home" className={cn("relative w-full flex flex-col min-h-[100svh] pt-24 pb-12", className)}>
       
-      {/* LightRays now cover this entire min-h-[100svh] container edge-to-edge */}
       <div className="absolute inset-0 -z-10 h-full w-full overflow-hidden pointer-events-none">
         <LightRays
           raysOrigin="top-center"
@@ -48,7 +47,7 @@ export default function Hero({
           lightSpread={2.5}
           rayLength={4}
           pulsating={true}
-          fadeDistance={3.5} // Increased so the light falls much lower
+          fadeDistance={3.5}
           saturation={1.0}
           followMouse={false}
           mouseInfluence={0}
@@ -97,7 +96,6 @@ export default function Hero({
         </motion.div>
       </div>
 
-      {/* Watch Preview Button Container (Anchored to bottom) */}
       {children && (
         <div className="relative z-10 w-full flex justify-center px-4 mt-auto">
           {children}

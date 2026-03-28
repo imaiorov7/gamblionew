@@ -25,7 +25,6 @@ export function FAQSection() {
         </Description>
       </div>
 
-      {/* Reduced mobile padding: p-5 md:p-12 */}
       <div className="w-full max-w-6xl mx-auto bg-card rounded-[2rem] p-5 sm:p-8 md:p-12 border border-border/60 shadow-lg">
         <Accordion
           type="single"

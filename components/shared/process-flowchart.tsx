@@ -21,7 +21,6 @@ function ProcessFlowchart({
   labels?: Label[];
 }) {
   return (
-    // Compressed py-16 down to py-4
     <div className="flex flex-col items-center w-full py-4 md:py-4 overflow-hidden">
       
       {/* === DESKTOP LAYOUT (Horizontal Grid) === */}

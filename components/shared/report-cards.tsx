@@ -34,9 +34,7 @@ const ReportCards = ({ title, description, data }: ReportCardsProps) => {
         </Description>
       </div>
 
-      {/* Grid of Report Cards */}
       <div className="relative w-full max-w-5xl mx-auto px-4 mt-4 md:mt-6">
-        {/* Tightened grid gap */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 relative">
           {data?.map(
             (
@@ -81,7 +79,6 @@ const ReportCards = ({ title, description, data }: ReportCardsProps) => {
                   </div>
                 )}
 
-                {/* Card Content - Compressed margins */}
                 <div className="relative z-10 flex flex-col h-full">
                   <div className="pb-3 mb-3 border-b border-border/40">
                     <Title className="text-xl md:text-2xl font-bold text-foreground">

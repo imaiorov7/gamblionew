@@ -19,7 +19,6 @@ const FeatureIntro = ({
   signature,
 }: FeatureIntroProps) => {
   return (
-    // Reduced py-12 to py-4, gap-8 to gap-4
     <div id="learn-how-it-works" className="flex flex-col items-center gap-4 md:gap-5 py-6 md:py-4 scroll-mt-32 w-full">
       <Title className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center max-w-4xl text-balance">
         {title}

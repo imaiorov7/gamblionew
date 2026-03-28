@@ -39,7 +39,7 @@ export default function Home() {
       {/* 1. FULL SCREEN HERO SECTION */}
       <div className="w-full border-b border-border/40">
         <Hero {...HeroDetails}>
-          {/* Passed as a child directly into the Hero component. No ScrollReveal! */}
+          {/* Passed directly into the Hero component. No ScrollReveal! */}
           <HeroVideoDialog
             animationStyle="from-center"
             videoSrc="https://www.youtube.com/embed/qh3NGpYRG3I?si=4rb-zSdDkVK9qxxb"
@@ -184,14 +184,12 @@ const HeroDetails = {
       label: "Contact Us",
       href: "/contact-us",
       variant: "default" as const,
-      // Perfectly proportioned SaaS sizing
       className: "text-white px-8 py-3 rounded-full font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all text-base",
     },
     {
       label: "Learn More",
       href: "#services",
       variant: "outline" as const,
-      // Perfectly proportioned SaaS sizing
       className: "text-foreground px-8 py-3 rounded-full font-semibold transition-all text-base",
     },
   ],

@@ -8,7 +8,6 @@ export default function TrustedBy() {
         Trusted by industry leaders
       </Description>
       
-      {/* Changed to a strict 2-column grid on mobile, 4-column on desktop */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-10 md:gap-16 lg:gap-20 max-w-5xl mx-auto opacity-70 place-items-center w-full px-4 md:px-0">
         {PARTNERS.map((partner, index) => (
           <div key={index} className="flex justify-center items-center w-full">

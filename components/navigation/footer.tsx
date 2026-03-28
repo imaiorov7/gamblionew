@@ -53,7 +53,6 @@ export function Footer() {
   ];
 
   return (
-    // Added border-solid to ensure it perfectly matches the clean lines from the rest of the site
     <footer className="relative w-full px-6 md:px-8 py-16 overflow-hidden bg-background border-t border-border/40 border-solid">
       <div className="flex flex-col lg:flex-row items-start justify-between mx-auto max-w-6xl text-sm text-muted-foreground gap-12 lg:gap-8">
         
@@ -67,7 +66,6 @@ export function Footer() {
         </div>
         
         {/* RIGHT SIDE: Links Grid */}
-        {/* Changed to a 3-column grid with equal gaps and pushed to the right using lg:ml-auto */}
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-12 sm:gap-16 lg:gap-24 w-full lg:w-auto lg:ml-auto">
           
           {/* Column 1: Pages */}

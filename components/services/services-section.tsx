@@ -53,7 +53,6 @@ export function ServicesSection({ className }: GridProps) {
               
               {/* === MOBILE ONLY HEADER === */}
               <div className="flex flex-col lg:hidden w-full gap-1 text-center mb-1">
-                {/* Fixed Typography Hierarchy: Title is now massive, Name is the subheading */}
                 <div className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground uppercase">
                   {feature.title}
                 </div>
@@ -65,13 +64,11 @@ export function ServicesSection({ className }: GridProps) {
               {/* === IMAGE/ANIMATION CONTAINER === */}
               <div className={cn("flex flex-col gap-4 md:gap-6 w-full", isEven ? "lg:order-last" : "lg:order-first")}>
                 
-                {/* DESKTOP ONLY: Catchphrase Subheading (Desktop title is in the other column) */}
                 <div className="hidden lg:block text-2xl xl:text-3xl font-medium text-muted-foreground leading-tight">
                   {feature.name}
                 </div>
 
                 {feature.img && (
-                  // Compressed height on mobile to ensure it all fits on one screen
                   <div className="relative w-full h-[180px] sm:h-[220px] md:h-auto md:aspect-video rounded-3xl md:rounded-[2rem] overflow-hidden flex items-center justify-center p-4 bg-gradient-to-br from-custom-dark to-background border border-border/40 shadow-xl">
                     <div className="absolute inset-0 bg-primary/5 blur-[100px] pointer-events-none rounded-full" />
                     <div className="relative z-10 w-full h-full flex items-center justify-center [&>*]:max-w-full [&>*]:max-h-full">
@@ -124,8 +121,6 @@ export function ServicesSection({ className }: GridProps) {
     </div>
   );
 }
-
-// Data array omitted for brevity, it remains identical to previous versions.
 const features: Feature[] = [
   {
     id: 1,

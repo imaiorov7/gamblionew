@@ -18,7 +18,6 @@ export default function CTASection({
   buttonLink,
 }: CTASectionProps) {
   return (
-    // Dynamic padding: py-10 px-6 for mobile, larger for desktop
     <div className="relative w-full rounded-[2rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl py-10 px-6 md:py-16 md:px-16 lg:px-20 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 bg-primary">
       
       <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary/60 opacity-90" />

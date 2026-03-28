@@ -21,10 +21,10 @@ type AnimationStyle =
 interface HeroVideoProps {
   animationStyle?: AnimationStyle;
   videoSrc: string;
-  thumbnailSrc?: string; // Made optional
-  thumbnailAlt?: string; // Made optional
+  thumbnailSrc?: string; // optional
+  thumbnailAlt?: string; // optional
   className?: string;
-  trigger?: React.ReactNode; // Added to support custom button triggers
+  trigger?: React.ReactNode; // Added custom button triggers
 }
 
 const animationVariants = {
@@ -84,7 +84,6 @@ export function HeroVideoDialog({
   return (
     <div className={cn("relative flex flex-col items-center justify-center", className)}>
       {trigger ? (
-        // Render custom trigger (like our Watch Preview button) if provided
         <div 
           onClick={() => setIsVideoOpen(true)}
           className="cursor-pointer inline-flex"
