@@ -9,27 +9,13 @@ import TrustedBy from "@/components/trusted-by";
 import { Description, Title } from "@/components/ui/typography";
 import { HeroVideoDialog } from "@/components/video-dialog";
 import { createMetadata } from "@/lib/metadata";
-import { PlayCircle } from "lucide-react";
+import { PlayCircle, ShieldCheck, Cpu, TrendingUp } from "lucide-react";
 
 export const metadata: Metadata = createMetadata({
   title: "AI to Amplify, Gamblio to Simplify",
   description:
-    "AI-driven platform built exclusively for gambling operators: designed to reduce churn, improve retention rate, increase player value, and cut operational costs. Everything you need to skyrocket your operation in one place.",
+    "AI-driven platform built exclusively for gambling operators: designed to reduce churn, improve retention rate, increase player value, and cut operational costs.",
   path: "/",
-  keywords: [
-    "gambling AI platform",
-    "casino analytics",
-    "player retention software",
-    "gambling business intelligence",
-    "AI for gambling operators",
-    "player behavior prediction",
-    "VIP detection",
-    "churn prevention",
-    "game recommendations",
-    "AI customer support",
-    "gambling technology",
-    "online casino solutions",
-  ],
 });
 
 export default function Home() {
@@ -39,7 +25,6 @@ export default function Home() {
       {/* 1. FULL SCREEN HERO SECTION */}
       <div className="w-full border-b border-border/40">
         <Hero {...HeroDetails}>
-          {/* Passed directly into the Hero component. No ScrollReveal! */}
           <HeroVideoDialog
             animationStyle="from-center"
             videoSrc="https://www.youtube.com/embed/qh3NGpYRG3I?si=4rb-zSdDkVK9qxxb"
@@ -54,74 +39,86 @@ export default function Home() {
       </div>
 
       {/* 2. SOCIAL PROOF */}
-      <section className="w-full pt-0 pb-8 border-b border-border/40">
+      {/* Tightened padding */}
+      <section className="w-full pt-4 pb-6 border-b border-border/40">
         <ScrollReveal className="container mx-auto px-4">
           <TrustedBy />
         </ScrollReveal>
       </section>
 
       {/* 3. CORE FEATURES SECTION */}
-      <section className="w-full py-16 md:py-24 bg-muted/5 border-b border-border/40 backdrop-blur-[2px]">
+      {/* Reduced py-16 md:py-24 to py-12 md:py-20 */}
+      <section className="w-full py-12 md:py-20 bg-muted/5 border-b border-border/40 backdrop-blur-[2px]">
         <ScrollReveal className="container mx-auto px-4">
           <CoreFeaturesSection
             title={
               <>
                 Built for <span className="text-primary">gambling</span>. Engineered
-                for <span className="text-primary">measurable performance.</span>
+                for <span className="text-primary">performance.</span>
               </>
             }
-            description={
-              <>
-                Gamblio unifies analytics, behavior predictions, game
-                recommendations, and customer care in one all-around AI solution.
-                <br />
-                <br />
-                <span className="font-semibold text-foreground">
-                  No generic software. No noise. Just outcomes that matter.
-                </span>
-              </>
-            }
+            description="No generic software. No noise. Just one all-around AI solution that delivers outcomes that matter."
             features={coreFeatures}
           />
         </ScrollReveal>
       </section>
 
       {/* 4. SERVICES SECTION */}
-      <section className="w-full py-16 md:py-24 border-b border-border/40 relative">
+      {/* Reduced py-16 md:py-24 to py-12 md:py-20 */}
+      <section className="w-full py-12 md:py-20 border-b border-border/40 relative">
         <ScrollReveal className="container mx-auto px-4 relative z-10">
           <ServicesSection />
         </ScrollReveal>
       </section>
 
       {/* 5. WHO WE ARE SECTION */}
-      <section className="w-full py-20 md:py-32 bg-muted/5 border-b border-border/40 scroll-mt-32 backdrop-blur-[2px]" id="who-we-are">
+      <section className="w-full py-12 md:py-20 bg-muted/5 border-b border-border/40 scroll-mt-32 backdrop-blur-[2px]" id="who-we-are">
         <ScrollReveal className="container mx-auto px-4">
-          <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-6 md:space-y-8">
-            <div className="space-y-3 md:space-y-4">
+          <div className="flex flex-col items-center text-center max-w-5xl mx-auto space-y-8 md:space-y-12">
+            
+            <div className="space-y-2 md:space-y-4">
               <Title className="text-3xl md:text-5xl font-bold tracking-tight">Who we are</Title>
               <Description className="text-lg md:text-2xl font-medium text-foreground">
                 Gambling Meets <span className="text-primary">Expertise.</span>
               </Description>
             </div>
             
-            <div className="relative p-6 md:p-14 mt-6 md:mt-8 rounded-3xl md:rounded-[2rem] bg-gradient-to-br from-custom-dark to-background border border-border/40 shadow-2xl overflow-hidden">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-1.5 bg-primary rounded-b-full opacity-80" />
-              <div className="absolute inset-0 bg-primary/5 blur-[100px] pointer-events-none rounded-full" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full">
+              {/* Pillar 1 */}
+              <div className="group flex flex-col items-center text-center py-6 px-5 md:py-8 md:px-6 rounded-2xl md:rounded-3xl bg-card border border-border/40 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-primary/40 transition-all duration-300">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <ShieldCheck className="w-6 h-6 md:w-7 md:h-7 text-primary" />
+                </div>
+                <h3 className="text-lg md:text-xl font-bold mb-2">Industry Veterans</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">Built by professionals who understand the operational realities of the casino floor and the back office.</p>
+              </div>
               
-              <Description className="relative z-10 text-base md:text-xl leading-relaxed text-muted-foreground">
-                Gamblio was built by industry professionals who understand both sides
-                of the table, operational realities and advanced AI capabilities. Our
-                team brings together experts in gaming operations, data science,
-                machine learning and analytics, united by one mission: to empower
-                operators with technology that delivers measurable results.
-              </Description>
+              {/* Pillar 2 - Now identical to Pillar 1 & 3 */}
+              <div className="group flex flex-col items-center text-center py-6 px-5 md:py-8 md:px-6 rounded-2xl md:rounded-3xl bg-card border border-border/40 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-primary/40 transition-all duration-300">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Cpu className="w-6 h-6 md:w-7 md:h-7 text-primary" />
+                </div>
+                <h3 className="text-lg md:text-xl font-bold mb-2">AI Pioneers</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">Uniting leading experts in data science and machine learning to push the boundaries of gaming tech.</p>
+              </div>
+
+              {/* Pillar 3 */}
+              <div className="group flex flex-col items-center text-center py-6 px-5 md:py-8 md:px-6 rounded-2xl md:rounded-3xl bg-card border border-border/40 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-primary/40 transition-all duration-300">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <TrendingUp className="w-6 h-6 md:w-7 md:h-7 text-primary" />
+                </div>
+                <h3 className="text-lg md:text-xl font-bold mb-2">Results Driven</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">United by one simple mission: to empower operators with technology that delivers strictly measurable ROI.</p>
+              </div>
             </div>
+
           </div>
         </ScrollReveal>
       </section>
 
       {/* 6. CERTIFICATIONS SECTION */}
-      <section className="w-full py-16 md:py-24 border-b border-border/40">
+      {/* Reduced py-16 md:py-24 to py-12 md:py-20 */}
+      <section className="w-full py-12 md:py-20 border-b border-border/40">
         <ScrollReveal className="container mx-auto px-4">
           <CoreFeaturesSection
             title={
@@ -136,8 +133,9 @@ export default function Home() {
       </section>
 
       {/* 7. FAQ & CTA SECTION */}
-      <section className="w-full py-16 md:py-24 bg-muted/5 backdrop-blur-[2px]">
-        <div className="container mx-auto px-4 space-y-20 md:space-y-32">
+      {/* Reduced py-16 md:py-24 and space-y gaps */}
+      <section className="w-full py-12 md:py-20 bg-muted/5 backdrop-blur-[2px]">
+        <div className="container mx-auto px-4 space-y-16 md:space-y-24">
           <ScrollReveal>
             <FAQSection />
           </ScrollReveal>
@@ -145,9 +143,7 @@ export default function Home() {
           <ScrollReveal delay={0.1} className="max-w-6xl mx-auto">
             <CTASection
               title="See Gamblio in Action"
-              description="Experience how Gamblio turns your gambling site data into actionable
-                  insights. Book a personalized session and see how easy it is to
-                  integrate, analyze, and optimize your platform."
+              description="Turn your gambling site data into actionable insights. Book a personalized session today."
               buttonText="Contact Us"
               buttonLink="/contact-us"
             />
@@ -159,6 +155,8 @@ export default function Home() {
   );
 }
 
+// Condensed Hero Text
+// Condensed Hero Text with properly scaled buttons
 const HeroDetails = {
   title: (
     <>
@@ -167,76 +165,44 @@ const HeroDetails = {
     </>
   ),
   tittleClassName:
-    "text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-center text-balance mb-4",
+    "text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-center text-balance mb-4 md:mb-6",
   description: (
     <>
-      AI-driven platform built exclusively for gambling operators: designed to
-      reduce churn, improve retention rate, increase player value, and cut
-      operational costs.
+      The AI-driven platform built exclusively for gambling operators. 
+      Reduce churn, improve retention, and cut operational costs.
       <br className="hidden md:block" />
-      <br className="hidden md:block" />
-      <span className="font-semibold text-foreground mt-4 block md:inline">Everything you need to skyrocket your operation in one place.</span>
+      <span className="font-semibold text-foreground mt-2 block">Everything you need in one place.</span>
     </>
   ),
-  descriptionClassName: "text-center w-full md:w-2/3 mx-auto text-base md:text-xl text-muted-foreground",
+  descriptionClassName: "text-center w-full md:w-2/3 mx-auto text-base md:text-xl text-muted-foreground mb-8 md:mb-12",
   buttons: [
     {
       label: "Contact Us",
       href: "/contact-us",
       variant: "default" as const,
-      className: "text-white px-8 py-3 rounded-full font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all text-base",
+      // Increased px/py and text size, but removed the forced w-full stretch
+      className: "text-white px-8 py-3.5 md:px-10 md:py-5 rounded-full font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all text-base md:text-lg",
     },
     {
       label: "Learn More",
       href: "#services",
       variant: "outline" as const,
-      className: "text-foreground px-8 py-3 rounded-full font-semibold transition-all text-base",
+      // Matched sizing, removed forced width
+      className: "text-foreground px-8 py-3.5 md:px-10 md:py-5 rounded-full font-bold transition-all text-base md:text-lg border-2",
     },
   ],
 };
 
 const coreFeatures = [
-  {
-    image: "/images/increase-revenue.png",
-    alt: "Increase Revenue illustration",
-    title: "Increase Revenue",
-  },
-  {
-    image: "/images/predict-behavior.png",
-    alt: "Predict Behavior illustration",
-    title: "Predict Behavior",
-  },
-  {
-    image: "/images/automate-support.png",
-    alt: "Automate Support illustration",
-    title: "Automate Support",
-  },
-  {
-    image: "/images/improve-efficiency.png",
-    alt: "Improve Efficiency illustration",
-    title: "Improve Efficiency",
-  },
+  { image: "/images/increase-revenue.png", alt: "Increase Revenue", title: "Increase Revenue" },
+  { image: "/images/predict-behavior.png", alt: "Predict Behavior", title: "Predict Behavior" },
+  { image: "/images/automate-support.png", alt: "Automate Support", title: "Automate Support" },
+  { image: "/images/improve-efficiency.png", alt: "Improve Efficiency", title: "Improve Efficiency" },
 ];
 
 const certifications = [
-  {
-    image: "/images/strict.png",
-    alt: "Strict security standards illustration",
-    title: "Strict security standards",
-  },
-  {
-    image: "/images/iso-9001.png",
-    alt: "ISO 9001 illustration",
-    title: "For quality management",
-  },
-  {
-    image: "/images/iso-27001.png",
-    alt: "ISO 27001 illustration",
-    title: "For information security",
-  },
-  {
-    image: "/images/iso-42001.png",
-    alt: "ISO 42001 illustration",
-    title: "For responsible AI management",
-  },
+  { image: "/images/strict.png", alt: "Strict security", title: "Strict security standards" },
+  { image: "/images/iso-9001.png", alt: "ISO 9001", title: "For quality management" },
+  { image: "/images/iso-27001.png", alt: "ISO 27001", title: "For information security" },
+  { image: "/images/iso-42001.png", alt: "ISO 42001", title: "For responsible AI management" },
 ];

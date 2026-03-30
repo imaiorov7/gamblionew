@@ -12,9 +12,13 @@ import { cn } from "@/lib/utils";
 
 export function FAQSection() {
   return (
-    <div id="faq" className="flex flex-col items-center w-full scroll-mt-32 gap-8 md:gap-12">
+    <div id="faq" className="relative flex flex-col items-center w-full scroll-mt-32 gap-8 md:gap-12 py-4">
       
-      <div className="flex flex-col items-center gap-4 md:gap-6 text-center max-w-3xl mx-auto">
+      {/* Subtle Ambient Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-primary/5 blur-[120px] pointer-events-none rounded-full" />
+
+      {/* Header */}
+      <div className="relative z-10 flex flex-col items-center gap-4 md:gap-6 text-center max-w-3xl mx-auto px-4">
         <Title className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
           Frequently Asked Questions
         </Title>
@@ -25,17 +29,27 @@ export function FAQSection() {
         </Description>
       </div>
 
-      <div className="w-full max-w-6xl mx-auto bg-card rounded-[2rem] p-5 sm:p-8 md:p-12 border border-border/60 shadow-lg">
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4">
+        {/* Added a top border to frame the list perfectly */}
         <Accordion
           type="single"
           collapsible
-          className="w-full space-y-1 md:space-y-2"
+          className="w-full border-t border-border/40"
         >
-          <AccordionItem value="item-1" className="border-b border-border/50 pb-2">
-            <AccordionTrigger className="text-left text-base sm:text-lg md:text-xl font-semibold hover:text-primary transition-colors py-3 md:py-4">
-              What business problems does Gamblio solve?
+          {/* Question 01 */}
+          <AccordionItem 
+            value="item-1" 
+            className="!bg-transparent !border-x-0 !border-t-0 border-b border-border/40 px-0"
+          >
+            <AccordionTrigger className="text-left hover:no-underline !bg-transparent py-6 md:py-8 group">
+              <div className="flex items-center gap-4 md:gap-6">
+                <span className="text-sm md:text-base font-mono font-bold text-primary/40 group-hover:text-primary transition-colors">01</span>
+                <span className="text-base sm:text-lg md:text-xl font-semibold group-hover:text-primary transition-colors">
+                  What business problems does Gamblio solve?
+                </span>
+              </div>
             </AccordionTrigger>
-            <AccordionContent className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed pt-1 md:pt-2 pb-4 md:pb-6">
+            <AccordionContent className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed pb-8 pl-9 md:pl-[3.25rem] !bg-transparent">
               <p>
                 Gamblio turns fragmented gambling data into real-time,
                 operational intelligence: it helps you raise player LTV,
@@ -46,11 +60,20 @@ export function FAQSection() {
             </AccordionContent>
           </AccordionItem>
           
-          <AccordionItem value="item-2" className="border-b border-border/50 pb-2">
-            <AccordionTrigger className="text-left text-base sm:text-lg md:text-xl font-semibold hover:text-primary transition-colors py-3 md:py-4">
-              How quickly can we see impact after integration?
+          {/* Question 02 */}
+          <AccordionItem 
+            value="item-2" 
+            className="!bg-transparent !border-x-0 !border-t-0 border-b border-border/40 px-0"
+          >
+            <AccordionTrigger className="text-left hover:no-underline !bg-transparent py-6 md:py-8 group">
+              <div className="flex items-center gap-4 md:gap-6">
+                <span className="text-sm md:text-base font-mono font-bold text-primary/40 group-hover:text-primary transition-colors">02</span>
+                <span className="text-base sm:text-lg md:text-xl font-semibold group-hover:text-primary transition-colors">
+                  How quickly can we see impact after integration?
+                </span>
+              </div>
             </AccordionTrigger>
-            <AccordionContent className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed pt-1 md:pt-2 pb-4 md:pb-6">
+            <AccordionContent className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed pb-8 pl-9 md:pl-[3.25rem] !bg-transparent">
               <p>
                 You’ll see operational value within days with business analytics
                 and recommendations; measurable KPIs (reduced ticket volume,
@@ -61,11 +84,20 @@ export function FAQSection() {
             </AccordionContent>
           </AccordionItem>
           
-          <AccordionItem value="item-3" className="border-none pb-0">
-            <AccordionTrigger className="text-left text-base sm:text-lg md:text-xl font-semibold hover:text-primary transition-colors py-3 md:py-4">
-              What integration options do you support?
+          {/* Question 03 */}
+          <AccordionItem 
+            value="item-3" 
+            className="!bg-transparent !border-x-0 !border-t-0 border-b border-border/40 px-0"
+          >
+            <AccordionTrigger className="text-left hover:no-underline !bg-transparent py-6 md:py-8 group">
+              <div className="flex items-center gap-4 md:gap-6">
+                <span className="text-sm md:text-base font-mono font-bold text-primary/40 group-hover:text-primary transition-colors">03</span>
+                <span className="text-base sm:text-lg md:text-xl font-semibold group-hover:text-primary transition-colors">
+                  What integration options do you support?
+                </span>
+              </div>
             </AccordionTrigger>
-            <AccordionContent className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed pt-1 md:pt-2 pb-0">
+            <AccordionContent className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed pb-8 pl-9 md:pl-[3.25rem] !bg-transparent">
               <p>
                 We use industry-standard{" "}
                 <span className="font-semibold text-foreground">
@@ -80,19 +112,20 @@ export function FAQSection() {
           </AccordionItem>
         </Accordion>
         
-        <div className="flex justify-center md:justify-end mt-4 md:mt-2">
+        <div className="flex justify-center mt-8 md:mt-10">
           <Link
             href="/faq"
             className={cn(
               buttonVariants({ variant: "ghost" }),
-              "group flex items-center gap-2 text-primary font-medium hover:bg-primary/10 rounded-full px-5 py-3 text-sm sm:text-base md:text-lg"
+              "group flex items-center gap-2 text-primary font-medium hover:bg-primary/10 rounded-full px-6 py-3 md:py-4 text-sm sm:text-base transition-colors duration-300"
             )}
           >
-            Read more 
+            Read all FAQs 
             <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-1.5" />
           </Link>
         </div>
       </div>
+
     </div>
   );
 }

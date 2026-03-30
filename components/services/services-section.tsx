@@ -1,6 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import type { ComponentPropsWithoutRef, ReactNode } from "react";
-import React from "react";
+import { useState, type ComponentPropsWithoutRef, ReactNode } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
@@ -11,10 +12,10 @@ import Predict from "./predict";
 import { Recommendation } from "./recommendation";
 
 interface Feature {
-  title?: string | ReactNode;
-  name: string | ReactNode;
   id: number;
-  description: string | ReactNode;
+  tabName: string;
+  title: string | ReactNode;
+  name: string | ReactNode;
   benefits: string[];
   href: string;
   className?: string;
@@ -27,11 +28,14 @@ interface GridProps extends ComponentPropsWithoutRef<"div"> {
 }
 
 export function ServicesSection({ className }: GridProps) {
+  const [activeTab, setActiveTab] = useState<number>(1);
+  const activeFeature = features.find((f) => f.id === activeTab) || features[0];
+
   return (
     <div id="services" className={cn("scroll-mt-32 w-full", className)}>
       
-      {/* SECTION HEADER */}
-      <div className="flex flex-col items-center justify-center pb-12 md:pb-16 space-y-3 md:space-y-4">
+      {/* SECTION HEADER - Removed double px-4 padding here */}
+      <div className="flex flex-col items-center justify-center pb-8 md:pb-14 space-y-3 md:space-y-4">
         <Title className="text-3xl md:text-5xl font-bold tracking-tight text-center">
           Services
         </Title>
@@ -40,90 +44,152 @@ export function ServicesSection({ className }: GridProps) {
         </Description>
       </div>
 
-      {/* SERVICES LIST */}
-      <div className="flex flex-col gap-24 md:gap-32 pb-8 md:pb-16 pt-4 md:pt-8">
-        {features.map((feature, index) => {
-          const isEven = index % 2 === 0;
+      {/* Removed double px-4 padding here so it aligns with the rest of the page */}
+      <div className="w-full max-w-6xl mx-auto">
+        
+        {/* =========================================
+            MOBILE VIEW: INTERACTIVE TABS
+        ========================================= */}
+        <div className="flex flex-col md:hidden w-full gap-4">
+          
+          {/* Scrollable Tabs - Adjusted gaps and changed to snap-start to force an obvious cut-off edge */}
+          <div className="flex overflow-x-auto gap-3 pb-2 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden -mx-4 px-4 sm:mx-0 sm:px-0">
+            {features.map((feature) => {
+              const isActive = activeTab === feature.id;
+              return (
+                <button
+                  key={feature.id}
+                  onClick={() => setActiveTab(feature.id)}
+                  className={cn(
+                    // Slimmed down from px-5 py-2.5 to px-4 py-2 and used snap-start
+                    "px-4 py-2 rounded-full text-sm font-bold tracking-wide transition-all duration-300 snap-start shrink-0 border",
+                    isActive 
+                      ? "bg-primary/10 text-primary border-primary/50 shadow-sm" 
+                      : "bg-muted/5 text-muted-foreground border-border/40 hover:bg-muted/10"
+                  )}
+                >
+                  {feature.tabName}
+                </button>
+              );
+            })}
+          </div>
 
-          return (
-            <div 
-              key={feature.id} 
-              className="flex flex-col lg:grid lg:grid-cols-2 gap-5 lg:gap-16 items-center"
-            >
-              
-              {/* === MOBILE ONLY HEADER === */}
-              <div className="flex flex-col lg:hidden w-full gap-1 text-center mb-1">
-                <div className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground uppercase">
-                  {feature.title}
+          {/* Active Content Card */}
+          <div className="w-full bg-card border border-border/50 rounded-[1.5rem] shadow-lg overflow-hidden flex flex-col mt-1">
+            
+            {/* Top: Animation */}
+            <div className="relative w-full h-[200px] bg-gradient-to-br from-custom-dark to-background border-b border-border/40 flex items-center justify-center p-4 overflow-hidden">
+              <div className="absolute inset-0 bg-primary/10 blur-[60px] pointer-events-none rounded-full" />
+              <div className="relative z-10 w-full h-full flex items-center justify-center [&>*]:max-w-full [&>*]:max-h-full transition-opacity duration-500">
+                <div key={activeFeature.id} className="w-full h-full flex justify-center items-center animate-in fade-in zoom-in-95 duration-500">
+                  {activeFeature.img}
                 </div>
-                <div className="text-base sm:text-lg font-medium text-muted-foreground leading-tight mt-1">
-                  {feature.name}
+              </div>
+            </div>
+
+            {/* Bottom: Content */}
+            <div className="flex flex-col p-6 gap-6 bg-muted/5 flex-1">
+              <div className="flex flex-col gap-1.5 animate-in fade-in slide-in-from-bottom-2 duration-500">
+                <div className="text-2xl font-bold tracking-tight uppercase text-foreground">
+                  {activeFeature.title}
+                </div>
+                <div className="text-sm font-medium text-muted-foreground leading-tight">
+                  {activeFeature.name}
                 </div>
               </div>
 
-              {/* === IMAGE/ANIMATION CONTAINER === */}
-              <div className={cn("flex flex-col gap-4 md:gap-6 w-full", isEven ? "lg:order-last" : "lg:order-first")}>
-                
-                <div className="hidden lg:block text-2xl xl:text-3xl font-medium text-muted-foreground leading-tight">
-                  {feature.name}
+              <ul className="space-y-3">
+                {activeFeature.benefits.map((benefit, idx) => (
+                  <li key={idx} className="flex items-start gap-3 animate-in fade-in slide-in-from-bottom-2 duration-500" style={{ animationDelay: `${idx * 100}ms` }}>
+                    <div className="flex items-center justify-center w-5 h-5 rounded-full bg-primary/10 shrink-0 mt-0.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
+                    </div>
+                    <span className="text-foreground font-medium text-sm leading-snug">{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="pt-2 mt-auto">
+                <Link
+                  href={activeFeature.href}
+                  className={cn(
+                    buttonVariants({ variant: "default" }),
+                    "w-full px-6 py-5 rounded-xl text-sm font-semibold shadow-md shadow-primary/10 transition-all text-white text-center"
+                  )}
+                >
+                  {activeFeature.cta}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* =========================================
+            DESKTOP VIEW: 2x2 BENTO GRID
+        ========================================= */}
+        <div className="hidden md:grid md:grid-cols-2 gap-6 md:gap-8 w-full">
+          {features.map((feature) => {
+            return (
+              <div 
+                key={feature.id} 
+                className="group flex flex-col bg-card border border-border/50 rounded-3xl md:rounded-[2rem] shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-300 overflow-hidden"
+              >
+                {/* Image Container */}
+                <div className="relative w-full h-[240px] bg-gradient-to-br from-custom-dark to-background border-b border-border/40 flex items-center justify-center p-4 overflow-hidden">
+                  <div className="absolute inset-0 bg-primary/5 blur-[80px] group-hover:bg-primary/10 transition-colors duration-500 pointer-events-none rounded-full" />
+                  <div className="relative z-10 w-full h-full flex items-center justify-center [&>*]:max-w-full [&>*]:max-h-full">
+                    {feature.img}
+                  </div>
                 </div>
 
-                {feature.img && (
-                  <div className="relative w-full h-[180px] sm:h-[220px] md:h-auto md:aspect-video rounded-3xl md:rounded-[2rem] overflow-hidden flex items-center justify-center p-4 bg-gradient-to-br from-custom-dark to-background border border-border/40 shadow-xl">
-                    <div className="absolute inset-0 bg-primary/5 blur-[100px] pointer-events-none rounded-full" />
-                    <div className="relative z-10 w-full h-full flex items-center justify-center [&>*]:max-w-full [&>*]:max-h-full">
-                      {feature.img}
+                {/* Text Content */}
+                <div className="flex flex-col p-8 gap-6 flex-1 bg-muted/5">
+                  <div className="flex flex-col gap-1.5">
+                    <div className="text-3xl font-bold tracking-tight uppercase text-foreground">
+                      {feature.title}
+                    </div>
+                    <div className="text-base font-medium text-muted-foreground leading-tight">
+                      {feature.name}
                     </div>
                   </div>
-                )}
-              </div>
 
-              {/* === TEXT CONTENT === */}
-              <div className={cn("flex flex-col justify-center gap-4 md:gap-6 w-full", isEven ? "lg:order-first" : "lg:order-last")}>
-                
-                {/* DESKTOP ONLY: Title */}
-                <div className="hidden lg:block text-4xl xl:text-5xl font-bold tracking-tight uppercase">
-                  {feature.title}
-                </div>
-
-                <Description className="text-sm md:text-lg text-muted-foreground leading-relaxed text-center lg:text-left">
-                  {feature.description}
-                </Description>
-
-                {/* Key Benefits */}
-                <div className="p-4 md:p-6 rounded-2xl md:rounded-3xl bg-muted/10 border border-border/50">
-                  <p className="font-semibold text-foreground mb-3 text-sm md:text-base">Key benefits:</p>
-                  <ul className="space-y-2 md:space-y-3">
-                    {feature.benefits.map((benefit) => (
-                      <li key={benefit} className="flex items-start gap-2 md:gap-3">
-                        <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-primary shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground text-xs sm:text-sm md:text-base">{benefit}</span>
+                  <ul className="space-y-3 flex-1 mt-2">
+                    {feature.benefits.map((benefit, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <div className="flex items-center justify-center w-5 h-5 rounded-full bg-primary/10 shrink-0 mt-0.5">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
+                        </div>
+                        <span className="text-foreground font-medium text-sm leading-snug">{benefit}</span>
                       </li>
                     ))}
                   </ul>
+
+                  <div className="pt-4 border-t border-border/40 mt-auto">
+                    <Link
+                      href={feature.href}
+                      className={cn(
+                        buttonVariants({ variant: "default" }),
+                        "w-full px-6 py-5 rounded-xl text-base font-semibold shadow-md shadow-primary/10 hover:shadow-primary/30 transition-all text-white text-center"
+                      )}
+                    >
+                      {feature.cta}
+                    </Link>
+                  </div>
                 </div>
-
-                <Link
-                  href={feature.href}
-                  className={cn(
-                    buttonVariants({ variant: "default" }),
-                    "w-full sm:w-fit mt-1 md:mt-2 px-8 py-4 md:py-6 rounded-full text-sm md:text-lg font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all text-white text-center"
-                  )}
-                >
-                  {feature.cta}
-                </Link>
               </div>
+            );
+          })}
+        </div>
 
-            </div>
-          );
-        })}
       </div>
     </div>
   );
 }
+
 const features: Feature[] = [
   {
     id: 1,
+    tabName: "Analytics",
     title: (
       <>
         G<span className="font-semibold text-primary">a</span>mbl
@@ -135,33 +201,21 @@ const features: Feature[] = [
       <>
         <span className="text-primary">Know</span> faster.{" "}
         <span className="text-primary">Act</span> smarter.{" "}
-        <span className="text-primary">Win </span>
-        more.
-      </>
-    ),
-    description: (
-      <>
-        A performance intelligence hub tracking all major KPIs - empowering
-        gambling operators with real-time business intelligence to optimize
-        profitability, control risk, and scale operations with confidence.
-        <br />
-        <br />
-        <span className="border-l-4 pl-3 md:pl-4 border-primary text-foreground font-medium block mt-1 md:mt-2 text-left">
-          Every insight drives measurable business growth.
-        </span>
+        <span className="text-primary">Win </span>more.
       </>
     ),
     benefits: [
-      "Real-time visibility into operations",
-      "Predefined & custom KPI reports",
-      "Actionable insights that turn data into smarter decisions",
+      "Real-time visibility into all major KPIs",
+      "Predefined & custom automated reporting",
+      "Turn gaming data into actionable business decisions",
     ],
     href: "/analytics",
-    cta: "See Analytics",
+    cta: "Explore Analytics",
     img: <LineChart />,
   },
   {
     id: 2,
+    tabName: "Predict",
     title: (
       <>
         G<span className="font-semibold text-primary">a</span>mbl
@@ -173,33 +227,21 @@ const features: Feature[] = [
       <>
         <span className="text-primary">Predict</span> behavior.{" "}
         <span className="text-primary">Prevent</span> losses.{" "}
-        <span className="text-primary">Protect </span> growth.
-      </>
-    ),
-    description: (
-      <>
-        AI-powered player profiling and behavioral forecasting that turns
-        reactivity into proactivity. Gamblio Predict helps operators identify
-        VIPs early, detect bonus abuse, prevent churn and ensure responsible
-        play — before risks or missed opportunities arise.
-        <br />
-        <br />
-        <span className="border-l-4 pl-3 md:pl-4 border-primary text-foreground font-medium block mt-1 md:mt-2 text-left">
-          Act before risks or missed opportunities arise.
-        </span>
+        <span className="text-primary">Protect </span>growth.
       </>
     ),
     benefits: [
-      "Identify emerging VIPs and compliance risks",
-      "Detect bonus abuse and risky patterns",
-      "Predict churn and automate retention",
+      "Identify emerging VIPs before the competition",
+      "Detect bonus abuse and compliance risks instantly",
+      "Predict churn and automate retention strategies",
     ],
     href: "/predict",
-    cta: "Meet Gamblio Predict",
+    cta: "Explore Predict",
     img: <Predict />,
   },
   {
     id: 3,
+    tabName: "uChoose",
     title: (
       <>
         G<span className="font-semibold text-primary">a</span>mbl
@@ -213,32 +255,21 @@ const features: Feature[] = [
       <>
         <span className="text-primary">Right</span> game.{" "}
         <span className="text-primary">Right</span> time.{" "}
-        <span className="text-primary">Maximum </span>retention.
-      </>
-    ),
-    description: (
-      <>
-        Personalization is half the story. uChoose is Gamblio’s AI-powered
-        recommendation engine designed to maximize player engagement and game
-        discovery, just like Netflix does with shows. But way cooler.
-        <br />
-        <br />
-        <span className="border-l-4 pl-3 md:pl-4 border-primary text-foreground font-medium block mt-1 md:mt-2 text-left">
-          Turn player data into personalized game discovery.
-        </span>
+        <span className="text-primary">Max </span>retention.
       </>
     ),
     benefits: [
-      "Personalized game suggestions",
-      "Boosts conversion & engagement",
-      "Enables weekly bundles",
+      "AI-powered personalized game discovery",
+      "Significantly boost conversion & engagement rates",
+      "Enable targeted weekly player bundles",
     ],
     href: "/uChoose",
-    cta: "Discover uChoose",
+    cta: "Explore uChoose",
     img: <Recommendation />,
   },
   {
     id: 4,
+    tabName: "Care",
     title: (
       <>
         G<span className="font-semibold text-primary">a</span>mbl
@@ -248,32 +279,16 @@ const features: Feature[] = [
     ),
     name: (
       <>
-        Support that <span className="text-primary">never sleeps</span>, AI that{" "}
-        <span className="text-primary">never stops learning.</span>
-      </>
-    ),
-    description: (
-      <>
-        Automate, analyze, and elevate customer care. Gamblio Care combines AI
-        and live support to deliver 24/7 assistance with faster resolutions and
-        lower operational costs. By learning from every interaction and using
-        full chat history as context, Gamblio goes beyond answering questions —
-        it understands players, knows what they truly care about, and drives
-        higher retention and revenue in return.
-        <br />
-        <br />
-        <span className="border-l-4 pl-3 md:pl-4 border-primary text-foreground font-medium block mt-1 md:mt-2 text-left">
-          Provide AI-powered customer support with full player context.
-        </span>
+        Support that <span className="text-primary">never sleeps.</span>
       </>
     ),
     benefits: [
-      "Operational cost reduction",
-      "Ticketing & live agents performance monitoring",
-      "Player satisfaction through a higher FTR rate",
+      "Dramatically reduce operational support costs",
+      "Monitor live agent and ticketing performance",
+      "Boost player satisfaction with higher First Time Resolution",
     ],
     href: "/care",
-    cta: "See Gamblio Care",
+    cta: "Explore Care",
     img: <Chat />,
   },
 ];
