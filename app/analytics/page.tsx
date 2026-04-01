@@ -3,254 +3,194 @@ import CTASection from "@/components/cta-section";
 import Hero from "@/components/hero";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import FeatureIntro from "@/components/shared/feature-intro";
-import FeatureShowcase from "@/components/shared/feature-showcase";
-import GlobalReach from "@/components/shared/global-reach";
-import DataIntoDecisions from "@/components/shared/key-capabilities";
+import KeyCapabilities from "@/components/shared/key-capabilities";
+import ModelsShowcase from "@/components/shared/models-showcase";
+import FeaturesCarousel from "@/components/shared/features-carousel";
 import ObjectiveDeliverables from "@/components/shared/objective-deliverables";
+import FeatureShowcase from "@/components/shared/feature-showcase";
 import ProcessFlowchart from "@/components/shared/process-flowchart";
-import ReportCards from "@/components/shared/report-cards";
-import { HeroVideoDialog } from "@/components/video-dialog";
 import { createMetadata } from "@/lib/metadata";
-import { PlayCircle } from "lucide-react";
 
 export const metadata: Metadata = createMetadata({
-  title:
-    "Gamblio Analytics - Real-Time Business Intelligence for Gambling Operators",
-  description:
-    "Turn complexity into clarity with real-time performance intelligence. Gamblio Analytics transforms gaming data into measurable business outcomes, empowering operators to make confident, data-driven decisions with predefined and custom KPI reports.",
-  path: "/analytics",
-  keywords: [
-    "gambling analytics",
-    "casino business intelligence",
-    "real-time KPI tracking",
-    "gambling reporting",
-    "casino analytics dashboard",
-    "gambling performance metrics",
-    "financial reporting gambling",
-    "bonus ROI tracking",
-    "player performance analytics",
-    "gambling data analytics",
-    "casino BI platform",
-    "gambling KPIs",
-  ],
+  title: "Gamblio Predict - AI Player Behavior & Segmentation",
+  description: "Predict behavior. Prevent losses. Protect growth. Gamblio Predict uses AI-driven segmentation and behavioral forecasting.",
+  path: "/predict",
 });
 
-export default function AnalyticsPage() {
-  const reportData = [
+export default function PredictPage() {
+  // --- SECTION 3 DATA ---
+  const modelsData = [
     {
-      title: "Daily Report",
-      description: "Snapshot of player activity and financial performance.",
-      value: "Enables daily operational control and instant decisions.",
-      hasImage: true,
-      imgPosition: "-right-10 -top-14",
-      imgArrowRotation: "none",
-      imgArrowPosition: "-right-16 -top-18",
+      title: "VIP Detection Model",
+      description: "Identifies potential VIPs early using an advanced learning model that includes deposit growth, bet velocity, and session trajectories.",
+      value: "Maximize LTV by recognizing high-potential players before competitors do.",
     },
     {
-      title: "Performance Report",
-      description: "Highlights top-performing players, games, and vendors.",
-      value: "Supports targeted promotions and strategic content planning.",
-      hasImage: false,
-      imgPosition: "none",
+      title: "Bonus Hunter Detection",
+      description: "Detects repetitive, coordinated, or exploitative behavior by cross-referencing wallet usage, RTP anomalies, and timing patterns.",
+      value: "Protect promotional ROI and safeguard your margins.",
     },
     {
-      title: "Bonus Report",
-      description: "Tracks bonus activation, redemption, and ROI.",
-      value:
-        "Enables A/B testing of promotional campaigns and maximizes promotional efficiency.",
-      hasImage: true,
-      imgPosition: "-left-10 -bottom-14",
-      imgArrowRotation: "rotate-180 ",
-      imgArrowPosition: " -left-16 -bottom-18",
+      title: "Churn Risk Model",
+      description: "Predicts player drop-off based on AI-powered system learning from declining engagement, deposit frequency, and win/loss patterns.",
+      value: "Trigger targeted CRM actions to prevent revenue loss.",
     },
     {
-      title: "Financial Report",
-      description:
-        "Analyzes bets, wins, deposits, withdrawals, GGR, NGR and all cross-KPIs in between.",
-      value: "Strengthens reconciliation and profitability tracking.",
-      hasImage: true,
-      imgPosition: "-right-10 -bottom-14",
-      imgArrowRotation: "rotate-90",
-      imgArrowPosition: "-right-16 -bottom-18",
+      title: "Responsible Gaming Monitoring",
+      description: "Flags behavior patterns aligned with potential harm - escalating bet sizes, rapid deposits, long sessions.",
+      value: "Strengthen compliance posture and support safer play.",
     },
   ];
 
   return (
     <div className="w-full flex flex-col">
-      {/* 1. FULL SCREEN HERO SECTION */}
+      {/* FULL SCREEN HERO SECTION */}
       <div className="w-full border-b border-border/40">
-        <Hero {...HeroDetails}>
-          <HeroVideoDialog
-            animationStyle="from-center"
-            videoSrc="https://www.youtube.com/embed/qh3NGpYRG3I?si=4rb-zSdDkVK9qxxb"
-            trigger={
-              <button className="flex items-center justify-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all border border-border/50 shadow-sm hover:shadow-md font-semibold text-base md:text-lg">
-                <PlayCircle className="w-5 h-5 md:w-6 md:h-6 text-primary shrink-0" />
-                Watch Preview
-              </button>
-            }
-          />
-        </Hero>
+        <Hero {...HeroDetails} />
       </div>
 
-      {/* Section 1: The Performance Engine */}
-      <section className="w-full min-h-[100svh] flex flex-col justify-center py-12 md:py-4 bg-muted/5 border-b border-border/40 backdrop-blur-[2px]">
+      {/* SECTION 1: OVERVIEW */}
+      <section className="w-full flex flex-col justify-center py-16 md:py-24 bg-muted/5 border-b border-border/40 backdrop-blur-[2px]">
         <ScrollReveal className="container mx-auto px-4">
           <FeatureIntro
-            title={
-              <>
-                The<span className="text-primary"> Performance Engine </span>of the
-                Gamblio Platform
-              </>
-            }
-            description={
-              <>
-                Gamblio Analytics is the business intelligence hub built exclusively
-                for the gambling industry. It gives operators the clarity they need
-                - a powerful dashboard that provides real-time visibility into
-                financial performance and all major KPIs, enabling faster, smarter,
-                and more confident decision-making.
-              </>
-            }
+            title={<>The <span className="text-primary">Behavioral Intelligence</span> Engine of Gamblio</>}
+            description="Gamblio Predict is the player behavior prediction and segmentation hub of the Gamblio platform. Using advanced machine learning and behavioral modeling, it classifies players into actionable segments, enabling operators to prevent in time rather than react late."
+            subTitle="It is the central control room for:"
             processFlowchart={
               <ProcessFlowchart
                 steps={[
-                  { number: 1, label: "KPI monitoring" },
-                  { number: 2, label: "Trend detection" },
-                  { number: 3, label: "Operational optimization" },
-                  { number: 4, label: "Strategic reporting" },
-                ]}
-                labels={[
-                  { title: "gamblio ai", position: "top", index: 0 },
-                  { title: "analytics", position: "bottom", index: 2 },
+                  { number: 1, label: "Player segmentation & prediction" },
+                  { number: 2, label: "Early VIP detection" },
+                  { number: 3, label: "Bonus abuse prevention" },
+                  { number: 4, label: "Churn risk management" },
+                  { number: 5, label: "Responsible gaming monitoring" },
                 ]}
               />
             }
-            subTitle="It's the central control room for:"
-            signature={
-              <>
-                "From insight to action, every metric drives measurable growth."
-                <br />
-                <span className="font-medium text-primary">-Gamblio</span>
-              </>
-            }
+            signature={<>"Know who to keep, how to keep them, and when to act before it's too late."</>}
           />
         </ScrollReveal>
       </section>
 
-      {/* Section 2: Turn Data Into Decisions */}
-      <section className="w-full min-h-[100svh] flex flex-col justify-center py-12 md:py-4 border-b border-border/40 relative">
+      {/* SECTION 2: KEY CAPABILITIES */}
+      <section className="w-full flex flex-col justify-center py-16 md:py-24 border-b border-border/40 relative">
         <ScrollReveal className="container mx-auto px-4 relative z-10">
-          <DataIntoDecisions
-            title={
-              <>
-                Turn<span className="text-primary"> Data </span>Into{" "}
-                <span className="text-primary">Decisions</span>
-              </>
-            }
-            description={
-              <>
-                Gamblio Analytics connects every deposit, bet, win, or bonus into
-                one intuitive, real-time interface. Operators can track performance
-                across players, games, and vendors with the precision needed to
-                optimize every move.
-              </>
-            }
-            subTitle=" Key capabilities:"
+          <KeyCapabilities
+            title={<>From Insight to <span className="text-primary">Prediction.</span> From Prediction to <span className="text-primary">Prevention.</span></>}
+            description="Gamblio Predict analyzes behavioral, transactional, and contextual signals, transforming them into real-time segmentation and early warnings that drive smarter engagement and safer operations."
             list={[
-              "Real-time tracking of core gambling events and KPIs",
-              "Predefined & customizable reports for every team",
-              "Advanced filtering and segmentation tools",
-              "Exportable reports for further analysis",
-              "Automated scheduled reports for leadership - insights that come to you",
+              "Automatic segmentation based on live behavior",
+              "Predictive identification of emerging VIPs",
+              "Bonus fraud & coordinated abuse detection",
+              "Dynamic churn probability scoring",
+              "Responsible gaming risk alerts",
+              "Configurable rules per market or vertical",
+              "Full player drill-down & segment analysis"
             ]}
-            buttonTitle="Explore Report Types"
           />
         </ScrollReveal>
       </section>
 
-      {/* Section 3: See Performance as It Happens */}
-      <section className="w-full min-h-[100svh] flex flex-col justify-center py-12 md:py-4 bg-muted/5 border-b border-border/40 backdrop-blur-[2px]">
+      {/* SECTION 3: MODELS */}
+      <section className="w-full flex flex-col justify-center py-16 md:py-24 bg-muted/5 border-b border-border/40 backdrop-blur-[2px]">
         <ScrollReveal className="container mx-auto px-4">
-          <ReportCards
-            title={
-              <>
-                See <span className="text-primary">Performance</span> as It Happens
-              </>
-            }
-            description="Four report types, one goal: faster, smarter, and clearer operations"
-            data={reportData}
+          <ModelsShowcase
+            title={<>Four Prediction Models. One Step Ahead of <span className="text-primary">Every Player.</span></>}
+            description="Predict anomalies before they happen."
+            data={modelsData}
           />
         </ScrollReveal>
       </section>
 
-      {/* Section 4: From Metrics to Measurable Outcomes */}
-      <section className="w-full min-h-[100svh] flex flex-col justify-center py-12 md:py-4 border-b border-border/40 relative">
+      {/* SECTION 4: FEATURES */}
+      <section className="w-full flex flex-col justify-center py-16 md:py-24 border-b border-border/40 relative">
+        <ScrollReveal className="container mx-auto px-4 relative z-10 overflow-hidden">
+          <FeaturesCarousel
+            title={<>Anticipate Behavior. <span className="text-primary">Act Before It Happens.</span></>}
+            description="Gamblio Predict uses advanced AI models to analyze player behavior in real time—helping operators identify high-value players, prevent churn, detect bonus abuse, and ensure responsible gaming."
+            features={[
+              "AI-powered player segmentation (VIP, churn risk, bonus hunters, at-risk players)",
+              "Early VIP detection based on behavioral and transactional patterns",
+              "Churn prediction with actionable resolution workflows",
+              "Bonus abuse detection through multi-pattern behavioral analysis",
+              "Responsible gaming monitoring with risk scoring and triggers",
+              "Tier-based scoring system for prioritizing player actions",
+              "Real-time alerts for critical player behavior changes",
+              "Player-level breakdown with detailed scoring components",
+              "Time-based analysis (daily, weekly, monthly views)",
+              "Actionable insights to support CRM, support, and risk teams"
+            ]}
+          />
+        </ScrollReveal>
+      </section>
+
+      {/* SECTION 5: BUSINESS IMPACT */}
+      <section className="w-full flex flex-col justify-center py-16 md:py-24 bg-muted/5 border-b border-border/40 backdrop-blur-[2px]">
         <ScrollReveal className="container mx-auto px-4 relative z-10">
           <ObjectiveDeliverables
-            title={
-              <>
-                From <span className="text-primary">Metrics</span> to Measurable{" "}
-                <span className="text-primary">Outcomes</span>
-              </>
-            }
-            description="Every feature in Gamblio Analytics is designed to directly influence
-                    performance — reducing blind spots, increasing Lifetime Value of
-                    players, and driving profitability."
-            leftColumn={[
-              "Faster decisions",
-              "Smarter bonus spend",
-              "Leaner operations",
-              "Risk prevention",
-              "Improved vendor strategy",
-            ]}
-            leftLabels={{ title: "analytics", index: 0.5 }}
-            rightLabels={{ title: "gamblio ai", index: 3.5 }}
-            rightColumn={[
-              "Real-time KPI visibility",
-              "Track ROI & optimize campaigns",
-              "Replace manual checks with live monitoring",
-              "Early alerts for abnormal events or performance drops",
-              "Benchmark and optimize game/provider performance",
-            ]}
+            title={<>Proactive Intelligence. <span className="text-primary">Measurable Results.</span></>}
+            description="Predict is not just analytics, it's actionable foresight."
+            leftLabel="Objective"
+            rightLabel="Gamblio Delivers"
+            leftColumn={["Retain players longer", "Grow VIP revenue", "Reduce bonus waste", "Strengthen compliance", "Increase operational efficiency"]}
+            rightColumn={["Predict churn & auto-trigger win-back actions", "Identify high-value players before competitors", "Detect abuse & optimize promotional spend", "Automatic RG flags with recommended actions", "AI removes manual analysis across teams"]}
           />
         </ScrollReveal>
       </section>
 
-      {/* Section 5: Services Section */}
-      <section className="w-full min-h-[100svh] flex flex-col justify-center py-12 md:py-4 bg-muted/5 border-b border-border/40 backdrop-blur-[2px]">
+      {/* SECTION 6: PREDICTIVE VISUALIZATION (Custom Block based on PDF) */}
+      <section className="w-full flex flex-col justify-center py-16 md:py-24 border-b border-border/40 relative">
         <ScrollReveal className="container mx-auto px-4">
-          <GlobalReach />
+          <div className="flex flex-col items-center gap-4 text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-balance">
+              Clear Segments. <span className="text-primary">Clear Signals.</span> Clear Actions.
+            </h2>
+            <p className="text-base md:text-lg text-muted-foreground">
+              Gamblio Predict includes a visualization suite built for clarity, precision, and operational actionability.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {[
+              { title: "Segment Overview", desc: "Real-time distribution of all player types." },
+              { title: "Behavioral Trends", desc: "How player categories shift over days/weeks/months." },
+              { title: "Segment Health KPIs", desc: "LTV, session count, churn probability." },
+              { title: "Drill-Down Explorer", desc: "Full player lists with advanced filters." }
+            ].map((card, i) => (
+              <div key={i} className="group p-8 rounded-[1.5rem] bg-card border border-border/50 hover:border-primary/50 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col gap-3">
+                {/* Animated Accent Line */}
+                <div className="w-10 h-1 bg-primary/40 rounded-full mb-1 group-hover:w-16 group-hover:bg-primary transition-all duration-300" />
+                <h4 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">{card.title}</h4>
+                <p className="text-muted-foreground">{card.desc}</p>
+              </div>
+            ))}
+          </div>
         </ScrollReveal>
       </section>
 
-      {/* Section 6: Core Value Proposition */}
-      <section className="w-full min-h-[100svh] flex flex-col justify-center py-12 md:py-4 border-b border-border/40 relative">
+      {/* SECTION 7: VALUE & POSITIONING */}
+      <section className="w-full flex flex-col justify-center py-16 md:py-24 bg-muted/5 border-b border-border/40 backdrop-blur-[2px]">
         <ScrollReveal className="container mx-auto px-4 relative z-10">
           <FeatureShowcase
-            title={
-              <>
-                <span className="text-primary">Core Value</span> Proposition
-              </>
-            }
-            description="Gamblio Analytics turns fragmented gaming data into measurable
-                    performance intelligence — empowering operators to grow revenue, reduce
-                    manual effort, and optimize player experiences with every decision."
-            chat1="Turn complexity into clarity"
-            chat2="Compress time-to-decision"
-            chat3="Transform data into decisions"
-            chat4="Empower your team with operational intelligence"
+            title={<><span className="text-primary">Core Value</span> Proposition</>}
+            description="Gamblio Predict turns raw player data into predictive intelligence - empowering operators to identify opportunity, prevent loss, compress churn, and ensure compliance through AI-driven segmentation and behavior modeling."
+            chat1="Predictive Intelligence"
+            chat2="Automated Detection"
+            chat3="Early Warning System"
+            chat4="Anticipation Over Reaction"
+            chat5="Data-Driven Retention"
+            chat6="Player Foresight"
           />
         </ScrollReveal>
       </section>
 
-      {/* Section 7: Call to Action */}
-      <section className="w-full min-h-[100svh] flex flex-col justify-center py-12 md:py-4 bg-muted/5 backdrop-blur-[2px]">
+      {/* SECTION 8: CALL TO ACTION */}
+      <section className="w-full flex flex-col justify-center py-16 md:py-24 bg-muted/5 backdrop-blur-[2px]">
         <div className="container mx-auto px-4">
           <ScrollReveal delay={0.1} className="max-w-6xl mx-auto">
             <CTASection
-              title="Ready to See Gamblio Analytics in Action?"
-              description=" Turn data into revenue with the BI engine designed for gambling operators."
+              title="Ready to Predict What Players Will Do Next?"
+              description="Take control of your operations with the AI engine that thinks ahead of your players."
               buttonText="Contact Us"
               buttonLink="/contact-us"
             />
@@ -264,36 +204,17 @@ export default function AnalyticsPage() {
 const HeroDetails = {
   title: (
     <>
-      <span className="text-primary">Faster </span>insights.
-      <br className="sm:hidden" />
-      <span className="text-primary"> Smarter </span>actions.
-      <br className="sm:hidden" />
-      <span className="text-primary"> Stronger </span>results.
+      <span className="text-primary">Predict </span>behavior.<br className="sm:hidden" />
+      <span className="text-primary"> Prevent </span>losses.<br className="sm:hidden" />
+      <span className="text-primary"> Protect </span>growth.
     </>
   ),
-  tittleClassName:
-    "text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-center text-balance mb-4",
-  description: (
-    <>
-      Turn complexity into clarity with real-time performance intelligence.
-      Gamblio Analytics transforms gaming data into measurable business
-      outcomes, empowering operators to make confident, data-driven decisions.
-    </>
-  ),
+  tittleClassName: "text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-center text-balance mb-4",
+  description: "Gamblio Predict uses AI-driven segmentation and behavioral forecasting to help operators identify VIPs early, prevent churn, stop bonus abuse, and ensure responsible play.",
   className: "text-center",
   descriptionClassName: "text-center w-full md:w-2/3 mx-auto text-base md:text-xl text-muted-foreground",
   buttons: [
-    {
-      label: "Contact Us",
-      href: "/contact-us",
-      variant: "default" as const,
-      className: "text-white px-8 py-3 rounded-full font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all text-base",
-    },
-    {
-      label: "Learn How It Works",
-      href: "#learn-how-it-works",
-      variant: "outline" as const,
-      className: "text-foreground px-8 py-3 rounded-full font-semibold transition-all text-base",
-    },
+    { label: "Contact Us", href: "/contact-us", variant: "default" as const, className: "text-white px-8 py-3 rounded-full font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all text-base" },
+    { label: "Learn How It Works", href: "#learn-how-it-works", variant: "outline" as const, className: "text-foreground px-8 py-3 rounded-full font-semibold transition-all text-base" },
   ],
 };

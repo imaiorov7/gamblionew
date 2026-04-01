@@ -1,21 +1,24 @@
 import { Description, Title } from "@/components/ui/typography";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import React from "react";
+import { cn } from "@/lib/utils";
 
 interface ObjectiveDeliverablesProps {
   title?: string | React.ReactNode;
   description?: string | React.ReactNode;
   leftColumn?: Array<string>;
   rightColumn?: Array<string>;
-  leftLabels?: any;
-  rightLabels?: any;
+  leftLabel?: string; // e.g., "Objective" or "Analytics"
+  rightLabel?: string; // e.g., "Gamblio Delivers" or "Gamblio Care"
 }
 
-function ObjectiveDeliverables({
+export default function ObjectiveDeliverables({
   title,
   description,
-  leftColumn,
-  rightColumn,
+  leftColumn = [],
+  rightColumn = [],
+  leftLabel = "Objective",
+  rightLabel = "Gamblio Delivers",
 }: ObjectiveDeliverablesProps) {
   return (
     <div className="flex flex-col items-center gap-6 md:gap-8 py-8 md:py-8 w-full px-4 overflow-hidden">
@@ -36,9 +39,9 @@ function ObjectiveDeliverables({
         <div className="hidden lg:grid grid-cols-[60px_minmax(0,1fr)_60px] gap-4 w-full px-2 mb-2">
           <div /> 
           <div className="flex w-full justify-between px-6 text-sm font-bold uppercase tracking-widest text-muted-foreground">
-            <div className="flex-1">Objective</div>
+            <div className="flex-1">{leftLabel}</div>
             <div className="w-12"></div> 
-            <div className="flex-1 text-primary">Gamblio Delivers</div>
+            <div className="flex-1 text-primary">{rightLabel}</div>
           </div>
           <div /> 
         </div>
@@ -53,7 +56,7 @@ function ObjectiveDeliverables({
               className="py-3 text-[10px] font-bold tracking-widest uppercase text-muted-foreground whitespace-nowrap"
               style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
             >
-              Analytics
+              {leftLabel}
             </span>
             <div className="flex-1 border-l-[2px] border-dashed border-border/60" />
             <div className="w-6 border-t-[2px] border-dashed border-border/60" />
@@ -67,7 +70,7 @@ function ObjectiveDeliverables({
               className="py-3 text-[10px] font-bold tracking-widest uppercase text-primary whitespace-nowrap"
               style={{ writingMode: "vertical-rl" }}
             >
-              Gamblio AI
+              {rightLabel}
             </span>
             <div className="flex-1 border-l-[2px] border-dashed border-primary/50" />
             <div className="w-6 border-t-[2px] border-dashed border-primary/50" />
@@ -75,9 +78,11 @@ function ObjectiveDeliverables({
 
           {/* === CARDS === */}
           {leftColumn?.map((objective, index) => {
-            let mobileBadge = null;
-            if (index === 0 || index === 1) mobileBadge = { title: "Analytics", type: "muted" };
-            if (index === 3 || index === 4) mobileBadge = { title: "Gamblio AI", type: "primary" };
+            // Distribute mobile badges dynamically
+            const isTopHalf = index < Math.ceil(leftColumn.length / 2);
+            const mobileBadge = isTopHalf 
+              ? { title: leftLabel, type: "muted" } 
+              : { title: rightLabel, type: "primary" };
 
             return (
               <div
@@ -89,14 +94,11 @@ function ObjectiveDeliverables({
 
                   {/* LEFT SIDE */}
                   <div className="flex-1 flex flex-col justify-center bg-muted/10 p-4 md:p-5 rounded-xl md:rounded-[1.25rem] border border-border/30 h-full">
-                    {mobileBadge && mobileBadge.type === "muted" && (
+                    {mobileBadge.type === "muted" && (
                       <span className="lg:hidden text-[9px] font-bold uppercase tracking-widest text-muted-foreground bg-muted/20 px-2 py-0.5 rounded-md w-fit mb-2">
                         {mobileBadge.title}
                       </span>
                     )}
-                    <span className="md:hidden text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1 block opacity-70">
-                      Objective
-                    </span>
                     <p className="text-sm md:text-base text-muted-foreground font-medium leading-tight">
                       {objective}
                     </p>
@@ -117,14 +119,11 @@ function ObjectiveDeliverables({
                   <div className="flex-1 flex flex-col justify-center bg-gradient-to-br from-primary/10 to-transparent p-4 md:p-5 rounded-xl md:rounded-[1.25rem] border border-primary/20 h-full relative overflow-hidden">
                     <div className="absolute -top-10 -right-10 w-24 h-24 bg-primary/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                    {mobileBadge && mobileBadge.type === "primary" && (
+                    {mobileBadge.type === "primary" && (
                       <span className="lg:hidden text-[9px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5 rounded-md w-fit mb-2 relative z-10">
                         {mobileBadge.title}
                       </span>
                     )}
-                    <span className="md:hidden text-[10px] font-bold uppercase tracking-wider text-primary mb-1 block relative z-10 opacity-80">
-                      Gamblio Delivers
-                    </span>
                     <p className="text-sm md:text-base text-foreground font-semibold relative z-10 leading-tight">
                       {rightColumn?.[index]}
                     </p>
@@ -139,5 +138,3 @@ function ObjectiveDeliverables({
     </div>
   );
 }
-
-export default ObjectiveDeliverables;

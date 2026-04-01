@@ -55,9 +55,9 @@ function ProcessFlowchart({
               style={{ gridRow: 2, gridColumn: index + 1 }}
             >
               <div className="group flex flex-col xl:flex-row items-center justify-center xl:justify-start gap-3 p-3 rounded-[1.25rem] bg-card border border-border/50 shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-300 w-full z-10 h-full min-h-[70px]">
-                <div className="w-8 h-8 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0 border border-primary/20 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300 text-sm">
-                  {step.number}
-                </div>
+              <div className="w-8 h-8 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0 border border-primary/20 group-hover:bg-primary group-hover:text-white transition-colors duration-300 text-sm">
+                {step.number}
+              </div>
                 <span className="text-xs lg:text-sm font-semibold text-center xl:text-left text-foreground leading-tight">
                   {step.label}
                 </span>
